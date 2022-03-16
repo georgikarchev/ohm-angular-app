@@ -1,0 +1,89 @@
+// @import '~normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+::ng-deep :root {
+    --white: #fefefe;
+    --main-bg-color: #FFFCF2;
+    --secondary-bg-color: #CCC5B9;
+    --main-color-light: #403D39;
+    --main-color-dark: #252422;
+    --highlight-color: #FFB800;
+    --highlight-color-green: #54C859;
+    --highlight-color-red: #EB5E28;
+    
+    --grid-template-columns-12col: 1fr 3fr 7fr 1fr;
+    --grid-gap: 1em;
+
+    --border-radius: 6px;
+    --box-shadow-color: rgba(--main-color-dark:, $alpha: 0.15);
+    --box-shadow: 1px 1px 10px var(--box-shadow-color);
+}
+
+::ng-deep html {
+    font-size: 10px;
+    line-height: 1.2;
+}
+
+::ng-deep body .app-root {
+    font-size: 1.6rem;
+    min-height: 100vh;
+
+    background-color: var(--main-bg-color);
+
+    display: grid;
+    grid-template-columns: var(--grid-template-columns-12col);
+    grid-template-rows:  8rem auto;
+    grid-template-areas: 
+        "header header header header"
+        "padding-left main main padding-right"
+        "footer footer footer footer";
+    gap: var(--grid-gap);
+    align-items: stretch;
+    justify-content: center;
+
+    & .wrapper {
+        display: grid;
+        grid-template-columns: var(--grid-template-columns-12col);
+        grid-template-areas: "padding-left main main padding-right";
+        gap: var(--grid-gap);
+    
+        & .wrapper-inner {
+            grid-area: main;
+        }
+    }
+
+    & header {
+        grid-area: header;
+        background-color: white;
+        // background-color: var(--secondary-bg-color);
+        box-shadow: 1px 1px 10px rgba($color: #000000, $alpha: 0.15);
+
+        display: flex;
+        width: 100%;
+        justify-content: stretch;
+        align-items: stretch;
+
+        & .app-header {
+            display: inherit;
+            width: inherit;
+        }
+    }
+
+    & main {
+        grid-area: main;
+
+        & .app-notifications {
+            display: block;
+            position: relative;
+        }
+    }
+
+    & footer {
+        grid-area: footer;
+    }
+}

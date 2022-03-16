@@ -1,0 +1,23 @@
+<div class="notifications">
+  <div *ngIf="showNotifications">
+    <div
+      class="notificationsList"
+      *ngFor="let notificationItem of notifications"
+    >
+      <app-notification
+        *ngIf="!notificationItem.dismissed"
+        [notification]="notificationItem"
+      ></app-notification>
+    </div>
+  </div>
+  <button
+    [ngClass]="
+      showNotifications
+        ? 'notifications__button--toggle'
+        : 'notifications__button--toggle half-transparent'
+    "
+    (click)="toggleNotificationsVisibilityHandler()"
+  >
+    {{ showNotifications ? "hide notifications" : "show " + notifications.length + " notifications" }}
+  </button>
+</div>
