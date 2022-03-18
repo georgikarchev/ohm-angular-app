@@ -1,0 +1,17 @@
+.rooms-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+
+    & .rooms-List__room {
+        background-color: var(--secondary-bg-color);
+        flex: 1;
+        min-width: 20%;
+
+        border: 1px solid var(--main-color-light);
+        border-radius: var(--border-radius);
+        padding: 1em;
+    }
+}

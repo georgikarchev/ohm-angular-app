@@ -1,0 +1,12 @@
+<h3>Add a new Room</h3>
+<!-- <form action="">
+    <input type="text" name="room-number" id="room-number" placeholder="Enter the room number">
+    <button>submit</button>
+</form> -->
+
+<form #roomData="ngForm" (ngSubmit)="onClickSubmit(roomData.value)"> 
+    <input type="text" name="roomNumber" placeholder="roomNumber" ngModel> 
+    <br/> 
+    <br/> 
+    <input type="submit" value="submit"> 
+ </form>

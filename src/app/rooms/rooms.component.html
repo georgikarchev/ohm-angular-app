@@ -1,1 +1,23 @@
-<p>rooms works!</p>
+<section class="rooms-list">
+    <ng-container *ngFor="let room of rooms">
+        <app-room class="rooms-List__room" [room]="room"></app-room>
+    </ng-container>
+    <!-- <div>
+        <ng-container *ngFor="let post of posts">
+            <div class="post">
+                {{post.userId}} | {{post.id}} | {{post.title}}
+            </div>
+        </ng-container>
+    </div> -->
+</section>
+<app-room-add class="add-room" *ngIf="addRoomOn"></app-room-add>
+<button
+    [ngClass]="
+    addRoomOn
+        ? 'add-room__button--toggle'
+        : 'add-room__button--toggle half-transparent'
+    "
+    (click)="addRoomClickHandler()"
+  >
+    {{ addRoomOn ? "Cancel" : "Add room" }}
+  </button>

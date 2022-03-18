@@ -11,6 +11,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1em;
 
     &--green {
         background-color: var(--highlight-color-green);

@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
+
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
@@ -14,6 +18,7 @@ import { RoomComponent } from './room/room.component';
 import { RoomDetailsComponent } from './room-details/room-details.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { NotificationComponent } from './notification/notification.component';
+import { RoomAddComponent } from './room-add/room-add.component';
 
 @NgModule({
   declarations: [
@@ -28,11 +33,14 @@ import { NotificationComponent } from './notification/notification.component';
     RoomComponent,
     RoomDetailsComponent,
     NotificationsComponent,
-    NotificationComponent
+    NotificationComponent,
+    RoomAddComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

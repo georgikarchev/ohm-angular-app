@@ -1,6 +1,6 @@
 <div class="notifications">
-  <div *ngIf="showNotifications">
-    <div
+  <ng-container *ngIf="showNotifications">
+    <ng-container
       class="notificationsList"
       *ngFor="let notificationItem of notifications"
     >
@@ -8,9 +8,10 @@
         *ngIf="!notificationItem.dismissed"
         [notification]="notificationItem"
       ></app-notification>
-    </div>
-  </div>
+    </ng-container>
+  </ng-container>
   <button
+    *ngIf="getNumberOfUndismissedNotifications() > 0"
     [ngClass]="
       showNotifications
         ? 'notifications__button--toggle'
@@ -18,6 +19,6 @@
     "
     (click)="toggleNotificationsVisibilityHandler()"
   >
-    {{ showNotifications ? "hide notifications" : "show " + notifications.length + " notifications" }}
+    {{ showNotifications ? "hide notifications" : "show " + getNumberOfUndismissedNotifications() + " notifications" }}
   </button>
 </div>

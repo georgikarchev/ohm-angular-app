@@ -2,8 +2,14 @@
   <app-header class="app-header"></app-header>
 </header>
 <main>
-  <app-notifications class="app-notifications" [notifications]="notifications"></app-notifications>
-  <router-outlet></router-outlet>
+  <!-- only show if logged in? NO there can be notifications even on the homepage, but notifications after login are different -->
+  <section class="app-notifications">
+    <!-- <app-notifications class="app-notifications" [notifications]="notifications"></app-notifications> -->
+    <app-notifications></app-notifications>
+  </section>
+  <section class="app-body">
+    <router-outlet></router-outlet>
+  </section>
 </main>
 <footer>
   <app-footer></app-footer>

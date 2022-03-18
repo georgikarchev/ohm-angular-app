@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Notification } from '../notifications/notification.service';
 
-export interface Notification {
-  type: string,
-  text: string,
-  dismissed: boolean
-}
+// export interface Notification {
+//   type: string,
+//   text: string,
+//   dismissed: boolean
+// }
 
 @Component({
   selector: 'app-notification',

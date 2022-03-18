@@ -1,0 +1,12 @@
+.room {
+    text-align: center;
+
+    &__identifier {
+        text-transform: uppercase;
+    }
+
+    &__description {
+        font-style: italic;
+        color: var(--main-color-lighter);
+    }
+}
