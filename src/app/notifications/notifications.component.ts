@@ -21,7 +21,7 @@ export class NotificationsComponent implements OnInit {
   notifications!: Notification[];
 
   constructor(private notificationsService: NotificationService) {
-    this.showNotifications = true;
+    this.showNotifications = false;
 
     // #2 getting the notifications data from a service, placed in this same folder
   }

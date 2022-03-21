@@ -13,6 +13,8 @@
     align-items: center;
     gap: 1em;
 
+    opacity: 0.8;
+
     &--green {
         background-color: var(--highlight-color-green);
     }

@@ -1,17 +1,25 @@
 .rooms-list {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-start;
-    gap: 1rem;
+    gap: var(--padding-small);
+    padding: var(--padding-medium);
 
     & .rooms-List__room {
-        background-color: var(--secondary-bg-color);
-        flex: 1;
-        min-width: 20%;
-
-        border: 1px solid var(--main-color-light);
+        // background-color: var(--secondary-bg-color);
+        flex: 1 1 0px;
+        flex-basis: 30%;
+        min-width: 30rem;
+        
+        // border: 1px solid var(--main-color-light);
         border-radius: var(--border-radius);
-        padding: 1em;
+        //padding: var(--padding-small);
+
+        // box-shadow: 1px 4px 10px rgba($color: #000000, $alpha: 0.75);
+        // box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        // box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+        box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
     }
 }

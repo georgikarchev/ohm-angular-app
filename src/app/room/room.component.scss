@@ -1,12 +1,78 @@
 .room {
+    position: relative;
     text-align: center;
 
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 20rem 6rem 6rem;
+    grid-template-areas: "photo photo" "button1 button2" "button3 button3" ;
+    background-color: #eee;
+    // border: 1px solid #bebebe;
+    // border-radius: var(--border-radius);
+
+
+    &__photo-wrapper {
+        grid-area: photo;        
+        
+        & img {
+            border-top-left-radius: var(--border-radius);
+            border-top-right-radius: var(--border-radius);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+
     &__identifier {
+        position: absolute;
+        background-color: rgba($color: #000000, $alpha: 0.75);
+        border-bottom-left-radius: var(--border-radius);
+        border-bottom-right-radius: var(--border-radius);
+        padding: var(--padding-small);
+        font-size: 3rem;
+        font-weight: 300;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
         text-transform: uppercase;
+        margin-top: 0;
+
+        color: var(--white);
+        text-align: center;
     }
 
     &__description {
         font-style: italic;
         color: var(--main-color-lighter);
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
     }
+
+    & .room__button {
+        border: unset;
+        background-color: unset;
+        border: 1px solid #ccc;
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--bg-color-3);
+        }
+
+        &--edit {
+            grid-area: button1;
+        }
+
+        &--mark-unavailable {
+            grid-area: button2;
+        }
+
+        &--view-bookings {
+            grid-area: button3;
+        }
+    }
+
 }

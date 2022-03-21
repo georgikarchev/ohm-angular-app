@@ -1,10 +1,10 @@
 nav {
     width: 100%;
 
-
+    padding-top: 1rem;
     display: grid;
     gap: 1rem;
-    grid-template-columns: var(--grid-template-columns-12col);
+    grid-template-columns: 1fr 1fr 8fr 2fr;
     grid-template-areas: "padding-left logo top-nav padding-right";
     align-items: center;
     justify-content: center;
@@ -13,12 +13,13 @@ nav {
 
     #logo {
         grid-area: logo;
+        padding-top: 1rem;
     }
 
 
     ul {
         grid-area: top-nav;
-        justify-self: right;
+        justify-self: center;
         display: flex;
         flex-direction: row;
         gap: calc(var(--grid-gap)*2);
@@ -33,11 +34,11 @@ nav {
 
                 &:hover,
                 &:active {
-                    color: var(--highlight-color);
+                    color: var(--white);
                 }
 
                 &.active-link {
-                    color: var(--highlight-color);
+                    color: var(--white);
                     border-bottom: 2px solid currentColor;
                 }
             }

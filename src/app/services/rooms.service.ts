@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 export interface Room {
   number: string,
   description?: string,
+  photo?: string,
   singleBeds?: number,
   doubleBeds?: number,
   kingSizeBeds?: number,
@@ -35,6 +36,7 @@ export class RoomsService {
     {
       number: '1',
       description: 'A cozy room for a single person.',
+      photo: "../assets/chastity-cortijo-R-w5Q-4Mqm0-unsplash.jpg",
       singleBeds: 1,
       doubleBeds: 0,
       kingSizeBeds: 0,
@@ -50,6 +52,7 @@ export class RoomsService {
     {
       number: '2',
       description: 'A very cozy room for two.',
+      photo: "../assets/febrian-zakaria-gwV9eklemSg-unsplash.jpg",
       singleBeds: 0,
       doubleBeds: 0,
       kingSizeBeds: 1,
@@ -65,6 +68,55 @@ export class RoomsService {
     {
       number: '3',
       description: 'A big room suitable for big families.',
+      photo: "../assets/edelle-bruton-PJNO2sLlbB8-unsplash.jpg",
+      singleBeds: 2,
+      doubleBeds: 0,
+      kingSizeBeds: 1,
+      babyCots: 1,
+      airConditioning: true,
+      centralHeating: true,
+      fireplace: true,
+      minibar: true,
+      balcony: true,
+      disabilityFriendly: true,
+      kitchen: true
+    },
+    {
+      number: '4',
+      description: 'A cozy room for a single person.',
+      photo: "../assets/chastity-cortijo-R-w5Q-4Mqm0-unsplash.jpg",
+      singleBeds: 1,
+      doubleBeds: 0,
+      kingSizeBeds: 0,
+      babyCots: 0,
+      airConditioning: true,
+      centralHeating: true,
+      fireplace: false,
+      minibar: true,
+      balcony: true,
+      disabilityFriendly: true,
+      kitchen: false
+    },
+    {
+      number: '5',
+      description: 'A very cozy room for two.',
+      photo: "../assets/febrian-zakaria-gwV9eklemSg-unsplash.jpg",
+      singleBeds: 0,
+      doubleBeds: 0,
+      kingSizeBeds: 1,
+      babyCots: 0,
+      airConditioning: true,
+      centralHeating: true,
+      fireplace: false,
+      minibar: true,
+      balcony: true,
+      disabilityFriendly: true,
+      kitchen: false
+    },
+    {
+      number: '6',
+      description: 'A big room suitable for big families.',
+      photo: "../assets/edelle-bruton-PJNO2sLlbB8-unsplash.jpg",
       singleBeds: 2,
       doubleBeds: 0,
       kingSizeBeds: 1,
@@ -77,6 +129,7 @@ export class RoomsService {
       disabilityFriendly: true,
       kitchen: true
     }
+
   ];
 
  
@@ -115,8 +168,8 @@ export class RoomsService {
 
     // check new room data object if needed
 
-     // HTTP POST - send new room data to API
+    // HTTP POST - send new room data to API
 
-     this.rooms.push(newRoomData);
+    this.rooms.push(newRoomData);
   }
 }

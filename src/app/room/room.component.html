@@ -1,6 +1,10 @@
 <article class="room">
-    <h3 class="room__identifier">ROOM: {{room.number}}</h3>
-    <section>
-        <p class="room__description">{{room.description}}</p>
-    </section>
+    <h3 class="room__identifier">{{room.number}}</h3>
+    <!-- <p class="room__description">{{room.description}}</p> -->
+    <div class="room__photo-wrapper">
+        <img [src]="room.photo" alt="Photo of room {{room.number}}">
+    </div>
+    <button class="room__button room__button--edit">edit</button>
+    <button class="room__button room__button--mark-unavailable">mark unavailable</button>
+    <button class="room__button room__button--view-bookings">view bookings</button>
 </article>

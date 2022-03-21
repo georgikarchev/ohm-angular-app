@@ -15,10 +15,10 @@
         cursor: pointer;
         border: none;
         background: none;
-        color: var(--main-color-light);
+        color: var(--white);
         border: 1px solid transparent;
         height: 3rem;
-        opacity: 0.5;
+        // opacity: 0.5;
         
 
         &:hover {
@@ -28,7 +28,7 @@
         }
 
         &.half-transparent {
-            opacity: 0.3;
+            // opacity: 0.3;
         }
     }
 }
