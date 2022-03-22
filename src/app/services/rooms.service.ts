@@ -4,20 +4,30 @@ import { Observable } from 'rxjs';
 
 export interface Room {
   number: string,
-  description?: string,
   photo?: string,
   singleBeds?: number,
   doubleBeds?: number,
   kingSizeBeds?: number,
   babyCots?: number,
-  airConditioning?: boolean,
-  centralHeating?: boolean,
-  fireplace?: boolean,
-  minibar?: boolean,
-  balcony?: boolean,
   disabilityFriendly?: boolean,
-  kitchen?: boolean;
 }
+
+// export interface Room {
+//   number: string,
+//   description?: string,
+//   photo?: string,
+//   singleBeds?: number,
+//   doubleBeds?: number,
+//   kingSizeBeds?: number,
+//   babyCots?: number,
+//   airConditioning?: boolean,
+//   centralHeating?: boolean,
+//   fireplace?: boolean,
+//   minibar?: boolean,
+//   balcony?: boolean,
+//   disabilityFriendly?: boolean,
+//   kitchen?: boolean;
+// }
 
  // % TEST ONLY
  export interface Post {
@@ -34,102 +44,32 @@ export interface Room {
 export class RoomsService {
   public rooms: Array<Room> = [
     {
+      number: '3',
+      photo: "../assets/edelle-bruton-PJNO2sLlbB8-unsplash.jpg",
+      singleBeds: 2,
+      doubleBeds: 0,
+      kingSizeBeds: 1,
+      babyCots: 1,
+      disabilityFriendly: true
+    },
+    {
       number: '1',
-      description: 'A cozy room for a single person.',
-      photo: "../assets/chastity-cortijo-R-w5Q-4Mqm0-unsplash.jpg",
+      photo: "",
       singleBeds: 1,
       doubleBeds: 0,
       kingSizeBeds: 0,
       babyCots: 0,
-      airConditioning: true,
-      centralHeating: true,
-      fireplace: false,
-      minibar: true,
-      balcony: true,
-      disabilityFriendly: true,
-      kitchen: false
+      disabilityFriendly: true
     },
     {
       number: '2',
-      description: 'A very cozy room for two.',
       photo: "../assets/febrian-zakaria-gwV9eklemSg-unsplash.jpg",
       singleBeds: 0,
       doubleBeds: 0,
       kingSizeBeds: 1,
       babyCots: 0,
-      airConditioning: true,
-      centralHeating: true,
-      fireplace: false,
-      minibar: true,
-      balcony: true,
       disabilityFriendly: true,
-      kitchen: false
     },
-    {
-      number: '3',
-      description: 'A big room suitable for big families.',
-      photo: "../assets/edelle-bruton-PJNO2sLlbB8-unsplash.jpg",
-      singleBeds: 2,
-      doubleBeds: 0,
-      kingSizeBeds: 1,
-      babyCots: 1,
-      airConditioning: true,
-      centralHeating: true,
-      fireplace: true,
-      minibar: true,
-      balcony: true,
-      disabilityFriendly: true,
-      kitchen: true
-    },
-    {
-      number: '4',
-      description: 'A cozy room for a single person.',
-      photo: "../assets/chastity-cortijo-R-w5Q-4Mqm0-unsplash.jpg",
-      singleBeds: 1,
-      doubleBeds: 0,
-      kingSizeBeds: 0,
-      babyCots: 0,
-      airConditioning: true,
-      centralHeating: true,
-      fireplace: false,
-      minibar: true,
-      balcony: true,
-      disabilityFriendly: true,
-      kitchen: false
-    },
-    {
-      number: '5',
-      description: 'A very cozy room for two.',
-      photo: "../assets/febrian-zakaria-gwV9eklemSg-unsplash.jpg",
-      singleBeds: 0,
-      doubleBeds: 0,
-      kingSizeBeds: 1,
-      babyCots: 0,
-      airConditioning: true,
-      centralHeating: true,
-      fireplace: false,
-      minibar: true,
-      balcony: true,
-      disabilityFriendly: true,
-      kitchen: false
-    },
-    {
-      number: '6',
-      description: 'A big room suitable for big families.',
-      photo: "../assets/edelle-bruton-PJNO2sLlbB8-unsplash.jpg",
-      singleBeds: 2,
-      doubleBeds: 0,
-      kingSizeBeds: 1,
-      babyCots: 1,
-      airConditioning: true,
-      centralHeating: true,
-      fireplace: true,
-      minibar: true,
-      balcony: true,
-      disabilityFriendly: true,
-      kitchen: true
-    }
-
   ];
 
  
@@ -144,7 +84,25 @@ export class RoomsService {
   }
 
 
-  getRooms() {
+  getRooms(orderBy?: String) {
+    const roomsListOutput: Array<Room> = [...this.rooms];
+    // order by
+    switch(orderBy){
+      case "singleBeds":
+        console.log("Order by single beds");
+      break;
+      case "dooubleBeds":
+        console.log("Order by double beds");
+      break;
+      case "kingsizeBeds":
+        console.log("Order by double beds");
+      break;
+      default: // order by number
+        console.log("order by number");
+        roomsListOutput.sort((first, second) => 0 - (first.number > second.number ? -1 : 1));
+        console.log("roomsListOutput", roomsListOutput);
+      break;
+    }
     return this.rooms;
   }
 
@@ -170,6 +128,20 @@ export class RoomsService {
 
     // HTTP POST - send new room data to API
 
+    // return
     this.rooms.push(newRoomData);
+  }
+
+  updateRoom(): void {
+    // HTTP POST - send new room data to API
+
+    // code responsible for updating a room in the rooms object, contained in the rooms.service
+
+    // return success or error ?
+    
+  }
+
+  updateToggleRoomAvailable(roomId: string): void {
+    // maybe this method should simply call the updateRoom method and define the change using the parameters passed to it
   }
 }

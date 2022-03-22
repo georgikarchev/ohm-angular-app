@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Post, Room, RoomsService } from '../services/rooms.service';
 
 @Component({
@@ -8,7 +8,8 @@ import { Post, Room, RoomsService } from '../services/rooms.service';
 })
 export class RoomsComponent implements OnInit {
   @Input() rooms!: Array<Room>;
-  posts!: Post[];
+  @Output() newRoomFormSubmitted: EventEmitter<Room> = new EventEmitter()
+  // posts!: Post[];
   addRoomOn: boolean;
 
   constructor(private roomsService: RoomsService) {
@@ -16,19 +17,24 @@ export class RoomsComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.roomsService.getAllPosts()
-      .subscribe(
-        data => { 
-          this.posts = data; 
-        },
-        err => {
-          console.log(`${JSON.stringify(err)}`) 
-        }
-      );
+    // this.roomsService.getAllPosts()
+    //   .subscribe(
+    //     data => { 
+    //       this.posts = data; 
+    //     },
+    //     err => {
+    //       console.log(`${JSON.stringify(err)}`) 
+    //     }
+    //   );
   }
 
   addRoomClickHandler(): void {
     this.addRoomOn = !this.addRoomOn;
+  }
+
+  onNewRoomFormSubmitted(newRoomData: Room): void {
+    //console.log("#Rooms: New Room Data", event);
+    this.newRoomFormSubmitted.emit(newRoomData)
   }
 
 }

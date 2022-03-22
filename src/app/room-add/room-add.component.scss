@@ -1,0 +1,21 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    & h3 {
+        font-size: 1.5rem;
+    }
+
+    .form-row {
+        
+    }
+
+    & .add-room__button {
+
+        &--toggle {
+            margin-top: var(--padding-min);
+        }
+    }
+}

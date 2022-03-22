@@ -1,12 +1,61 @@
-<h3>Add a new Room</h3>
-<!-- <form action="">
-    <input type="text" name="room-number" id="room-number" placeholder="Enter the room number">
-    <button>submit</button>
-</form> -->
+<div class="wrapper">
+  <ng-container *ngIf="addRoomOn">
+    <h3>Add a new Room</h3>
+    <!-- <form action="">
+            <input type="text" name="room-number" id="room-number" placeholder="Enter the room number">
+            <button>submit</button>
+        </form> -->
 
-<form #roomData="ngForm" (ngSubmit)="onClickSubmit(roomData.value)"> 
-    <input type="text" name="roomNumber" placeholder="roomNumber" ngModel> 
-    <br/> 
-    <br/> 
-    <input type="submit" value="submit"> 
- </form>
+    <form #roomData="ngForm" (ngSubmit)="onClickSubmit(roomData)">
+      <div class="form-row">
+        <label for="roomNumber">Room Number</label>
+        <input id="roomNumber" type="text" name="roomNumber" placeholder="roomNumber" ngModel/>
+
+      </div>
+      <div class="form-row">
+        <label>Single Beds</label>
+        <select id="singleBeds" name="roomSingleBeds" ngModel>
+          <option *ngFor="let number of [0, 1, 2, 3]" [ngValue]="number">
+            {{ number }}
+          </option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="doubleBeds">Double Beds</label>
+        <select id="doubleBeds" name="roomDoubleBeds" ngModel>
+          <option *ngFor="let number of [0, 1, 2]" [ngValue]="number">
+            {{ number }}
+          </option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="kingsizeBeds">Kingsize Beds</label>
+        <select id="kingsizeBeds" name="roomKingsizeBeds" ngModel>
+          <option *ngFor="let number of [0, 1, 2]" [ngValue]="number">
+            {{ number }}
+          </option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="babyCots">Baby Cots</label>
+        <select id="babyCots" name="roomBabyCots" ngModel>
+          <option *ngFor="let number of [0, 1, 2]" [ngValue]="number">
+            {{ number }}
+          </option>
+        </select>
+      </div>
+      <br />
+      <br />
+      <input type="submit" value="submit" />
+    </form>
+  </ng-container>
+  <button
+    [ngClass]="{
+      'add-room__button add-room__button--toggle': true,
+      red: addRoomOn
+    }"
+    (click)="addRoomClickHandler()"
+  >
+    {{ addRoomOn ? "Cancel" : "add room" }}
+  </button>
+</div>
