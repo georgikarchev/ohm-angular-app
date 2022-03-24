@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { BookingsService } from '../services/bookings.service';
 import { Room, RoomsService } from '../services/rooms.service';
 
@@ -7,14 +7,18 @@ import { Room, RoomsService } from '../services/rooms.service';
   templateUrl: './rooms-page.component.html',
   styleUrls: ['./rooms-page.component.scss']
 })
-export class RoomsPageComponent implements OnInit {
+export class RoomsPageComponent implements OnInit, OnChanges {
   rooms: Array<Room>;
 
   constructor(private roomsService: RoomsService, private bookingsService: BookingsService) {
-      this.rooms = roomsService.getRooms();
+      this.rooms = roomsService.orderRooms('number');
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges(): void {
+    console.log("CHANGES");
   }
 
   onNewRoomFormSubmitted(newRoomData: Room): void {
@@ -23,6 +27,10 @@ export class RoomsPageComponent implements OnInit {
 
     // call Service and update data object
     this.roomsService.addRoom(newRoomData);
+  }
+
+  onClickMarkUnavailable(_roomIdentifier: String): void {
+    this.roomsService.updateToggleRoomAvailable(_roomIdentifier);
   }
 
 }

@@ -3,19 +3,49 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: var(--padding-min);
     
     & h3 {
         font-size: 1.5rem;
     }
 
-    .form-row {
+    & .form-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &--identifier {
+            font-weight: bold;
+        }
+
+        &:not(:last-of-type) {
+            padding-bottom: var(--padding-min);
+        }
+        
+        & label {
+            margin-right: var(--padding-min);
+            width: 60%;
+        }
+
+        & input[type="number"] {
+            text-align: center;
+            width: 30%;
+        }
+
+        // & input[type="submit"] {
+        //     margin-top: var(--padding-min);
+        // }
+
         
     }
 
     & .add-room__button {
-
         &--toggle {
             margin-top: var(--padding-min);
+        }
+
+        &--cancel {
+            width: 100%;
         }
     }
 }

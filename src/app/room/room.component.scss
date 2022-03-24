@@ -1,132 +1,156 @@
 @import "../../assets/scss/abstracts/mixins";
 
 .room {
-    position: relative;
+  position: relative;
+  text-align: center;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  // grid-template-rows: 20rem 6rem 6rem;
+  grid-template-rows: 20rem 5rem 5rem;
+  grid-template-areas: "photo photo" "button1 button2" "button3 button3";
+  background-color: #eee;
+  // border: 1px solid #bebebe;
+  // border-radius: var(--border-radius);
+
+  @include respond(phone) {
+    grid-template-columns: 1fr 3fr 1fr 1fr 2fr;
+    grid-template-rows: 10rem;
+    grid-template-areas: "identifier photo button1 button2 button3";
+  }
+
+  &__photo-wrapper {
+    grid-area: photo;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & img {
+      border-top-left-radius: var(--border-radius);
+      border-top-right-radius: var(--border-radius);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      @include respond(phone) {
+        border-top-left-radius: unset;
+        border-top-right-radius: unset;
+      }
+    }
+
+    & .room__photo-placeholder {
+      max-width: 40%;
+      fill: var(--main-color-lighter);
+      opacity: 0.3;
+    }
+  }
+
+  & .tag {
+    position: absolute;
+    top: 10rem;
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: var(--padding-min);
+    width: 100%;
+
+    color: var(--white);
+    font-weight: bold;
+    background-color: rgba($color: red, $alpha: 0.8);
+    box-shadow: var(--box-shadow-2);
+  }
+
+  &__identifier {
+    position: absolute;
+    background-color: rgba($color: #000000, $alpha: 0.75);
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    padding: var(--padding-min) var(--padding-small);
+    font-size: 3rem;
+    font-weight: 300;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-transform: uppercase;
+    margin-top: 0;
+
+    color: var(--white);
     text-align: center;
 
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    // grid-template-rows: 20rem 6rem 6rem;
-    grid-template-rows: 20rem 5rem 5rem;
-    grid-template-areas: "photo photo" "button1 button2" "button3 button3" ;
-    background-color: #eee;
-    // border: 1px solid #bebebe;
-    // border-radius: var(--border-radius);
+    @include respond(phone) {
+      grid-area: identifier;
+
+      position: unset;
+      left: unset;
+      top: unset;
+      transform: unset;
+      font-size: 2rem;
+      border-top-left-radius: var(--border-radius);
+      border-bottom-right-radius: unset;
+      margin-bottom: 0;
+      padding: var(--padding-min);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &__description {
+    font-style: italic;
+    color: var(--main-color-lighter);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  & .room__button {
+    border: unset;
+    background-color: unset;
+    border: 1px solid #ccc;
+    cursor: pointer;
+
+    &:hover,
+    &:active {
+      background-color: var(--bg-color-3);
+    }
 
     @include respond(phone) {
-        grid-template-columns: 1fr 3fr 1fr 1fr 2fr;
-        grid-template-rows: 10rem;
-        grid-template-areas: "identifier photo button1 button2 button3";
+      border: none;
+      &:not(:first-of-type) {
+        border-left: 1px solid var(--gray);
+      }
     }
 
-
-    &__photo-wrapper {
-        grid-area: photo;
-        display: flex;
-        justify-content: center;
-        align-items: center;  
-        
-        & img {
-            border-top-left-radius: var(--border-radius);
-            border-top-right-radius: var(--border-radius);
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-
-            @include respond(phone) {
-                border-top-left-radius: unset;
-                border-top-right-radius: unset;
-            }
-        }
-
-        & .room__photo-placeholder {
-            max-width: 40%;
-            fill: var(--main-color-lighter);
-            opacity: 0.3;
-        }
+    &:last-of-type {
+      border-bottom-left-radius: var(--border-radius);
+      border-bottom-right-radius: var(--border-radius);
     }
 
-
-    &__identifier {
-        position: absolute;
-        background-color: rgba($color: #000000, $alpha: 0.75);
-        border-bottom-left-radius: var(--border-radius);
-        border-bottom-right-radius: var(--border-radius);
-        padding: var(--padding-min) var(--padding-small);
-        font-size: 3rem;
-        font-weight: 300;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        text-transform: uppercase;
-        margin-top: 0;
-
-        color: var(--white);
-        text-align: center;
-
-        @include respond(phone) {
-            grid-area: identifier;
-
-            position: unset;
-            left: unset;
-            top: unset;
-            transform: unset;
-            font-size: 2rem;
-            border-top-left-radius: var(--border-radius);
-            border-bottom-right-radius: unset;
-            margin-bottom: 0;
-            padding: var(--padding-min);
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    &--edit {
+      grid-area: button1;
     }
 
-    &__description {
-        font-style: italic;
-        color: var(--main-color-lighter);
-
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
+    &--mark-unavailable {
+      grid-area: button2;
     }
 
-    & .room__button {
-        border: unset;
-        background-color: unset;
-        border: 1px solid #ccc;
-        cursor: pointer;
-
-        &:hover,
-        &:active {
-            background-color: var(--bg-color-3);
-        }
-
-        @include respond(phone) {
-            border: none;
-            &:not(:first-of-type) {
-                border-left: 1px solid var(--gray);
-            }
-        }
-
-        &:last-of-type {
-            border-bottom-left-radius: var(--border-radius);
-            border-bottom-right-radius: var(--border-radius);
-        }
-
-        &--edit {
-            grid-area: button1;
-        }
-
-        &--mark-unavailable {
-            grid-area: button2;
-        }
-
-        &--view-bookings {
-            grid-area: button3;
-        }
+    &--view-bookings {
+      grid-area: button3;
     }
+  }
 
+  &__edit {
+    z-index: 10;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    background-color: var(--gray-light);
+    justify-content: center;
+    align-items: center;
+  }
 }

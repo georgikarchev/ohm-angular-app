@@ -1,22 +1,20 @@
-// import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Room } from '../services/rooms.service';
 
 @Component({
-  selector: 'app-room-add',
-  templateUrl: './room-add.component.html',
-  styleUrls: ['./room-add.component.scss'],
+  selector: 'app-room-edit',
+  templateUrl: './room-edit.component.html',
+  styleUrls: ['./room-edit.component.scss']
 })
-export class RoomAddComponent implements OnInit {
+export class RoomEditComponent implements OnInit {
   @Output() formSubmitted: EventEmitter<Room> = new EventEmitter();
-  addRoomOn: boolean;
+  @Output() cancelEditRoom: EventEmitter<String> = new EventEmitter()
 
-  constructor() {
-    this.addRoomOn = false;
+  constructor() { }
+
+  ngOnInit(): void {
   }
-
-  ngOnInit(): void {}
 
   onClickSubmit(result: NgForm): void {
     const newRoom: Room = {
@@ -25,19 +23,11 @@ export class RoomAddComponent implements OnInit {
       doubleBeds: result.value.roomDoubleBeds !== undefined? result.value.roomDoubleBeds : 0,
       babyCots: result.value.roomBabyCots != undefined? result.value.roomBabyCots : 0
     };
-    //console.log(result.value);
     this.formSubmitted.emit(newRoom);
-
-    // console.log(result.value);
-    // console.log('You have entered : ' + result.roomNumber);
-    // const roomData: Room = {
-    //   number: result.roomNumber,
-    // };
-
-    // this.formSubmitted.emit(roomData);
   }
 
-  addRoomClickHandler(): void {
-    this.addRoomOn = !this.addRoomOn;
+  onClickCancelEditRoom(): void {
+    this.cancelEditRoom.emit('cancel');
   }
+
 }

@@ -1,15 +1,15 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 
 export interface Room {
-  number: string,
-  photo?: string,
-  singleBeds?: number,
-  doubleBeds?: number,
-  kingSizeBeds?: number,
-  babyCots?: number,
-  disabilityFriendly?: boolean,
+  number: string;
+  photo?: string;
+  singleBeds?: number;
+  doubleBeds?: number;
+  babyCots?: number;
+  disabilityFriendly?: boolean;
+  available?: boolean;
 }
 
 // export interface Room {
@@ -29,8 +29,8 @@ export interface Room {
 //   kitchen?: boolean;
 // }
 
- // % TEST ONLY
- export interface Post {
+// % TEST ONLY
+export interface Post {
   userId: number;
   id: number;
   title: string;
@@ -38,75 +38,80 @@ export interface Room {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
-
 export class RoomsService {
-  public rooms: Array<Room> = [
+  private rooms: Array<Room> = [
     {
-      number: '3',
-      photo: "../assets/edelle-bruton-PJNO2sLlbB8-unsplash.jpg",
-      singleBeds: 2,
-      doubleBeds: 0,
-      kingSizeBeds: 1,
-      babyCots: 1,
-      disabilityFriendly: true
-    },
-    {
-      number: '1',
+      number: "1",
       photo: "",
       singleBeds: 1,
       doubleBeds: 0,
-      kingSizeBeds: 0,
       babyCots: 0,
-      disabilityFriendly: true
+      disabilityFriendly: true,
+      available: true
     },
     {
-      number: '2',
+      number: "2",
       photo: "../assets/febrian-zakaria-gwV9eklemSg-unsplash.jpg",
       singleBeds: 0,
       doubleBeds: 0,
-      kingSizeBeds: 1,
       babyCots: 0,
       disabilityFriendly: true,
+      available: true
+    },
+    {
+      number: "3",
+      photo: "../assets/edelle-bruton-PJNO2sLlbB8-unsplash.jpg",
+      singleBeds: 2,
+      doubleBeds: 0,
+      babyCots: 1,
+      disabilityFriendly: true,
+      available: true
     },
   ];
 
- 
-  
+  // public rooms: Array<Room> = [];
+  private orderBy: String;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.orderBy = "number";
+  }
 
   // % TEST ONLY
-  getAllPosts() : Observable<Post[]> { 
-    const url = 'https://jsonplaceholder.typicode.com/posts';
+  getAllPosts(): Observable<Post[]> {
+    const url = "https://jsonplaceholder.typicode.com/posts";
     return this.http.get<Post[]>(url);
   }
 
-
-  getRooms(orderBy?: String) {
-    const roomsListOutput: Array<Room> = [...this.rooms];
+  orderRooms(orderBy?: String) {
+    //this.rooms = [...this.roomsData];
     // order by
-    switch(orderBy){
+    switch (orderBy) {
       case "singleBeds":
+        this.orderBy = "singleBeds";
         console.log("Order by single beds");
-      break;
+        break;
       case "dooubleBeds":
+        this.orderBy = "dooubleBeds";
         console.log("Order by double beds");
-      break;
-      case "kingsizeBeds":
-        console.log("Order by double beds");
-      break;
-      default: // order by number
-        console.log("order by number");
-        roomsListOutput.sort((first, second) => 0 - (first.number > second.number ? -1 : 1));
-        console.log("roomsListOutput", roomsListOutput);
-      break;
+        break;
+      default:
+        this.orderBy = "number";
+        // order by number
+        // console.log("order by number");
+        this.rooms.sort(
+          (first, second) => 0 - (first.number > second.number ? -1 : 1)
+        );
+        // console.log("roomsListOutput", roomsListOutput);
+        break;
     }
+    console.log("#rooms.service - getrooms()",this.rooms);
+    // return roomsListOutput;
     return this.rooms;
   }
 
-  addRoom(newRoomData: Room){
+  addRoom(_newRoomData: Room) {
     //number: string, description: string, singleBeds: number, doubleBeds: number, kingSizeBeds: number, babyCots: number, airConditioning: boolean, centralHeating: boolean, fireplace: boolean, minibar: boolean, balcony: boolean, disabilityFriendly: boolean, kitchen: boolean
     //  let newRoom: Room = {
     //   number: number,
@@ -128,20 +133,24 @@ export class RoomsService {
 
     // HTTP POST - send new room data to API
 
-    // return
-    this.rooms.push(newRoomData);
+    //console.log("#rooms.service", _newRoomData);
+    this.rooms.push(_newRoomData);
   }
 
   updateRoom(): void {
     // HTTP POST - send new room data to API
-
     // code responsible for updating a room in the rooms object, contained in the rooms.service
-
     // return success or error ?
-    
   }
 
-  updateToggleRoomAvailable(roomId: string): void {
+  updateToggleRoomAvailable(_roomIdentifier: String): void {
     // maybe this method should simply call the updateRoom method and define the change using the parameters passed to it
+    let roomToUpdate: any = this.rooms.find(room => room.number === _roomIdentifier);
+    if(roomToUpdate !== undefined) {
+      roomToUpdate.available = !roomToUpdate.available;
+      this.orderRooms(this.orderBy);
+    } else {
+      console.log("#rooms.service - updateToggleRoomAvailable() - Room not found.");
+    }
   }
 }

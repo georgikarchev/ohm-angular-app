@@ -1,0 +1,31 @@
+<div class="wrapper">
+  <h3>Edit room</h3>
+
+  <form #roomData="ngForm" (ngSubmit)="onClickSubmit(roomData)">
+    <div class="form-row form-row--identifier">
+      <label for="roomNumber">Room Number</label>
+      <input id="roomNumber" type="number" name="roomNumber" ngModel />
+    </div>
+    <div class="form-row">
+      <label>Single Beds</label>
+      <input id="singleBeds" type="number" name="roomSingleBeds" ngModel />
+    </div>
+    <div class="form-row">
+      <label for="doubleBeds">Double Beds</label>
+      <input id="doubleBeds" type="number" name="roomDoubleBeds" ngModel />
+    </div>
+    <div class="form-row">
+      <label for="babyCots">Baby Cots</label>
+      <input id="babyCots" type="number" name="babyCots" ngModel />
+    </div>
+    <div class="form-row">
+      <input type="submit" value="submit" />
+    </div>
+  </form>
+  <button
+    class="add-room__button add-room__button--cancel"
+    (click)="onClickCancelEditRoom()"
+  >
+    Cancel
+  </button>
+</div>

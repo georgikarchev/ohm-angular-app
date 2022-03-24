@@ -2,4 +2,4 @@
     <h1>Rooms</h1>
 </header>
 
-<app-rooms [rooms]="rooms" (newRoomFormSubmitted)="onNewRoomFormSubmitted($event)"></app-rooms>
+<app-rooms [rooms]="rooms" (newRoomFormSubmitted)="onNewRoomFormSubmitted($event)" (roomMarkUnavailable)="onClickMarkUnavailable($event)"></app-rooms>

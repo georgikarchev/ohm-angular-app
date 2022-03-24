@@ -10,7 +10,7 @@ export class DashboardComponent implements OnInit {
   rooms: Array<Room>;
 
   constructor(private roomsService: RoomsService) {
-    this.rooms = roomsService.getRooms();
+    this.rooms = roomsService.orderRooms();
   }
 
   ngOnInit(): void {

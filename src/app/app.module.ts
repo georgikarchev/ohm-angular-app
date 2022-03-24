@@ -20,6 +20,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { NotificationComponent } from './notification/notification.component';
 import { RoomAddComponent } from './room-add/room-add.component';
 import { RoomsPageComponent } from './rooms-page/rooms-page.component';
+import { RoomEditComponent } from './room-edit/room-edit.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { RoomsPageComponent } from './rooms-page/rooms-page.component';
     NotificationsComponent,
     NotificationComponent,
     RoomAddComponent,
-    RoomsPageComponent
+    RoomsPageComponent,
+    RoomEditComponent
   ],
   imports: [
     BrowserModule,
