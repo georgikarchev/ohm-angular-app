@@ -9,7 +9,7 @@ import { Room } from '../services/rooms.service';
 })
 export class RoomEditComponent implements OnInit {
   @Output() formSubmitted: EventEmitter<Room> = new EventEmitter();
-  @Output() cancelEditRoom: EventEmitter<String> = new EventEmitter()
+  @Output() cancelEditRoom: EventEmitter<string> = new EventEmitter()
 
   constructor() { }
 
@@ -18,7 +18,8 @@ export class RoomEditComponent implements OnInit {
 
   onClickSubmit(result: NgForm): void {
     const newRoom: Room = {
-      number: result.value.roomNumber,
+      id: 'placeholder-id',
+      name: result.value.roomName,
       singleBeds: result.value.roomSingleBeds !== undefined? result.value.roomSingleBeds : 0,
       doubleBeds: result.value.roomDoubleBeds !== undefined? result.value.roomDoubleBeds : 0,
       babyCots: result.value.roomBabyCots != undefined? result.value.roomBabyCots : 0

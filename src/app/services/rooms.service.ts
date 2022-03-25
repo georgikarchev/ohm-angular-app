@@ -3,7 +3,8 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
 export interface Room {
-  number: string;
+  id: string;
+  name: string;
   photo?: string;
   singleBeds?: number;
   doubleBeds?: number;
@@ -43,7 +44,8 @@ export interface Post {
 export class RoomsService {
   private rooms: Array<Room> = [
     {
-      number: "1",
+      id: 'ohm-h1-r1',
+      name: "1",
       photo: "",
       singleBeds: 1,
       doubleBeds: 0,
@@ -52,7 +54,8 @@ export class RoomsService {
       available: true
     },
     {
-      number: "2",
+      id: 'ohm-h1-r2',
+      name: "2",
       photo: "../assets/febrian-zakaria-gwV9eklemSg-unsplash.jpg",
       singleBeds: 0,
       doubleBeds: 0,
@@ -61,7 +64,8 @@ export class RoomsService {
       available: true
     },
     {
-      number: "3",
+      id: 'ohm-h1-r3',
+      name: "3",
       photo: "../assets/edelle-bruton-PJNO2sLlbB8-unsplash.jpg",
       singleBeds: 2,
       doubleBeds: 0,
@@ -75,7 +79,7 @@ export class RoomsService {
   private orderBy: String;
 
   constructor(private http: HttpClient) {
-    this.orderBy = "number";
+    this.orderBy = "name";
   }
 
   // % TEST ONLY
@@ -97,11 +101,11 @@ export class RoomsService {
         console.log("Order by double beds");
         break;
       default:
-        this.orderBy = "number";
+        this.orderBy = "name";
         // order by number
         // console.log("order by number");
         this.rooms.sort(
-          (first, second) => 0 - (first.number > second.number ? -1 : 1)
+          (first, second) => 0 - (first.name > second.name ? -1 : 1)
         );
         // console.log("roomsListOutput", roomsListOutput);
         break;
@@ -109,6 +113,15 @@ export class RoomsService {
     console.log("#rooms.service - getrooms()",this.rooms);
     // return roomsListOutput;
     return this.rooms;
+  }
+
+  getRooms(): Array<Room> {
+    return this.rooms;
+  }
+
+  getRoom(roomId: string): any {
+    const room = this.rooms.find(r => r.id === roomId);
+    return room;
   }
 
   addRoom(_newRoomData: Room) {
@@ -134,6 +147,8 @@ export class RoomsService {
     // HTTP POST - send new room data to API
 
     //console.log("#rooms.service", _newRoomData);
+    _newRoomData.id = 'ohm-h1-r'+ (this.rooms.length+1);
+    _newRoomData.available = true;
     this.rooms.push(_newRoomData);
   }
 
@@ -143,9 +158,9 @@ export class RoomsService {
     // return success or error ?
   }
 
-  updateToggleRoomAvailable(_roomIdentifier: String): void {
+  updateToggleRoomAvailable(roomId: String): void {
     // maybe this method should simply call the updateRoom method and define the change using the parameters passed to it
-    let roomToUpdate: any = this.rooms.find(room => room.number === _roomIdentifier);
+    let roomToUpdate: any = this.rooms.find(room => room.id === roomId);
     if(roomToUpdate !== undefined) {
       roomToUpdate.available = !roomToUpdate.available;
       this.orderRooms(this.orderBy);

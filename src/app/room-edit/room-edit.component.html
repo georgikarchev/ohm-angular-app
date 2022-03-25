@@ -3,8 +3,8 @@
 
   <form #roomData="ngForm" (ngSubmit)="onClickSubmit(roomData)">
     <div class="form-row form-row--identifier">
-      <label for="roomNumber">Room Number</label>
-      <input id="roomNumber" type="number" name="roomNumber" ngModel />
+      <label for="roomName">Room Number</label>
+      <input id="roomName" type="text" name="roomName" ngModel />
     </div>
     <div class="form-row">
       <label>Single Beds</label>
@@ -22,10 +22,10 @@
       <input type="submit" value="submit" />
     </div>
   </form>
-  <button
+  <!-- <button
     class="add-room__button add-room__button--cancel"
     (click)="onClickCancelEditRoom()"
   >
     Cancel
-  </button>
+  </button> -->
 </div>

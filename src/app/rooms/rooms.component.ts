@@ -9,7 +9,8 @@ import { Post, Room, RoomsService } from '../services/rooms.service';
 export class RoomsComponent implements OnInit {
   @Input() rooms!: Array<Room>;
   @Output() newRoomFormSubmitted: EventEmitter<Room> = new EventEmitter();
-  @Output() roomMarkUnavailable: EventEmitter<String> = new EventEmitter();
+  @Output() roomMarkUnavailable: EventEmitter<string> = new EventEmitter();
+  @Output() roomSelectedForEdit: EventEmitter<string> = new EventEmitter();
   // posts!: Post[];
   addRoomOn: boolean;
 
@@ -38,8 +39,13 @@ export class RoomsComponent implements OnInit {
     this.newRoomFormSubmitted.emit(newRoomData)
   }
 
-  onClickMarkUnavailable(roomIdentifier: String): void {
+  onRoomMarkUnavailable(roomIdentifier: string): void {
     this.roomMarkUnavailable.emit(roomIdentifier);
+  }
+
+  onRoomSelectedForEdit(roomId: string): void {
+    //console.log("#rooms -> Room roomSelectedForEdit()", roomId);
+    this.roomSelectedForEdit.emit(roomId);
   }
 
 }

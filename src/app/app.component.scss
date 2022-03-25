@@ -148,12 +148,40 @@
                 border-top-right-radius: var(--border-radius);
                 text-align: center;
 
+                display: grid;
+                grid-template-columns: 2fr 6fr 2fr;
+                grid-template-areas: "actions-left heading-text actions-right";
+                align-items: center;
+
 
                 & h1 {
+                    grid-area: heading-text;
                     font-size: 2.4rem;
                     font-weight: var(--font-weight-light);
                     text-align: center;
                     width: 100%;
+                }
+
+                & .actions-left {
+                    grid-area: actions-left;
+                    justify-self: flex-start;
+                }
+                
+                & .actions-right {
+                    grid-area: actions-right;
+                    justify-self: flex-end;
+                }
+                
+                & .actions-left,
+                & .actions-right {
+                    padding-left: var(--padding-min);
+                    padding-right: var(--padding-min);
+
+                    & .btn {
+                        padding-left: var(--padding-small);
+                        padding-right: var(--padding-small);
+                    }
+                    
                 }
             }
         }

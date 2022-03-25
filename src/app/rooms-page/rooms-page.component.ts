@@ -8,10 +8,17 @@ import { Room, RoomsService } from '../services/rooms.service';
   styleUrls: ['./rooms-page.component.scss']
 })
 export class RoomsPageComponent implements OnInit, OnChanges {
-  rooms: Array<Room>;
+  //rooms: Array<Room>;
+  public state;
 
   constructor(private roomsService: RoomsService, private bookingsService: BookingsService) {
-      this.rooms = roomsService.orderRooms('number');
+      // this.rooms = roomsService.orderRooms('number');
+      this.state = {
+        rooms: roomsService.getRooms(),
+        showRoomDetails: false,
+        showRoomId: '',
+        selectedRoom: undefined
+      }
   }
 
   ngOnInit(): void {
@@ -29,8 +36,19 @@ export class RoomsPageComponent implements OnInit, OnChanges {
     this.roomsService.addRoom(newRoomData);
   }
 
-  onClickMarkUnavailable(_roomIdentifier: String): void {
-    this.roomsService.updateToggleRoomAvailable(_roomIdentifier);
+  onRoomMarkUnavailable(roomIdentifier: string): void {
+    this.roomsService.updateToggleRoomAvailable(roomIdentifier);
+  }
+
+  onRoomSelectedForEdit(roomId: string): void {
+    this.state.showRoomDetails = true;
+    this.state.showRoomId = roomId;
+    this.state.selectedRoom = this.roomsService.getRoom(roomId);
+    console.log(this.state.selectedRoom);
+  }
+
+  onClickBackToRooms() {
+    this.state.showRoomDetails = false;
   }
 
 }

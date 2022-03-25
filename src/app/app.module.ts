@@ -21,6 +21,7 @@ import { NotificationComponent } from './notification/notification.component';
 import { RoomAddComponent } from './room-add/room-add.component';
 import { RoomsPageComponent } from './rooms-page/rooms-page.component';
 import { RoomEditComponent } from './room-edit/room-edit.component';
+import { ButtonComponent } from './misc/button/button.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { RoomEditComponent } from './room-edit/room-edit.component';
     NotificationComponent,
     RoomAddComponent,
     RoomsPageComponent,
-    RoomEditComponent
+    RoomEditComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,

@@ -9,27 +9,30 @@ import { Room } from '../services/rooms.service';
 export class RoomComponent implements OnInit {
 
   @Input() room!: Room;
-  @Output() roomMarkUnavailable: EventEmitter<String> = new EventEmitter();
+  @Output() roomMarkUnavailable: EventEmitter<string> = new EventEmitter();
+  @Output() roomSelectedForEdit: EventEmitter<string> = new EventEmitter();
 
-  editRoomActive: Boolean;
+  // editRoomActive: Boolean;
 
   constructor() {
-    this.editRoomActive = false;
+    // this.editRoomActive = false;
    }
 
   ngOnInit(): void {
   }
 
-  onClickMarkUnavailable(_roomIdentifier: String): void {
-    this.roomMarkUnavailable.emit(_roomIdentifier);
+  onRoomMarkUnavailable(roomId: string): void {
+    this.roomMarkUnavailable.emit(roomId);
   }
 
   onClickEditRoom(): void {
-    this.editRoomActive = !this.editRoomActive;
+    // this.editRoomActive = !this.editRoomActive;
+    this.roomSelectedForEdit.emit(this.room.id);
+
   }
 
-  onCancelEditRoom(message: String): void {
-    this.editRoomActive = false;
-  }
+  // onCancelEditRoom(message: string): void {
+  //   this.editRoomActive = false;
+  // }
 
 }

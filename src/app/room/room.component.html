@@ -6,14 +6,14 @@
   }"
 >
   <h3 class="room__identifier">
-    <span>{{ room.number }}</span>
+    <span>{{ room.name }}</span>
   </h3>
   <!-- <p class="room__description">{{room.description}}</p> -->
   <div class="room__photo-wrapper">
     <img
       *ngIf="room.photo"
       [src]="room.photo"
-      alt="Photo of room {{ room.number }}"
+      alt="Photo of room {{ room.name }}"
     />
     <ng-container *ngIf="!room.photo">
       <svg
@@ -32,7 +32,7 @@
   <button class="room__button room__button--edit" (click)="onClickEditRoom()">edit</button>
   <button
     class="room__button room__button--mark-unavailable"
-    (click)="onClickMarkUnavailable(room.number)"
+    (click)="onRoomMarkUnavailable(room.id)"
   >
     {{ room.available? "mark unavailable" : "mark available" }}
   </button>
@@ -40,5 +40,5 @@
     view bookings
   </button>
 
-  <app-room-edit *ngIf="editRoomActive" class="room__edit" (cancelEditRoom)="onCancelEditRoom($event)"></app-room-edit>
+  <!-- <app-room-edit *ngIf="editRoomActive" class="room__edit" (cancelEditRoom)="onCancelEditRoom($event)"></app-room-edit> -->
 </article>

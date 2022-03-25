@@ -15,15 +15,10 @@
     grid-auto-flow: row;
 
     gap: var(--padding-small);
-    padding: var(--padding-medium);
 
 
     @include respond(small-desktop) {
         grid-template-columns: repeat(4, 1fr);
-    }
-
-    @include respond(tab-land) {
-        padding: var(--padding-small);
     }
     
     @include respond(tab-port) {
@@ -33,7 +28,6 @@
     @include respond(phone) {
         grid-template-columns: repeat(1, 1fr);
         grid-template-rows: 1fr;
-        padding: var(--padding-min);
         gap: var(--padding-min);
     }
 

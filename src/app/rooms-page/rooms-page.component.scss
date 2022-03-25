@@ -1,0 +1,13 @@
+@import "../../assets/scss/abstracts/mixins";
+
+.page-body {
+    padding: var(--padding-medium);
+
+    @include respond(tab-land) {
+        padding: var(--padding-small);
+    }
+
+    @include respond(phone) {
+        padding: var(--padding-min);
+    }
+}
