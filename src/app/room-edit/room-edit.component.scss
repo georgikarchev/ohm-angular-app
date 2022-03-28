@@ -1,3 +1,73 @@
 .wrapper {
-    width: 90%;
+    // width: 90%;
+    padding: var(--padding-min);
+    
+    display: flex;
+    gap: var(--padding-min);
+
+    & .image-wrapper,
+    & .data-wrapper {
+        flex: 1;
+        min-width: avar(--box-min-width);
+    }
+    
+    & .image-wrapper {
+        background-color: var(--gray-light);
+        
+        & img {
+            width: 100%;
+        }
+    }
+
+
+    & .data-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-end;
+    }
+
+    & h3 {
+        font-size: 1.5rem;
+    }
+
+    & .form-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &--identifier {
+            font-weight: bold;
+        }
+
+        &:not(:last-of-type) {
+            padding-bottom: var(--padding-min);
+        }
+        
+        & label {
+            margin-right: var(--padding-min);
+            width: 60%;
+        }
+
+        & input[type="number"] {
+            text-align: center;
+            width: 30%;
+        }
+
+        // & input[type="submit"] {
+        //     margin-top: var(--padding-min);
+        // }
+
+        
+    }
+
+    & .add-room__button {
+        &--toggle {
+            margin-top: var(--padding-min);
+        }
+
+        &--cancel {
+            width: 100%;
+        }
+    }
 }

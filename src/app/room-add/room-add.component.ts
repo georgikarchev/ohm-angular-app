@@ -9,7 +9,7 @@ import { Room } from '../services/rooms.service';
   styleUrls: ['./room-add.component.scss'],
 })
 export class RoomAddComponent implements OnInit {
-  @Output() formSubmitted: EventEmitter<Room> = new EventEmitter();
+  @Output() newRoomFormSubmitted: EventEmitter<Room> = new EventEmitter();
   addRoomOn: boolean;
 
   constructor() {
@@ -27,7 +27,7 @@ export class RoomAddComponent implements OnInit {
       babyCots: result.value.roomBabyCots != undefined? result.value.roomBabyCots : 0
     };
     //console.log(result.value);
-    this.formSubmitted.emit(newRoom);
+    this.newRoomFormSubmitted.emit(newRoom);
 
     // console.log(result.value);
     // console.log('You have entered : ' + result.roomNumber);

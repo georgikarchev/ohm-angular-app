@@ -110,7 +110,7 @@ export class RoomsService {
         // console.log("roomsListOutput", roomsListOutput);
         break;
     }
-    console.log("#rooms.service - getrooms()",this.rooms);
+    //console.log("#rooms.service - getrooms()",this.rooms);
     // return roomsListOutput;
     return this.rooms;
   }
@@ -121,6 +121,8 @@ export class RoomsService {
 
   getRoom(roomId: string): any {
     const room = this.rooms.find(r => r.id === roomId);
+    // console.log("#roomsService: getRoom::",this.rooms);
+    // console.log("#roomsService: getRoom::",roomId);
     return room;
   }
 
@@ -152,9 +154,15 @@ export class RoomsService {
     this.rooms.push(_newRoomData);
   }
 
-  updateRoom(): void {
-    // HTTP POST - send new room data to API
+  updateRoom(_updatedRoomData: Room): void {
     // code responsible for updating a room in the rooms object, contained in the rooms.service
+    // find the room to be edited in the rooms array
+    // console.log("#rooms.service: updateRoom():: _updatedRoomData.id:::",_updatedRoomData.id);
+    let roomToUpdate: any = this.rooms.find(room => room.id === _updatedRoomData.id);
+    // console.log("#rooms.service: updateRoom():: roomToUpdate", roomToUpdate);
+    //room = _updatedRoomData;
+    // console.log(this.rooms);
+    // HTTP POST - send new room data to API
     // return success or error ?
   }
 

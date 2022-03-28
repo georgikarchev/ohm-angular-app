@@ -1,6 +1,11 @@
 <header>
   <section class="actions-left">
-    <app-button *ngIf="state.showRoomDetails" (btnClick)="onClickBackToRooms()" text="back" [isDisabled]="false"></app-button>
+    <app-button
+      *ngIf="state.showRoomDetails"
+      (btnClick)="onClickBackToRooms()"
+      text="back"
+      [isDisabled]="false"
+    ></app-button>
   </section>
   <h1>Rooms</h1>
 </header>
@@ -12,6 +17,10 @@
     (roomMarkUnavailable)="onRoomMarkUnavailable($event)"
     (roomSelectedForEdit)="onRoomSelectedForEdit($event)"
   ></app-rooms>
-  <app-room-edit *ngIf="state.showRoomDetails"></app-room-edit>
+  <app-room-edit
+    class="page-body__room-edit"
+    *ngIf="state.showRoomDetails"
+    [roomToUpdate]="state.selectedRoom"
+    (updateFormSubmitted)="onUpdateRoomFormSubmitted($event)"
+  ></app-room-edit>
 </section>
-

@@ -2,6 +2,8 @@
 
 .page-body {
     padding: var(--padding-medium);
+    width: 100%;
+    box-sizing: border-box;
 
     @include respond(tab-land) {
         padding: var(--padding-small);
@@ -9,5 +11,10 @@
 
     @include respond(phone) {
         padding: var(--padding-min);
+    }
+
+    &__room-edit {
+        width: 100%;
+        display: block;
     }
 }

@@ -1,27 +1,46 @@
 <div class="wrapper">
-  <h3>Edit room</h3>
+  <section class="image-wrapper">
+    <img *ngIf="roomToUpdate!.photo" [src]="roomToUpdate!.photo" alt="">
+    <ng-container *ngIf="!roomToUpdate!.photo">
+      <svg
+        class="room__photo-placeholder"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 640 512"
+      >
+        <!--! Font Awesome Pro 6.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+        <path
+          d="M176 288C220.1 288 256 252.1 256 208S220.1 128 176 128S96 163.9 96 208S131.9 288 176 288zM544 128H304C295.2 128 288 135.2 288 144V320H64V48C64 39.16 56.84 32 48 32h-32C7.163 32 0 39.16 0 48v416C0 472.8 7.163 480 16 480h32C56.84 480 64 472.8 64 464V416h512v48c0 8.837 7.163 16 16 16h32c8.837 0 16-7.163 16-16V224C640 170.1 597 128 544 128z"
+        />
+      </svg>
+    </ng-container>
+  </section>
+  <section class="data-wrapper">
+    <h3>Edit room</h3>
+  
+    <form #roomData="ngForm" (ngSubmit)="onClickSubmit(roomData)">
+      <div class="form-row form-row--identifier">
+        <label for="roomName">Room Name/Number</label>
+        <input id="roomName" type="text" name="roomName" [(ngModel)]="roomToUpdate!.name" />
+      </div>
+      <div class="form-row">
+        <label>Single Beds</label>
+        <input id="singleBeds" type="number" name="roomSingleBeds" [(ngModel)]="roomToUpdate!.singleBeds" />
+      </div>
+      <div class="form-row">
+        <label for="doubleBeds">Double Beds</label>
+        <input id="doubleBeds" type="number" name="roomDoubleBeds" [(ngModel)]="roomToUpdate!.doubleBeds" />
+      </div>
+      <div class="form-row">
+        <label for="babyCots">Baby Cots</label>
+        <input id="babyCots" type="number" name="roomBabyCots" [(ngModel)]="roomToUpdate!.babyCots" />
+      </div>
+      <div class="form-row">
+        <input type="submit" value="save" />
+      </div>
+    </form>
+  </section>
 
-  <form #roomData="ngForm" (ngSubmit)="onClickSubmit(roomData)">
-    <div class="form-row form-row--identifier">
-      <label for="roomName">Room Number</label>
-      <input id="roomName" type="text" name="roomName" ngModel />
-    </div>
-    <div class="form-row">
-      <label>Single Beds</label>
-      <input id="singleBeds" type="number" name="roomSingleBeds" ngModel />
-    </div>
-    <div class="form-row">
-      <label for="doubleBeds">Double Beds</label>
-      <input id="doubleBeds" type="number" name="roomDoubleBeds" ngModel />
-    </div>
-    <div class="form-row">
-      <label for="babyCots">Baby Cots</label>
-      <input id="babyCots" type="number" name="babyCots" ngModel />
-    </div>
-    <div class="form-row">
-      <input type="submit" value="submit" />
-    </div>
-  </form>
+  
   <!-- <button
     class="add-room__button add-room__button--cancel"
     (click)="onClickCancelEditRoom()"

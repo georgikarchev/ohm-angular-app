@@ -36,15 +36,24 @@ export class RoomsPageComponent implements OnInit, OnChanges {
     this.roomsService.addRoom(newRoomData);
   }
 
+  onUpdateRoomFormSubmitted(updatedRoomData: Room): void {
+    //console.log("#Rooms-Page: New Room Data", updatedRoomData);
+    // check for duplicates in Room Number
+
+    // call Service and update data object
+    this.roomsService.updateRoom(updatedRoomData);
+  }
+
   onRoomMarkUnavailable(roomIdentifier: string): void {
     this.roomsService.updateToggleRoomAvailable(roomIdentifier);
   }
 
   onRoomSelectedForEdit(roomId: string): void {
     this.state.showRoomDetails = true;
+    //console.log("#rooms-page: onRoomSelectedForEdit() :: roomId:",this.roomsService.getRooms());
     this.state.showRoomId = roomId;
     this.state.selectedRoom = this.roomsService.getRoom(roomId);
-    console.log(this.state.selectedRoom);
+    // console.log("#rooms-page: onRoomSelectedForEdit() :: selectedRoom Object",this.state.selectedRoom);
   }
 
   onClickBackToRooms() {
