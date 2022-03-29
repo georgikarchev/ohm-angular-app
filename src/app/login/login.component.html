@@ -1,4 +1,56 @@
-<article>
-    <h1>Login Page</h1>
-</article>
-   
+<header>
+  <h1>Login Page</h1>
+</header>
+<section class="page-body">
+  <!-- <form #loginUserData="ngForm" (ngSubmit)="onClickSubmitDataForm(loginUserData)">
+        <div class="form-row">
+          <label for="userEmail">Email</label>
+          <input id="userEmail" type="email" name="userEmail" ngModel />
+        </div>
+        <div class="form-row">
+          <label for="userPassword">Password</label>
+          <input id="userPassword" type="password" name="userPassword" ngModel />
+        </div>
+        <div class="form-row form-row__submit">
+          <input type="submit" value="Send" />
+        </div>
+      </form> -->
+  <form [formGroup]="loginForm" (ngSubmit)="submit()">
+    <div class="form-row">
+      <label for="userEmail">Email</label>
+      <input
+        id="userEmail"
+        type="email"
+        name="userEmail"
+        formControlName="email"
+      />
+      <ng-container *ngIf="email?.errors?.['required'] && email?.touched === true">
+        <p class="warning">Email address is required</p>
+      </ng-container>
+      <ng-container *ngIf="email?.errors?.['email'] && email?.touched === true">
+        <p class="warning">Please enter a valid email address</p>
+      </ng-container>
+    </div>
+    <div class="form-row">
+      <label for="userPassword">Password</label>
+      <input
+        id="userPassword"
+        type="password"
+        name="userPassword"
+        formControlName="password"
+      />
+      <ng-container *ngIf="password?.errors?.['required'] && password?.touched === true">
+        <p class="warning">Password is required</p>
+      </ng-container>
+      <ng-container
+        *ngIf="password?.errors?.['minlength'] && password?.touched === true"
+      >
+        <p class="warning">Password needs to be at least 6 characters long</p>
+      </ng-container>
+    </div>
+    <div class="form-row form-row__submit">
+        <input type="submit" value="Send" />
+      </div>
+  </form>
+  <p>New to Open Hotel Manager? <a routerLink="/register">Sign Up here!</a></p>
+</section>

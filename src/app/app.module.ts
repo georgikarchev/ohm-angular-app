@@ -4,14 +4,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RoomsComponent } from './rooms/rooms.component';
 import { RoomComponent } from './room/room.component';
@@ -34,6 +33,7 @@ import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { HotToastModule } from '@ngneat/hot-toast';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,6 @@ import { HotToastModule } from '@ngneat/hot-toast';
     HomeComponent,
     DashboardComponent,
     LoginComponent,
-    RegisterComponent,
     RoomsComponent,
     RoomComponent,
     RoomDetailsComponent,
@@ -52,7 +51,8 @@ import { HotToastModule } from '@ngneat/hot-toast';
     RoomAddComponent,
     RoomsPageComponent,
     RoomEditComponent,
-    ButtonComponent
+    ButtonComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +70,8 @@ import { HotToastModule } from '@ngneat/hot-toast';
     provideRemoteConfig(() => getRemoteConfig()),
     provideStorage(() => getStorage()),
     HotToastModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     ScreenTrackingService,UserTrackingService

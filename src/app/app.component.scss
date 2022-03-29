@@ -68,6 +68,7 @@
 
     // background-color: var(--main-bg-color);
     background-image: url(../assets/christian-lambert-vmIWr0NnpCQ-unsplash.jpg);
+    background-attachment: fixed;
     background-size: 100% auto; 
 
     display: grid;
@@ -100,7 +101,21 @@
     & input {
         box-sizing: border-box;
         width: 100%;
+        
+        &[type="text"],
+        &[type="password"],
+        &[type="number"],
+        &[type="email"] {
+            border-top: none;
+            border-left: none;
+            border-right: none;
+        }
     }
+
+    & .warning {
+        color: var(--highlight-color-red);
+    }
+
 
     & > .wrapper {
         display: grid;

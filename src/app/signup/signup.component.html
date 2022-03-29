@@ -1,0 +1,86 @@
+<header>
+  <h1>Sign up</h1>
+</header>
+<section class="page-body">
+  <form [formGroup]="signUpForm" (ngSubmit)="submit()">
+    <div class="form-row">
+      <label for="name">Name</label>
+      <input id="name" type="text" name="name" formControlName="name" />
+      <ng-container
+        *ngIf="name?.errors?.['required'] && name?.touched === true"
+      >
+        <p class="warning">Name address is required</p>
+      </ng-container>
+      <ng-container
+        *ngIf="name?.errors?.['minlength'] && name?.touched === true"
+      >
+        <p class="warning">Name needs to be at least 5 characters long</p>
+      </ng-container>
+    </div>
+    <div class="form-row">
+      <label for="userEmail">Email</label>
+      <input
+        id="userEmail"
+        type="email"
+        name="userEmail"
+        formControlName="email"
+      />
+      <ng-container
+        *ngIf="email?.errors?.['required'] && email?.touched === true"
+      >
+        <p class="warning">Email address is required</p>
+      </ng-container>
+      <ng-container *ngIf="email?.errors?.['email'] && email?.touched === true">
+        <p class="warning">Please enter a valid email address</p>
+      </ng-container>
+    </div>
+    <div class="form-row">
+      <label for="userPassword">Password</label>
+      <input
+        id="userPassword"
+        type="password"
+        name="userPassword"
+        formControlName="password"
+        minlength="6"
+      />
+      <ng-container
+        *ngIf="password?.errors?.['required'] && password?.touched === true"
+      >
+        <p class="warning">Password is required</p>
+      </ng-container>
+      <ng-container
+        *ngIf="password?.errors?.['minlength'] && password?.touched === true"
+      >
+        <p class="warning">Password needs to be at least 6 characters long</p>
+      </ng-container>
+    </div>
+    <div class="form-row">
+      <label for="userPassword">Confirm Password</label>
+      <input
+        id="confirmPassword"
+        type="password"
+        name="confirmPassword"
+        formControlName="confirmPassword"
+        minlength="6"
+      />
+      <ng-container
+        *ngIf="confirmPassword?.errors?.['required'] && confirmPassword?.touched === true"
+      >
+        <p class="warning">Confirm Password is required</p>
+      </ng-container>
+      <ng-container
+        *ngIf="confirmPassword?.errors?.['minlength'] && confirmPassword?.touched === true"
+      >
+        <p class="warning">
+          Confirm Password needs to be at least 6 characters long
+        </p>
+      </ng-container>
+    </div>
+    <ng-container *ngIf="signUpForm?.errors?.['passwordsDontMatch']">
+      <p class="warning">Passwords should match</p>
+    </ng-container>
+    <div class="form-row form-row__submit">
+      <input type="submit" value="Sign Up!" />
+    </div>
+  </form>
+</section>
