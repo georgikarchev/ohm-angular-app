@@ -12,11 +12,21 @@
     }
     
     & .image-wrapper {
-        background-color: var(--gray-light);
+        position: relative;
+        // background-color: var(--gray-light);
         
-        & img {
+        & > img {
             width: 100%;
         }
+
+        & > button {
+            position: absolute;
+            bottom: var(--padding-medium);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+
     }
 
 

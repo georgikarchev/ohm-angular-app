@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 export interface Room {
   id: string;
   name: string;
-  photo?: string;
+  photo?: string | undefined;
   singleBeds?: number;
   doubleBeds?: number;
   babyCots?: number;
@@ -46,7 +46,7 @@ export class RoomsService {
     {
       id: 'ohm-h1-r1',
       name: "1",
-      photo: "",
+      photo: undefined,
       singleBeds: 1,
       doubleBeds: 0,
       babyCots: 0,
@@ -157,7 +157,7 @@ export class RoomsService {
   updateRoom(_updatedRoomData: Room): void {
     // code responsible for updating a room in the rooms object, contained in the rooms.service
     // find the room to be edited in the rooms array
-    // console.log("#rooms.service: updateRoom():: _updatedRoomData.id:::",_updatedRoomData.id);
+    console.log("#rooms.service: updateRoom():: _updatedRoomData.id:::",_updatedRoomData.id);
     let roomToUpdate: any = this.rooms.find(room => room.id === _updatedRoomData.id);
     // console.log("#rooms.service: updateRoom():: roomToUpdate", roomToUpdate);
     //room = _updatedRoomData;
