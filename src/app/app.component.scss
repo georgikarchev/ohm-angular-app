@@ -116,6 +116,25 @@
         color: var(--highlight-color-red);
     }
 
+    & .button {
+        background: none;
+        border: 1px solid transparent;
+        border-radius: var(--border-radius);
+
+        &--light {
+            color: var(--white);
+        }
+
+        &--dark {
+            color: var(--main-color-dark);
+        }
+
+        &:hover,
+        &:active {
+            border-color: currentColor;
+        }
+    }
+
 
     & > .wrapper {
         display: grid;
