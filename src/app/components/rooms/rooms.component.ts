@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Post, Room, RoomsService } from '../services/rooms.service';
+import { Post, Room, RoomsService } from '../../services/rooms.service';
 
 @Component({
   selector: 'app-rooms',

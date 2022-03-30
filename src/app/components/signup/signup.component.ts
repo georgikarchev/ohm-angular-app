@@ -10,8 +10,8 @@ import {
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { switchMap } from 'rxjs';
-import { AuthService } from '../services/auth.service';
-import { UsersService } from '../services/users.service';
+import { AuthService } from '../../services/auth.service';
+import { UsersService } from '../../services/users.service';
 
 export function passwordsMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Notification } from './notifications/notification.service';
+import { Notification } from './components/notifications/notification.service';
 import { AuthService } from './services/auth.service';
 
 @Component({

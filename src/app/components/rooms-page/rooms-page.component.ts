@@ -1,6 +1,6 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
-import { BookingsService } from '../services/bookings.service';
-import { Room, RoomsService } from '../services/rooms.service';
+import { BookingsService } from '../../services/bookings.service';
+import { Room, RoomsService } from '../../services/rooms.service';
 
 @Component({
   selector: 'app-rooms-page',

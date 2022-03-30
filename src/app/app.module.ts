@@ -6,21 +6,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { HomeComponent } from './home/home.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { LoginComponent } from './login/login.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HomeComponent } from './components/home/home.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from './components/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
-import { RoomsComponent } from './rooms/rooms.component';
-import { RoomComponent } from './room/room.component';
-import { RoomDetailsComponent } from './room-details/room-details.component';
-import { NotificationsComponent } from './notifications/notifications.component';
-import { NotificationComponent } from './notification/notification.component';
-import { RoomAddComponent } from './room-add/room-add.component';
-import { RoomsPageComponent } from './rooms-page/rooms-page.component';
-import { RoomEditComponent } from './room-edit/room-edit.component';
-import { ButtonComponent } from './misc/button/button.component';
+import { RoomsComponent } from './components/rooms/rooms.component';
+import { RoomComponent } from './components/room/room.component';
+import { RoomDetailsComponent } from './components/room-details/room-details.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { NotificationComponent } from './components/notification/notification.component';
+import { RoomAddComponent } from './components/room-add/room-add.component';
+import { RoomsPageComponent } from './components/rooms-page/rooms-page.component';
+import { RoomEditComponent } from './components/room-edit/room-edit.component';
+import { ButtonComponent } from './components/button/button.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
@@ -33,7 +33,7 @@ import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { HotToastModule } from '@ngneat/hot-toast';
-import { SignupComponent } from './signup/signup.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 @NgModule({
   declarations: [

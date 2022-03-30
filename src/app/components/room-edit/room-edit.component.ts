@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Room } from '../services/rooms.service';
-import { FileUploadService } from '../services/file-upload.service';
+import { Room } from '../../services/rooms.service';
+import { FileUploadService } from '../../services/file-upload.service';
 import { switchMap, tap } from 'rxjs';
 import { HotToastService } from '@ngneat/hot-toast';
 
