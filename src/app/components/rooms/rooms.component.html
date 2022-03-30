@@ -1,21 +1,14 @@
 <section class="rooms-list">
   <ng-container *ngFor="let room of rooms">
-    <app-room class="rooms-List__room" [room]="room" (roomMarkUnavailable)="onRoomMarkUnavailable($event)" (roomSelectedForEdit)="onRoomSelectedForEdit($event)"></app-room>
+    <app-room
+      class="rooms-List__room"
+      [room]="room"
+      (roomMarkUnavailable)="onRoomMarkUnavailable($event)"
+      (roomSelectedForEdit)="onRoomSelectedForEdit($event)"
+    ></app-room>
   </ng-container>
-  <!-- <div>
-        <ng-container *ngFor="let post of posts">
-            <div class="post">
-                {{post.userId}} | {{post.id}} | {{post.title}}
-            </div>
-        </ng-container>
-    </div> -->
-    <app-room-add class="add-room" (newRoomFormSubmitted)="onNewRoomFormSubmitted($event)"></app-room-add>
-    <!-- <div class="add-room">
-      <button
-        class="add-room__button"
-        (click)="addRoomClickHandler()"
-      >
-        {{ addRoomOn ? "Cancel" : "add room" }}
-      </button>
-    </div> -->
+  <app-room-add
+    class="add-room"
+    (newRoomFormSubmitted)="onNewRoomFormSubmitted($event)"
+  ></app-room-add>
 </section>

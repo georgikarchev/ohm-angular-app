@@ -1,5 +1,5 @@
 // import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
 // import { Observable, switchAll, switchMap } from 'rxjs';
 // import { ref, Storage, uploadBytes } from '@angular/fire/storage';
 // import { getDownloadURL } from 'firebase/storage';
@@ -15,13 +15,10 @@ import {
 import { finalize, from, map, Observable, switchMap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FileUploadService {
-
-  constructor(private http: HttpClient, private storage: Storage) {
-
-  }
+  constructor(private http: HttpClient, private storage: Storage) {}
 
   onUpload() {
     // this.http.post

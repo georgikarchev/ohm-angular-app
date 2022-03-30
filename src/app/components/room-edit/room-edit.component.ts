@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Room } from '../../services/rooms.service';
+import { Room } from "../../models/room";
 import { FileUploadService } from '../../services/file-upload.service';
 import { switchMap, tap } from 'rxjs';
 import { HotToastService } from '@ngneat/hot-toast';
+import { ProfileUser } from 'src/app/models/user';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-room-edit',
@@ -11,6 +13,9 @@ import { HotToastService } from '@ngneat/hot-toast';
   styleUrls: ['./room-edit.component.scss'],
 })
 export class RoomEditComponent implements OnInit {
+  user$ = this.usersService.currentUserProfile$;
+  
+  @Input() userUid!: any;
   @Input() roomToUpdate!: any; // ugly fix - a type of Room should be used here but passing a probably undefined value from parent component does not work
   @Output() updateFormSubmitted: EventEmitter<Room> = new EventEmitter();
   @Output() cancelEditRoom: EventEmitter<string> = new EventEmitter();
@@ -19,7 +24,8 @@ export class RoomEditComponent implements OnInit {
 
   constructor(
     private fileUploadService: FileUploadService,
-    private toast: HotToastService
+    private toast: HotToastService,
+    private usersService: UsersService
   ) {}
 
   ngOnInit(): void {
@@ -32,15 +38,30 @@ export class RoomEditComponent implements OnInit {
   //   this.selectedFile = event.target.files[0];
   // }
 
-  uploadFile(event: any) {
+  uploadFile(event: any) {//, { uid }: ProfileUser
     this.fileUploadService
-      .uploadFile(event.target.files[0], `rooms/h1/`)
+      .uploadFile(event.target.files[0], `rooms/${this.userUid}/${this.roomToUpdate.id}`)
       .pipe(
         this.toast.observe({
-          loading: 'Uploading profile image...',
+          loading: 'Uploading image...',
           success: 'Image uploaded successfully',
           error: 'There was an error in uploading the image',
-        })
+        }),
+        // switchMap((photoURL) =>
+        //   this.usersService.updateUser({
+        //     1,
+        //     photoURL,
+        //   })
+        // )
+        // switchMap(
+        //   (photoURL) => {
+        //     console.log(
+        //       '$$$ Insert the realtime DB update call HERE!',
+        //       photoURL
+        //     )
+        //     return true;
+        //   }
+        // )
       )
       .subscribe();
   }

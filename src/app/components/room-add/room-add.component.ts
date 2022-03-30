@@ -1,7 +1,9 @@
 // import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Room } from '../../services/rooms.service';
+import { UsersService } from 'src/app/services/users.service';
+import { RoomsService } from '../../services/rooms.service';
+import { Room } from "../../models/room";
 
 @Component({
   selector: 'app-room-add',
@@ -9,10 +11,12 @@ import { Room } from '../../services/rooms.service';
   styleUrls: ['./room-add.component.scss'],
 })
 export class RoomAddComponent implements OnInit {
+  user$ = this.usersService.currentUserProfile$;
+
   @Output() newRoomFormSubmitted: EventEmitter<Room> = new EventEmitter();
   addRoomOn: boolean;
 
-  constructor() {
+  constructor(private usersService: UsersService, private roomsService: RoomsService) {
     this.addRoomOn = false;
   }
 
@@ -27,7 +31,12 @@ export class RoomAddComponent implements OnInit {
       babyCots: result.value.roomBabyCots != undefined? result.value.roomBabyCots : 0
     };
     //console.log(result.value);
-    this.newRoomFormSubmitted.emit(newRoom);
+
+    this.roomsService.addRoom(newRoom);
+
+
+    // HERE is where the code emits the event to the rooms-page.component
+    //this.newRoomFormSubmitted.emit({newRoom, user}]);
 
     // console.log(result.value);
     // console.log('You have entered : ' + result.roomNumber);

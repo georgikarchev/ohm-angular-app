@@ -1,6 +1,11 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
+import { User } from 'firebase/auth';
+import { ProfileUser } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { BookingsService } from '../../services/bookings.service';
-import { Room, RoomsService } from '../../services/rooms.service';
+import { RoomsService } from '../../services/rooms.service';
+import { Room } from "../../models/room";
+
 
 @Component({
   selector: 'app-rooms-page',
@@ -10,8 +15,9 @@ import { Room, RoomsService } from '../../services/rooms.service';
 export class RoomsPageComponent implements OnInit, OnChanges {
   //rooms: Array<Room>;
   public state;
+  public userEmail: User | null | undefined;
 
-  constructor(private roomsService: RoomsService, private bookingsService: BookingsService) {
+  constructor(private roomsService: RoomsService, private bookingsService: BookingsService, public authService: AuthService) {
       // this.rooms = roomsService.orderRooms('number');
       this.state = {
         rooms: roomsService.getRooms(),
@@ -22,18 +28,29 @@ export class RoomsPageComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    // this.authService.currentUser$.subscribe(
+    //   data => {
+    //     this.roomsService.fetchRoomsFromRealTimeDatabase(data!.uid);
+    //   }
+    // );
   }
 
   ngOnChanges(): void {
     console.log("CHANGES");
   }
 
-  onNewRoomFormSubmitted(newRoomData: Room): void {
+  onNewRoomFormSubmitted(params: any): void { //newRoomData: Room, user: ProfileUser
+    console.log(params);
+    const newRoomData = params[0];
+    const user = params[1];
     //console.log("#Rooms-Page: New Room Data", newRoomData);
     // check for duplicates in Room Number
 
     // call Service and update data object
-    this.roomsService.addRoom(newRoomData);
+
+
+    // commented out - moved the call of the service to the room-add.component
+    // this.roomsService.addRoom(newRoomData, user);
   }
 
   onUpdateRoomFormSubmitted(updatedRoomData: Room): void {

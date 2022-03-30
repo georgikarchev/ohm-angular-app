@@ -10,17 +10,23 @@
   <h1>Rooms</h1>
 </header>
 <section class="page-body">
-  <app-rooms
-    *ngIf="!state.showRoomDetails"
-    [rooms]="state.rooms"
-    (newRoomFormSubmitted)="onNewRoomFormSubmitted($event)"
-    (roomMarkUnavailable)="onRoomMarkUnavailable($event)"
-    (roomSelectedForEdit)="onRoomSelectedForEdit($event)"
-  ></app-rooms>
-  <app-room-edit
-    class="page-body__room-edit"
-    *ngIf="state.showRoomDetails"
-    [roomToUpdate]="state.selectedRoom"
-    (updateFormSubmitted)="onUpdateRoomFormSubmitted($event)"
-  ></app-room-edit>
+  <!-- <ng-container *ngIf="this.rooms$ | async as rooms"> -->
+    <ng-container *ngIf="this.authService.currentUser$ | async as user">
+      <app-rooms
+        *ngIf="!state.showRoomDetails"
+        [rooms]="state.rooms"
+        [userUid]="user?.uid"
+        (newRoomFormSubmitted)="onNewRoomFormSubmitted($event)"
+        (roomMarkUnavailable)="onRoomMarkUnavailable($event)"
+        (roomSelectedForEdit)="onRoomSelectedForEdit($event)"
+      ></app-rooms>
+      <app-room-edit
+        class="page-body__room-edit"
+        *ngIf="state.showRoomDetails"
+        [roomToUpdate]="state.selectedRoom"
+        [userUid]="user?.uid"
+        (updateFormSubmitted)="onUpdateRoomFormSubmitted($event)"
+      ></app-room-edit>
+    </ng-container>
+  <!-- </ng-container> -->
 </section>

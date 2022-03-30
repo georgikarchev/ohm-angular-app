@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Post, Room, RoomsService } from '../../services/rooms.service';
+import { Post, RoomsService } from '../../services/rooms.service';
+import { Room } from "../../models/room";
 
 @Component({
   selector: 'app-rooms',
@@ -8,6 +9,7 @@ import { Post, Room, RoomsService } from '../../services/rooms.service';
 })
 export class RoomsComponent implements OnInit {
   @Input() rooms!: Array<Room>;
+  @Input() userUid!: any;
   @Output() newRoomFormSubmitted: EventEmitter<Room> = new EventEmitter();
   @Output() roomMarkUnavailable: EventEmitter<string> = new EventEmitter();
   @Output() roomSelectedForEdit: EventEmitter<string> = new EventEmitter();

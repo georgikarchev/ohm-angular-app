@@ -1,17 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { User } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
 import { Observable } from "rxjs";
+import { ProfileUser } from "../models/user";
+import { UsersService } from "./users.service";
+import { Room } from "../models/room";
+import { AuthService } from "./auth.service";
 
-export interface Room {
-  id: string;
-  name: string;
-  photo?: string | undefined;
-  singleBeds?: number;
-  doubleBeds?: number;
-  babyCots?: number;
-  disabilityFriendly?: boolean;
-  available?: boolean;
-}
 
 // export interface Room {
 //   number: string,
@@ -42,6 +38,7 @@ export interface Post {
   providedIn: "root",
 })
 export class RoomsService {
+
   private rooms: Array<Room> = [
     {
       id: 'ohm-h1-r1',
@@ -78,8 +75,19 @@ export class RoomsService {
   // public rooms: Array<Room> = [];
   private orderBy: String;
 
-  constructor(private http: HttpClient) {
+  private user$: any;
+  public userData: any | undefined;
+  private db: any;
+
+  constructor(private http: HttpClient, public authService: AuthService) {
     this.orderBy = "name";
+    // this.user$ = usersService.currentUserProfile$;
+    // this.user$.subscribe((userDataFromObservable: any) => this.userData = userDataFromObservable);
+    this.db = getDatabase();
+
+    this.authService.currentUser$.subscribe(
+      data => this.userData = data
+    );
   }
 
   // % TEST ONLY
@@ -127,31 +135,13 @@ export class RoomsService {
   }
 
   addRoom(_newRoomData: Room) {
-    //number: string, description: string, singleBeds: number, doubleBeds: number, kingSizeBeds: number, babyCots: number, airConditioning: boolean, centralHeating: boolean, fireplace: boolean, minibar: boolean, balcony: boolean, disabilityFriendly: boolean, kitchen: boolean
-    //  let newRoom: Room = {
-    //   number: number,
-    //   description: description,
-    //   singleBeds: singleBeds,
-    //   doubleBeds: doubleBeds,
-    //   kingSizeBeds: kingSizeBeds,
-    //   babyCots: babyCots,
-    //   airConditioning: airConditioning,
-    //   centralHeating: centralHeating,
-    //   fireplace: fireplace,
-    //   minibar: minibar,
-    //   balcony: balcony,
-    //   disabilityFriendly: disabilityFriendly,
-    //   kitchen: kitchen
-    //  };
-
-    // check new room data object if needed
-
-    // HTTP POST - send new room data to API
-
-    //console.log("#rooms.service", _newRoomData);
-    _newRoomData.id = 'ohm-h1-r'+ (this.rooms.length+1);
-    _newRoomData.available = true;
-    this.rooms.push(_newRoomData);
+    if(this.userData !== undefined && this.userData.uid) {
+      _newRoomData.id = `ohm-${this.userData.uid}-r${this.rooms.length+1}`;
+      _newRoomData.available = true;
+      this.rooms.push(_newRoomData);
+      console.log("$$$",this.userData.email, this.userData.uid);
+      set(ref(this.db, `hotels/${this.userData.uid}/rooms/${_newRoomData.id}`), _newRoomData);
+    }
   }
 
   updateRoom(_updatedRoomData: Room): void {
