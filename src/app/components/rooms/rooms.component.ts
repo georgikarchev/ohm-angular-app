@@ -8,7 +8,7 @@ import { Room } from "../../models/room";
   styleUrls: ['./rooms.component.scss']
 })
 export class RoomsComponent implements OnInit {
-  @Input() rooms!: Array<Room>;
+  @Input() rooms!: any;//Array<Room>;
   @Input() userUid!: any;
   @Output() newRoomFormSubmitted: EventEmitter<Room> = new EventEmitter();
   @Output() roomMarkUnavailable: EventEmitter<string> = new EventEmitter();
