@@ -47,7 +47,6 @@ import { PagesModule } from './feature/pages/pages.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),

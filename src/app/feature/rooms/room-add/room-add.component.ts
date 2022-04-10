@@ -1,9 +1,9 @@
 // import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { UsersService } from 'src/app/services/users.service';
-import { RoomsService } from '../../services/rooms.service';
-import { Room } from "../../models/room";
+import { UsersService } from 'src/app/core/services/users.service';
+import { RoomsService } from 'src/app/core/services/rooms.service';
+import { Room } from "src/app/core/Interfaces";
 
 @Component({
   selector: 'app-room-add',

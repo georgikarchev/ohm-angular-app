@@ -1,11 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Room } from "../../models/room";
-import { FileUploadService } from '../../services/file-upload.service';
+import { Room, ProfileUser } from "src/app/core/Interfaces";
+import { FileUploadService } from 'src/app/core/services/file-upload.service';
 import { switchMap, tap } from 'rxjs';
 import { HotToastService } from '@ngneat/hot-toast';
-import { ProfileUser } from 'src/app/models/user';
-import { UsersService } from 'src/app/services/users.service';
+// import { ProfileUser } from 'src/app/models/user';
+import { UsersService } from 'src/app/core/services/users.service';
+import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { RoomsService } from 'src/app/core/services/rooms.service';
 
 @Component({
   selector: 'app-room-edit',
@@ -14,6 +17,9 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class RoomEditComponent implements OnInit {
   user$ = this.usersService.currentUserProfile$;
+
+  roomId: number = 0;
+  isLoading: boolean = false;
   
   @Input() userUid!: any;
   @Input() roomToUpdate!: any; // ugly fix - a type of Room should be used here but passing a probably undefined value from parent component does not work
@@ -25,10 +31,26 @@ export class RoomEditComponent implements OnInit {
   constructor(
     private fileUploadService: FileUploadService,
     private toast: HotToastService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private activatedRoute: ActivatedRoute,
+    private titleService: Title,
+    private roomsService: RoomsService
   ) {}
 
   ngOnInit(): void {
+    this.activatedRoute.params
+      .pipe(
+        tap(params => {
+          this.roomId = +params['id'];
+          this.titleService.setTitle('Edit Room ' + this.roomId);
+          this.isLoading = true;
+        }),
+        switchMap(params => {
+          return this.roomsService.getRoom(params['id'])
+        })
+      )
+
+
     // console.log("#room-edit: ngOnInit():: ",this.roomToUpdate);
     //console.log("%%%",this.roomToUpdate.photo);
   }

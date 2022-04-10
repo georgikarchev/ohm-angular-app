@@ -1,17 +1,21 @@
 <header>
-  <section class="actions-left">
+  <!-- <section class="actions-left">
     <app-button
       *ngIf="state.showRoomDetails"
       (btnClick)="onClickBackToRooms()"
       text="back"
       [isDisabled]="false"
     ></app-button>
-  </section>
+  </section> -->
   <h1>Rooms</h1>
 </header>
 <section class="page-body">
   <!-- <ng-container *ngIf="this.rooms$ | async as rooms"> -->
-    <ng-container *ngIf="this.authService.currentUser$ | async as user">
+    
+    
+    
+    
+    <!-- <ng-container *ngIf="this.authService.currentUser$ | async as user">
       <app-rooms
         *ngIf="!state.showRoomDetails"
         [rooms]="state.rooms"
@@ -27,6 +31,10 @@
         [userUid]="user?.uid"
         (updateFormSubmitted)="onUpdateRoomFormSubmitted($event)"
       ></app-room-edit>
-    </ng-container>
+    </ng-container> -->
+
+
+
+
   <!-- </ng-container> -->
 </section>

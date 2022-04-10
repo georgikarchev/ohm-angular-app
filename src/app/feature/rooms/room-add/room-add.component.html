@@ -6,7 +6,8 @@
             <button>submit</button>
         </form> -->
 
-    <form #roomData="ngForm" (ngSubmit)="onClickSubmit(roomData)">
+    <!-- <form #roomData="ngForm" (ngSubmit)="onClickSubmit(roomData)"> -->
+      <form>
       <div class="form-row form-row--identifier">
         <label for="roomName">Room Name/Number</label>
         <input id="roomName" type="text" name="roomName" ngModel/>
@@ -33,11 +34,14 @@
       </div>
     </form>
   </ng-container>
-  <button
+  <!-- <button
     [ngClass]="{
       'add-room__button add-room__button--toggle': true,
       'add-room__button--cancel': addRoomOn
     }"
+    (click)="addRoomClickHandler()"
+  > -->
+  <button
     (click)="addRoomClickHandler()"
   >
     {{ addRoomOn ? "Cancel" : "add room" }}

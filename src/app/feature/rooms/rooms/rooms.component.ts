@@ -1,21 +1,21 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { User } from 'firebase/auth';
-import { ProfileUser } from 'src/app/models/user';
-import { AuthService } from 'src/app/services/auth.service';
-import { BookingsService } from '../../services/bookings.service';
-import { RoomsService } from '../../services/rooms.service';
-import { Room } from '../../models/room';
+import { ProfileUser } from '../../../core/Interfaces/user';
+import { AuthService } from '../../../core/services/auth.service';
+import { BookingsService } from '../../../core/services/bookings.service';
+import { RoomsService } from '../../../core/services/rooms.service';
+import { Room } from '../../../core/Interfaces';
 import { Observable } from 'rxjs';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 import { Item } from 'firebase/analytics';
 import { getDatabase, onValue, ref } from 'firebase/database';
 
 @Component({
-  selector: 'app-rooms-page',
-  templateUrl: './rooms-page.component.html',
-  styleUrls: ['./rooms-page.component.scss'],
+  selector: 'app-rooms',
+  templateUrl: './rooms.component.html',
+  styleUrls: ['./rooms.component.scss'],
 })
-export class RoomsPageComponent implements OnInit, OnChanges {
+export class RoomsComponent implements OnInit, OnChanges {
   //rooms: Array<Room>;
   public state: any;
   public userEmail: User | null | undefined;
