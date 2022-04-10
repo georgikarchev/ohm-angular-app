@@ -6,21 +6,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { HomeComponent } from './components/home/home.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { LoginComponent } from './components/login/login.component';
+// import { HeaderComponent } from './core/header/header.component';
+// import { FooterComponent } from './core/footer/footer.component';
+// import { HomeComponent } from './feature/pages/home/home.component';
+// import { DashboardComponent } from './components/dashboard/dashboard.component';
+// import { LoginComponent } from './auth/login/login.component';
+// import { SignupComponent } from './auth/signup/signup.component';
 import { AppRoutingModule } from './app-routing.module';
-import { RoomsComponent } from './components/rooms/rooms.component';
-import { RoomComponent } from './components/room/room.component';
-import { RoomDetailsComponent } from './components/room-details/room-details.component';
-import { NotificationsComponent } from './components/notifications/notifications.component';
-import { NotificationComponent } from './components/notification/notification.component';
-import { RoomAddComponent } from './components/room-add/room-add.component';
-import { RoomsPageComponent } from './components/rooms-page/rooms-page.component';
-import { RoomEditComponent } from './components/room-edit/room-edit.component';
-import { ButtonComponent } from './components/button/button.component';
+// import { RoomsComponent } from './components/rooms/rooms.component';
+// import { RoomComponent } from './components/room/room.component';
+// import { RoomDetailsComponent } from './components/room-details/room-details.component';
+// import { NotificationsComponent } from './components/notifications/notifications.component';
+// import { NotificationComponent } from './components/notification/notification.component';
+// import { RoomAddComponent } from './components/room-add/room-add.component';
+// import { RoomsPageComponent } from './components/rooms-page/rooms-page.component';
+// import { RoomEditComponent } from './components/room-edit/room-edit.component';
+// import { ButtonComponent } from './components/button/button.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
@@ -33,26 +34,14 @@ import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { HotToastModule } from '@ngneat/hot-toast';
-import { SignupComponent } from './components/signup/signup.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from './core/core.module';
+import { AuthModule } from './auth/auth.module';
+import { PagesModule } from './feature/pages/pages.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    HomeComponent,
-    DashboardComponent,
-    LoginComponent,
-    RoomsComponent,
-    RoomComponent,
-    RoomDetailsComponent,
-    NotificationsComponent,
-    NotificationComponent,
-    RoomAddComponent,
-    RoomsPageComponent,
-    RoomEditComponent,
-    ButtonComponent,
-    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +60,12 @@ import { SignupComponent } from './components/signup/signup.component';
     provideStorage(() => getStorage()),
     HotToastModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    
+    AuthModule,
+    CoreModule.forRoot(),
+    PagesModule
   ],
   providers: [
     ScreenTrackingService,UserTrackingService

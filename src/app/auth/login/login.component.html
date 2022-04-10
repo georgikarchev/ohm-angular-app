@@ -1,0 +1,89 @@
+<header>
+  <h1>Login</h1>
+</header>
+<section class="page-body">
+  <!-- <form #loginUserData="ngForm" (ngSubmit)="onClickSubmitDataForm(loginUserData)">
+        <div class="form-row">
+          <label for="userEmail">Email</label>
+          <input id="userEmail" type="email" name="userEmail" ngModel />
+        </div>
+        <div class="form-row">
+          <label for="userPassword">Password</label>
+          <input id="userPassword" type="password" name="userPassword" ngModel />
+        </div>
+        <div class="form-row form-row__submit">
+          <input type="submit" value="Send" />
+        </div>
+      </form> -->
+  <div class="form-container">
+    <form [formGroup]="loginForm" (ngSubmit)="submit()">
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="email"
+            id="userEmail"
+            type="email"
+            name="userEmail"
+            formControlName="email"
+          />
+        </mat-form-field>
+        <!-- <label for="userEmail">Email</label>
+        <input
+          id="userEmail"
+          type="email"
+          name="userEmail"
+          formControlName="email"
+        /> -->
+        <ng-container
+          *ngIf="email?.errors?.['required'] && email?.touched === true"
+        >
+          <p class="warning">Email address is required</p>
+        </ng-container>
+        <ng-container
+          *ngIf="email?.errors?.['email'] && email?.touched === true"
+        >
+          <p class="warning">Please enter a valid email address</p>
+        </ng-container>
+      </div>
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            placeholder="password"
+            id="userPassword"
+            type="password"
+            name="userPassword"
+            formControlName="password"
+          />
+        </mat-form-field>
+        <!-- <label for="userPassword">Password</label>
+        <input
+          id="userPassword"
+          type="password"
+          name="userPassword"
+          formControlName="password"
+        /> -->
+        <ng-container
+          *ngIf="password?.errors?.['required'] && password?.touched === true"
+        >
+          <p class="warning">Password is required</p>
+        </ng-container>
+        <ng-container
+          *ngIf="password?.errors?.['minlength'] && password?.touched === true"
+        >
+          <p class="warning">Password needs to be at least 6 characters long</p>
+        </ng-container>
+      </div>
+      <div class="form-row form-row__submit">
+        <!-- <input type="submit" value="Send" /> -->
+        <button mat-flat-button color="primary" type="submit">Send</button>
+      </div>
+    </form>
+  </div>
+  <div class="padding-top--small">
+    New to Open Hotel Manager? <a routerLink="/sign-up">Sign Up here!</a>
+  </div>
+</section>

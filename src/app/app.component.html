@@ -1,18 +1,19 @@
 <header>
-  <app-header class="app-header"></app-header>
+  <app-header></app-header>
 </header>
 <main>
-  <ng-container *ngIf="this.authService.currentUser$ | async as user">
+  <!-- <ng-container *ngIf="this.authService.currentUser$ | async as user"> -->
     <!-- only show if logged in? NO there can be notifications even on the homepage, but notifications after login are different -->
     <section class="app-notifications">
       <!-- <app-notifications class="app-notifications" [notifications]="notifications"></app-notifications> -->
-      <app-notifications></app-notifications>
+      <!-- <app-notifications-list></app-notifications-list> -->
     </section>
-  </ng-container>
+  <!-- </ng-container> -->
   <section class="app-body">
     <router-outlet></router-outlet>
   </section>
 </main>
 <footer>
-  <app-footer></app-footer>
+  static footer
+  <!-- <app-footer></app-footer> -->
 </footer>

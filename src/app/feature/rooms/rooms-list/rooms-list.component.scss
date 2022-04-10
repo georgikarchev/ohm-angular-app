@@ -1,0 +1,80 @@
+@import "../../../../assets/scss/abstracts/mixins";
+
+.rooms-list {
+    // display: flex;
+    // flex-wrap: wrap;
+    // flex-direction: row;
+    // justify-content: flex-start;
+    // align-items: flex-start;
+
+    display: grid;
+    grid-template-rows: 30rem;
+    // grid-auto-rows: 30rem;
+    grid-template-columns: repeat(5, 1fr);
+    // grid-auto-columns: 40rem;
+    grid-auto-flow: row;
+
+    gap: var(--padding-small);
+
+
+    @include respond(small-desktop) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    @include respond(tab-port) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    @include respond(phone) {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: 1fr;
+        gap: var(--padding-min);
+    }
+
+    & .rooms-List__room {
+        // background-color: var(--secondary-bg-color);
+        // flex: 1 1 0px;
+        // flex-basis: 10%;
+        // min-width: 20rem;
+        // max-width: 30rem;
+        
+        // border: 1px solid var(--main-color-light);
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        //padding: var(--padding-small);
+
+        // box-shadow: 1px 4px 10px rgba($color: #000000, $alpha: 0.75);
+        // box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        // box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+        // box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+        box-shadow: var(--box-shadow-2);
+        
+
+        @include respond(phone) {
+            box-shadow: var(--box-shadow-2);
+        }
+    }
+
+    & .add-room {
+        background-color: var(--gray-light);
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow-2);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &__button {
+            flex-basis: content;
+        }
+
+        &__input-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--padding-min);
+            box-sizing: border-box;
+        }
+    }
+}

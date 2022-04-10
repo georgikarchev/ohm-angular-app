@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Notification } from './components/notifications/notification.service';
-import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +8,7 @@ import { AuthService } from './services/auth.service';
 export class AppComponent {
   title = 'ohm-app';
 
-  constructor(public authService: AuthService){}
+  constructor(){}
 
   // notifications: Notification[] = [
   //   {

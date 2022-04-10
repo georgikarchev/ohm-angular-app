@@ -1,230 +1,250 @@
 // @import '~normalize.css';
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
 @import "../assets/scss/abstracts/mixins";
 
 * {
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
 ::ng-deep :root {
-    --white: #fefefe;
-    --black: #000000;
-    --gray: #cccccc;
-    --gray-light: #eeeeee;
-    --main-bg-color: #FFFCF2;
-    --secondary-bg-color: #CCC5B9;
-    --bg-color-1: #FFFCF2;
-    --bg-color-2: #CCC5B9;
-    --bg-color-3: #fdd56e;
-    --main-color-lighter: #635e58;
-    --main-color-light: #403D39;
-    --main-color-dark: #252422;
-    --highlight-color: #FFB800;
-    --highlight-color-green: #54C859;
-    --highlight-color-red: #EB5E28;
-    
-    --grid-template-columns-12col: 1fr 3fr 7fr 1fr;
-    --grid-template-columns-12col-mobile: 5px 5fr 5fr 5px;
-    --grid-gap: 1em;
+  --white: #fefefe;
 
-    --border-radius: 6px;
-    --box-shadow-color: rgba(--main-color-dark:, $alpha: 0.15);
-    --box-shadow: 1px 1px 10px var(--box-shadow-color);
-    --box-shadow-2: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  --black: #000000;
+  --gray: #cccccc;
+  --gray-light: #eeeeee;
+  --main-bg-color: #fffcf2;
+  --secondary-bg-color: #ccc5b9;
+  --bg-color-1: #fffcf2;
+  --bg-color-2: #ccc5b9;
+  --bg-color-3: #fdd56e;
+  --main-color-lighter: #635e58;
+  --main-color-light: #403d39;
+  --main-color-dark: #252422;
+  --highlight-color: #ffb800;
+  --highlight-color-green: #54c859;
+  --highlight-color-red: #eb5e28;
 
-    --padding-min: 1rem;
-    --padding-small: 3rem;
-    --padding-medium: 6rem;
-    --padding-big: 9rem;
-    --padding-max: 12rem;
+  --grid-template-columns-12col: 1fr 3fr 7fr 1fr;
+  --grid-template-columns-12col-mobile: 1px 5fr 5fr 1px;
+  --grid-gap: 1em;
 
-    --font-family-main: 'Roboto', sans-serif;
-    --font-weight-light: 300;
+  --border-radius: 6px;
+  --box-shadow-color: rgba(--main-color-dark: , $alpha: 0.15);
+  --box-shadow: 1px 1px 10px var(--box-shadow-color);
+  --box-shadow-2: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 
-    --box-min-width: 320px;
+  --padding-min: 1rem;
+  --padding-small: 3rem;
+  --padding-medium: 6rem;
+  --padding-big: 9rem;
+  --padding-max: 12rem;
+
+  --font-family-main: "Roboto", sans-serif;
+  --font-weight-light: 300;
+
+  --box-min-width: 320px;
 }
 
 ::ng-deep html {
-    font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
-    line-height: 1.2;
+  font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
+  line-height: 1.2;
 
-    @include respond(tab-land) { // width < 1200?
-        font-size: 56.25%; //1 rem = 9px, 9/16 = 50%
-    }
+  @include respond(tab-land) {
+    // width < 1200?
+    font-size: 56.25%; //1 rem = 9px, 9/16 = 50%
+  }
 
-    @include respond(tab-port) { // width < 900?
-        font-size: 50%; //1 rem = 8px, 8/16 = 50%
-    }
-    
-    @include respond(big-desktop) {
-        font-size: 75%; //1rem = 12, 12/16
-    }
+  @include respond(tab-port) {
+    // width < 900?
+    font-size: 50%; //1 rem = 8px, 8/16 = 50%
+  }
+
+  @include respond(big-desktop) {
+    font-size: 75%; //1rem = 12, 12/16
+  }
 }
 
 ::ng-deep body .app-root {
-    font-size: 1.5rem;
-    min-height: 100vh;
+  font-size: 1.5rem;
+  min-height: 100vh;
 
-    // background-color: var(--main-bg-color);
-    background-image: url(../assets/christian-lambert-vmIWr0NnpCQ-unsplash.jpg);
-    background-attachment: fixed;
-    background-size: 100% auto; 
+  // background-color: var(--main-bg-color);
+  background-color: var(--white);
+  background-attachment: fixed;
+  background-size: 100% auto;
 
-    display: grid;
-    grid-template-columns: var(--grid-template-columns-12col);
-    grid-template-rows:  6rem auto 6rem;
-    grid-template-areas: 
-        "header header header header"
-        "padding-left main main padding-right"
-        "footer footer footer footer";
-    gap: var(--grid-gap);
+  display: grid;
+  grid-template-columns: var(--grid-template-columns-12col);
+  grid-template-rows: 5rem auto 5rem;
+  grid-template-areas:
+    "header header header header"
+    "padding-left main main padding-right"
+    "footer footer footer footer";
+  gap: var(--grid-gap);
+  align-items: stretch;
+  justify-content: center;
+
+  @include respond(tab-port) {
+    grid-template-columns: var(--grid-template-columns-12col-mobile);
+  }
+
+  .padding-top--small {
+    padding-top: var(--padding-small);
+  }
+
+  // & button {
+  //     cursor: pointer;
+
+  //     // &.red {
+  //     //     background: var(--highlight-color-red);
+  //     // }
+  // }
+
+  // & input {
+  //     box-sizing: border-box;
+  //     width: 100%;
+
+  //     &[type="text"],
+  //     &[type="password"],
+  //     &[type="number"],
+  //     &[type="email"] {
+  //         border-top: none;
+  //         border-left: none;
+  //         border-right: none;
+  //     }
+  // }
+
+  // & .warning {
+  //     color: var(--highlight-color-red);
+  // }
+
+  // & .button {
+  //     background: none;
+  //     border: 1px solid transparent;
+  //     border-radius: var(--border-radius);
+
+  //     &--light {
+  //         color: var(--white);
+  //     }
+
+  //     &--dark {
+  //         color: var(--main-color-dark);
+  //     }
+
+  //     &:hover,
+  //     &:active {
+  //         border-color: currentColor;
+  //     }
+  // }
+
+  // & > .wrapper {
+  //     display: grid;
+  //     grid-template-columns: var(--grid-template-columns-12col);
+  //     grid-template-areas: "padding-left main main padding-right";
+  //     gap: var(--grid-gap);
+
+  //     & .wrapper-inner {
+  //         grid-area: main;
+  //     }
+  // }
+
+  & > header {
+    grid-area: header;
+    // background-color: rgba($color: #ffffff, $alpha: 0.5);
+    // background-color: var(--secondary-bg-color);
+    // box-shadow: 1px 1px 10px rgba($color: #000000, $alpha: 0.15);
+
+    display: flex;
+    width: 100%;
+    justify-content: stretch;
     align-items: stretch;
+
+    // & .app-header {
+    //     display: inherit;
+    //     width: inherit;
+    // }
+  }
+
+  & main {
+    grid-area: main;
+
+    // // center children horizontal and vertical
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+
+    display: flex;
     justify-content: center;
+    align-items: center;
 
-    @include respond(tab-port) {
-        grid-template-columns: var(--grid-template-columns-12col-mobile);
+    & .app-notifications {
+      display: block;
+      position: relative;
     }
 
-    @include respond(phone) {
-        background-image: unset;
-    }
-
-    & button {
-        cursor: pointer;
-
-        // &.red {
-        //     background: var(--highlight-color-red);
-        // }
-    }
-    
-    & input {
-        box-sizing: border-box;
+    & .app-body {
+        height: 100%;
         width: 100%;
-        
-        &[type="text"],
-        &[type="password"],
-        &[type="number"],
-        &[type="email"] {
-            border-top: none;
-            border-left: none;
-            border-right: none;
-        }
-    }
-
-    & .warning {
-        color: var(--highlight-color-red);
-    }
-
-    & .button {
-        background: none;
-        border: 1px solid transparent;
-        border-radius: var(--border-radius);
-
-        &--light {
-            color: var(--white);
-        }
-
-        &--dark {
-            color: var(--main-color-dark);
-        }
-
-        &:hover,
-        &:active {
-            border-color: currentColor;
-        }
-    }
-
-
-    & > .wrapper {
-        display: grid;
-        grid-template-columns: var(--grid-template-columns-12col);
-        grid-template-areas: "padding-left main main padding-right";
-        gap: var(--grid-gap);
-    
-        & .wrapper-inner {
-            grid-area: main;
-        }
-    }
-
-    & header {
-        grid-area: header;
-        // background-color: rgba($color: #ffffff, $alpha: 0.5);
-        // background-color: var(--secondary-bg-color);
-        // box-shadow: 1px 1px 10px rgba($color: #000000, $alpha: 0.15);
 
         display: flex;
-        width: 100%;
-        justify-content: stretch;
-        align-items: stretch;
-
-        & .app-header {
-            display: inherit;
-            width: inherit;
-        }
+        // justify-content: center;
+        // align-items: center;
     }
 
-    & main {
-        grid-area: main;
+    // & .app-body {
+    // margin-top: var(--padding-small);
+    // border-radius: var(--border-radius);
+    // background-color: var(--white);
+    // box-shadow: 0px 4px 30px rgba($color: #000000, $alpha: 0.5);
 
-        & .app-notifications {
-            display: block;
-            position: relative;
-        }
+    // & header:first-of-type {
+    //     background-color: var(--bg-color-3);
+    //     border-top-left-radius: var(--border-radius);
+    //     border-top-right-radius: var(--border-radius);
+    //     text-align: center;
 
-        & .app-body {
-            margin-top: var(--padding-small);
-            border-radius: var(--border-radius);
-            background-color: var(--white);
-            box-shadow: 0px 4px 30px rgba($color: #000000, $alpha: 0.5);
-        
-            & header:first-of-type {
-                background-color: var(--bg-color-3);
-                border-top-left-radius: var(--border-radius);
-                border-top-right-radius: var(--border-radius);
-                text-align: center;
+    //     display: grid;
+    //     grid-template-columns: 2fr 6fr 2fr;
+    //     grid-template-areas: "actions-left heading-text actions-right";
+    //     align-items: center;
 
-                display: grid;
-                grid-template-columns: 2fr 6fr 2fr;
-                grid-template-areas: "actions-left heading-text actions-right";
-                align-items: center;
+    //     & h1 {
+    //         grid-area: heading-text;
+    //         font-size: 2.4rem;
+    //         font-weight: var(--font-weight-light);
+    //         text-align: center;
+    //         width: 100%;
+    //     }
 
+    //     & .actions-left {
+    //         grid-area: actions-left;
+    //         justify-self: flex-start;
+    //     }
 
-                & h1 {
-                    grid-area: heading-text;
-                    font-size: 2.4rem;
-                    font-weight: var(--font-weight-light);
-                    text-align: center;
-                    width: 100%;
-                }
+    //     & .actions-right {
+    //         grid-area: actions-right;
+    //         justify-self: flex-end;
+    //     }
 
-                & .actions-left {
-                    grid-area: actions-left;
-                    justify-self: flex-start;
-                }
-                
-                & .actions-right {
-                    grid-area: actions-right;
-                    justify-self: flex-end;
-                }
-                
-                & .actions-left,
-                & .actions-right {
-                    padding-left: var(--padding-min);
-                    padding-right: var(--padding-min);
+    //     & .actions-left,
+    //     & .actions-right {
+    //         padding-left: var(--padding-min);
+    //         padding-right: var(--padding-min);
 
-                    & .btn {
-                        padding-left: var(--padding-small);
-                        padding-right: var(--padding-small);
-                    }
-                    
-                }
-            }
-        }
-    }
+    //         & .btn {
+    //             padding-left: var(--padding-small);
+    //             padding-right: var(--padding-small);
+    //         }
 
-    & footer {
-        grid-area: footer;
-        color: var(--white);
-    }
+    //     }
+    // }
+    // }
+  }
+
+  & footer {
+    grid-area: footer;
+    color: var(--white);
+  }
 }
