@@ -9,7 +9,7 @@ import { Room } from "../../../core/Interfaces/room";
 })
 export class RoomsListComponent implements OnInit {
   @Input() rooms!: any;//Array<Room>;
-  @Input() userUid!: any;
+  // @Input() userUid!: any;
   @Output() newRoomFormSubmitted: EventEmitter<Room> = new EventEmitter();
   @Output() roomMarkUnavailable: EventEmitter<string> = new EventEmitter();
   @Output() roomSelectedForEdit: EventEmitter<string> = new EventEmitter();

@@ -5,10 +5,11 @@ import { AuthService } from '../../../core/services/auth.service';
 import { BookingsService } from '../../../core/services/bookings.service';
 import { RoomsService } from '../../../core/services/rooms.service';
 import { Room } from '../../../core/Interfaces';
-import { Observable } from 'rxjs';
+import { mergeMap, Observable, tap, switchMap } from 'rxjs';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 import { Item } from 'firebase/analytics';
 import { getDatabase, onValue, ref } from 'firebase/database';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-rooms',
@@ -20,13 +21,17 @@ export class RoomsComponent implements OnInit, OnChanges {
   public state: any;
   public userEmail: User | null | undefined;
 
+  isLoading: boolean = false;
+  
+
   rooms$: Observable<Room[]> | undefined;
 
   constructor(
     private roomsService: RoomsService,
     private bookingsService: BookingsService,
     public authService: AuthService,
-    private firestore: Firestore
+    private firestore: Firestore,
+    private httpService: HttpClient
   ) {
     // this.rooms = roomsService.orderRooms('number');
     this.state = {
@@ -36,19 +41,69 @@ export class RoomsComponent implements OnInit, OnChanges {
       selectedRoom: undefined,
     };
   }
-
+// #1 - only shows rooms afte rerender
+  // ngOnInit(): void {
+  //   this.authService.currentUser$.subscribe((data) => {
+  //     const db = getDatabase();
+  //     const starCountRef = ref(db, `hotels/${data!.uid}/rooms`);
+  //     onValue(starCountRef, (snapshot) => {
+  //       const data = snapshot.val();
+  //        //alert(data);
+  //        console.log(data);
+  //       // updateStarCount(postElement, data);
+  //       let arr: Array<any> = [];
+  //       Object.keys(data).map(function (key) {
+  //         arr.push(data[key]);
+  //         return arr;
+  //       });
+  //       this.state.rooms = arr;
+  //     });
+  //   });
+  // }
+  // #2
   ngOnInit(): void {
-    this.authService.currentUser$.subscribe((data) => {
-      // this.roomsService.fetchRoomsFromRealTimeDatabase(data!.uid);
+    // this.authService.currentUser$.pipe(
+    //   tap((data) => {
+               
+    //     const db = getDatabase();
+    //     const starCountRef = ref(db, `hotels/${data!.uid}/rooms`);
+    //     onValue(starCountRef, (snapshot) => {
+    //       const data = snapshot.val();
+    //        //alert(data);
+    //        console.log(data);
+    //       // updateStarCount(postElement, data);
+    //       let arr: Array<any> = [];
+    //       Object.keys(data).map(function (key) {
+    //         arr.push(data[key]);
+    //         return arr;
+    //       });
+    //       this.state.rooms = arr;
+    //     });
+    //   })
+    // ).subscribe();
+    
+    // this.rooms$ = this.roomsList();
+    this.roomsList();
+    this.isLoading = true;
 
-      // const coll = collection(this.firestore, `hotel/${data!.uid}/rooms`);
-      // this.rooms$ = collectionData(coll);
+    // const inter = setInterval(()=>{
+    //   console.log(this.state.rooms);
+    // }, 1000);
+    //  The data is there it is simply not refreshed!!!!! how to force angular to rerender after the data is here
+  }
 
+
+  roomsList() {
+    if(!this.authService.currentUserUid) {
+      console.log("User is not logged in");
+      return;
+    } else {
       const db = getDatabase();
-      const starCountRef = ref(db, `hotels/${data!.uid}/rooms`);
+      const starCountRef = ref(db, `hotels/${this.authService.currentUserUid}/rooms`);
       onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
-        // alert(data);
+          //alert(data);
+          console.log(data);
         // updateStarCount(postElement, data);
         let arr: Array<any> = [];
         Object.keys(data).map(function (key) {
@@ -57,12 +112,10 @@ export class RoomsComponent implements OnInit, OnChanges {
         });
         this.state.rooms = arr;
       });
-    });
-    // this.newGetRooms();
-     
+    }
   }
-
-  // newGetRooms() {
+      
+      // newGetRooms() {
   //   this.rooms$ = this.fetchRoomsFromServer();
   // }
 

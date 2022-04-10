@@ -8,22 +8,60 @@ import {
   UserInfo,
   UserCredential,
 } from '@angular/fire/auth';
-import { concatMap, from, Observable, of, switchMap } from 'rxjs';
+import { concatMap, from, Observable, of, switchMap, tap } from 'rxjs';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  _currentUserUid: string = '';
+
   currentUser$ = authState(this.auth);
 
-  constructor(private auth: Auth) {}
+  constructor(private auth: Auth, private storage: StorageService) {
+    // console.log("AuthService constructor # currentUserUid", this.currentUserUid);
+  }
 
-  signUp(name: string, email: string, password: string): Observable<UserCredential> {
+  get currentUserUid() {
+    if(this._currentUserUid === '') {
+      if(this.storage.getItem('uid') !== null) {
+        var token: any = this.storage.getItem('uid');
+        if (token == null) {
+          token = undefined;
+        } 
+        this._currentUserUid = token;
+      }
+    }
+    return this._currentUserUid;
+  }
+
+  set currentUserUid(value: string) {
+    this._currentUserUid = value;
+  }
+
+  signUp(
+    name: string,
+    email: string,
+    password: string
+  ): Observable<UserCredential> {
     return from(createUserWithEmailAndPassword(this.auth, email, password));
+    // .pipe(
+    //   tap(data => {
+    //     console.log('AuthService#data.user',data.user);
+    //     this.currentUserUid = data.user.uid;
+    //   })
+    // );
   }
 
   login(email: string, password: string): Observable<any> {
-    return from(signInWithEmailAndPassword(this.auth, email, password));
+    return from(signInWithEmailAndPassword(this.auth, email, password)).pipe(
+      tap((data) => {
+        // console.log('AuthService#data.user',data.user);
+        this.currentUserUid = data.user.uid;
+        this.storage.setItem('uid',data.user.uid);
+      })
+    );
   }
 
   // updateProfile(profileData: Partial<UserInfo>): Observable<any> {
@@ -38,6 +76,8 @@ export class AuthService {
   // }
 
   logout(): Observable<any> {
+    this.currentUserUid = '';
+    this.storage.removeItem('uid');
     return from(this.auth.signOut());
   }
 }

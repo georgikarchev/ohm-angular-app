@@ -14,24 +14,25 @@
     
     
     
-    
-    <!-- <ng-container *ngIf="this.authService.currentUser$ | async as user">
-      <app-rooms
+    <!-- <ng-container *ngIf="this.authService.currentUser$ | async as user"> -->
+      <ng-container  *ngIf="this.state.rooms">
+        roomsList {{this.state.rooms}}
+      </ng-container>
+      <app-rooms-list
         *ngIf="!state.showRoomDetails"
         [rooms]="state.rooms"
-        [userUid]="user?.uid"
         (newRoomFormSubmitted)="onNewRoomFormSubmitted($event)"
         (roomMarkUnavailable)="onRoomMarkUnavailable($event)"
         (roomSelectedForEdit)="onRoomSelectedForEdit($event)"
-      ></app-rooms>
-      <app-room-edit
+      ></app-rooms-list>
+      <!-- <app-room-edit
         class="page-body__room-edit"
         *ngIf="state.showRoomDetails"
         [roomToUpdate]="state.selectedRoom"
         [userUid]="user?.uid"
         (updateFormSubmitted)="onUpdateRoomFormSubmitted($event)"
-      ></app-room-edit>
-    </ng-container> -->
+      ></app-room-edit> -->
+    <!-- </ng-container> -->
 
 
 
