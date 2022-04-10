@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ohm-angular-app": {
+      "hosting": {
+        "ohm-app": [
+          "ohm-angular-app"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ohm-angular-app"
+  }
+}
