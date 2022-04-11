@@ -1,51 +1,45 @@
+:host {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: var(--padding-min);
-    
-    & h3 {
-        font-size: 1.5rem;
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--padding-min);
 
-    & .form-row {
+  & h3 {
+    font-size: 1.5rem;
+  }
+
+  & .form-container {
+    & form {
+      min-width: 300px;
+      width: 30rem;
+      max-width: 100%;
+
+      & .form-row {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
 
-        &--identifier {
-            font-weight: bold;
-        }
-
-        &:not(:last-of-type) {
-            padding-bottom: var(--padding-min);
-        }
-        
-        & label {
-            margin-right: var(--padding-min);
-            width: 60%;
-        }
-
-        & input[type="number"] {
-            text-align: center;
-            width: 30%;
-        }
-
-        // & input[type="submit"] {
-        //     margin-top: var(--padding-min);
+        // & .mat-form-field {
+        //     display: block;
         // }
-
-        
+      }
     }
+  }
 
-    & .add-room__button {
-        &--toggle {
-            margin-top: var(--padding-min);
-        }
+  & .form-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 
-        &--cancel {
-            width: 100%;
-        }
+    &--identifier {
+      font-weight: bold;
     }
+  }
 }

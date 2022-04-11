@@ -8,37 +8,20 @@
   <h3 class="room__identifier">
     <span>{{ room.name }}</span>
   </h3>
-  <!-- <p class="room__description">{{room.description}}</p> -->
   <div class="room__photo-wrapper">
     <img
-      *ngIf="room.photo"
-      [src]="room.photo"
-      alt="Photo of room {{ room.name }}"
+    *ngIf="room.photo"
+    [src]="room.photo"
+    alt="Photo of room {{ room.name }}"
     />
     <ng-container *ngIf="!room.photo">
-      <svg
-        class="room__photo-placeholder"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 640 512"
-      >
-        <!--! Font Awesome Pro 6.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-        <path
-          d="M176 288C220.1 288 256 252.1 256 208S220.1 128 176 128S96 163.9 96 208S131.9 288 176 288zM544 128H304C295.2 128 288 135.2 288 144V320H64V48C64 39.16 56.84 32 48 32h-32C7.163 32 0 39.16 0 48v416C0 472.8 7.163 480 16 480h32C56.84 480 64 472.8 64 464V416h512v48c0 8.837 7.163 16 16 16h32c8.837 0 16-7.163 16-16V224C640 170.1 597 128 544 128z"
-        />
-      </svg>
+      <div class="fallback">
+        <mat-icon [inline]="true" aria-hidden="false" aria-label="bed icon">bed</mat-icon>
+      </div>
     </ng-container>
   </div>
-  <span class="tag tag--unavailable" *ngIf="!room.available">unavailable</span>
-  <button class="room__button room__button--edit" (click)="onClickEditRoom()">edit</button>
-  <button
-    class="room__button room__button--mark-unavailable"
-    (click)="onRoomMarkUnavailable(room.id)"
-  >
-    {{ room.available? "mark unavailable" : "mark available" }}
+  <button mat-mini-fab color="white" class="room__button room__button--edit" (click)="onClickEditRoom(room.id)">
+    <mat-icon color="primary">edit</mat-icon>
   </button>
-  <button class="room__button room__button--view-bookings">
-    view bookings
-  </button>
-
-  <!-- <app-room-edit *ngIf="editRoomActive" class="room__edit" (cancelEditRoom)="onCancelEditRoom($event)"></app-room-edit> -->
+  <!-- <span class="tag tag--unavailable" *ngIf="!room.available">unavailable</span> -->
 </article>

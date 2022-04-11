@@ -10,6 +10,7 @@ import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 import { Item } from 'firebase/analytics';
 import { getDatabase, onValue, ref } from 'firebase/database';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rooms',
@@ -22,7 +23,8 @@ export class RoomsComponent implements OnInit, OnChanges {
   public userEmail: User | null | undefined;
 
   isLoading: boolean = false;
-  
+
+  filter: string = 'all';
 
   rooms$: Observable<Room[]> | undefined;
 
@@ -31,7 +33,8 @@ export class RoomsComponent implements OnInit, OnChanges {
     private bookingsService: BookingsService,
     public authService: AuthService,
     private firestore: Firestore,
-    private httpService: HttpClient
+    private httpService: HttpClient,
+    private router: Router
   ) {
     // this.rooms = roomsService.orderRooms('number');
     this.state = {
@@ -41,7 +44,7 @@ export class RoomsComponent implements OnInit, OnChanges {
       selectedRoom: undefined,
     };
   }
-// #1 - only shows rooms afte rerender
+  // #1 - only shows rooms afte rerender
   // ngOnInit(): void {
   //   this.authService.currentUser$.subscribe((data) => {
   //     const db = getDatabase();
@@ -64,7 +67,7 @@ export class RoomsComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     // this.authService.currentUser$.pipe(
     //   tap((data) => {
-               
+
     //     const db = getDatabase();
     //     const starCountRef = ref(db, `hotels/${data!.uid}/rooms`);
     //     onValue(starCountRef, (snapshot) => {
@@ -81,7 +84,7 @@ export class RoomsComponent implements OnInit, OnChanges {
     //     });
     //   })
     // ).subscribe();
-    
+
     // this.rooms$ = this.roomsList();
     this.roomsList();
     this.isLoading = true;
@@ -92,18 +95,40 @@ export class RoomsComponent implements OnInit, OnChanges {
     //  The data is there it is simply not refreshed!!!!! how to force angular to rerender after the data is here
   }
 
+  applyFilter(val: string) {
+    switch (val) {
+      case 'free':
+        this.filter = 'free';
+        break;
+      case 'occupied':
+        this.filter = 'occupied';
+        break;
+      case 'ooo':
+        this.filter = 'ooo';
+        break;
+      default: // 'all'
+        this.filter = 'all';
+        break;
+    }
+    this.filterRooms(this.filter);
+  }
+
+  filterRooms(filter: string) {}
 
   roomsList() {
-    if(!this.authService.currentUserUid) {
-      console.log("User is not logged in");
+    if (!this.authService.currentUserUid) {
+      console.log('User is not logged in');
       return;
     } else {
       const db = getDatabase();
-      const starCountRef = ref(db, `hotels/${this.authService.currentUserUid}/rooms`);
+      const starCountRef = ref(
+        db,
+        `hotels/${this.authService.currentUserUid}/rooms`
+      );
       onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
-          //alert(data);
-          console.log(data);
+        //alert(data);
+        // console.log(data);
         // updateStarCount(postElement, data);
         let arr: Array<any> = [];
         Object.keys(data).map(function (key) {
@@ -114,8 +139,8 @@ export class RoomsComponent implements OnInit, OnChanges {
       });
     }
   }
-      
-      // newGetRooms() {
+
+  // newGetRooms() {
   //   this.rooms$ = this.fetchRoomsFromServer();
   // }
 
@@ -139,6 +164,10 @@ export class RoomsComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     console.log('CHANGES');
+  }
+
+  onNewRoomClicked() {
+    this.router.navigate(['/rooms/new/']);
   }
 
   onNewRoomFormSubmitted(params: any): void {

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Room } from '../../../core/Interfaces/room';
 
 @Component({
@@ -10,11 +11,10 @@ export class RoomComponent implements OnInit {
 
   @Input() room!: Room;
   @Output() roomMarkUnavailable: EventEmitter<string> = new EventEmitter();
-  @Output() roomSelectedForEdit: EventEmitter<string> = new EventEmitter();
 
   // editRoomActive: Boolean;
 
-  constructor() {
+  constructor(private router: Router) {
     // this.editRoomActive = false;
    }
 
@@ -25,10 +25,10 @@ export class RoomComponent implements OnInit {
     this.roomMarkUnavailable.emit(roomId);
   }
 
-  onClickEditRoom(): void {
+  onClickEditRoom(roomId: string): void {
+    this.router.navigate(['/rooms/edit-room/', roomId]);
     // this.editRoomActive = !this.editRoomActive;
-    this.roomSelectedForEdit.emit(this.room.id);
-
+    // this.roomSelectedForEdit.emit(this.room.id);
   }
 
   // onCancelEditRoom(message: string): void {

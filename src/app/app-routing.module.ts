@@ -15,6 +15,7 @@ import { AboutComponent } from './feature/pages/about/about.component';
 import { ContactComponent } from './feature/pages/contact/contact.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { PageNotFoundComponent } from './feature/pages/page-not-found/page-not-found.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectToHome = () => redirectLoggedInTo(['dashboard']);
@@ -43,6 +44,10 @@ const routes: Routes = [
   },
   // {
   //   path: 'dashboard',
+  //   loadChildren: () => import('./feature/dashboard/dashboard.module').then(m => m.DashboardModule)
+  // },
+  // {
+  //   path: 'dashboard',
   //   component: DashboardComponent,
   //   ...canActivate(redirectToLogin),
   // },
@@ -58,7 +63,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: HomeComponent
+    component: PageNotFoundComponent
   },
 ];
 

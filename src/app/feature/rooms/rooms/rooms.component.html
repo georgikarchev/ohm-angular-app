@@ -7,35 +7,47 @@
       [isDisabled]="false"
     ></app-button>
   </section> -->
-  <h1>Rooms</h1>
+  <!-- <h1>Rooms</h1> -->
+  <nav class="rooms__filters">
+    <ul>
+      <li><a [class.selected]="filter === 'all'" (click)="applyFilter('all')">ALL</a></li>
+      <li><a [class.selected]="filter === 'free'" (click)="applyFilter('free')">FREE</a></li>
+      <li><a [class.selected]="filter === 'occupied'" (click)="applyFilter('occupied')">OCCUPIED</a></li>
+      <li><a [class.selected]="filter === 'ooo'" (click)="applyFilter('ooo')">OUT OF ORDER</a></li>
+    </ul>
+  </nav>
+  <button mat-fab color="white" class="button--new" (click)="onNewRoomClicked()" >
+    <mat-icon color="primary">edit</mat-icon>
+    <span class="tooltip">new room</span>
+  </button>
 </header>
 <section class="page-body">
   <!-- <ng-container *ngIf="this.rooms$ | async as rooms"> -->
-    
-    
-    
-    <!-- <ng-container *ngIf="this.authService.currentUser$ | async as user"> -->
-      <ng-container  *ngIf="this.state.rooms">
+
+  <!-- <ng-container *ngIf="this.authService.currentUser$ | async as user"> -->
+  <ng-container  *ngIf="!!this.state.rooms">
         roomsList {{this.state.rooms}}
       </ng-container>
+
+
       <app-rooms-list
-        *ngIf="!state.showRoomDetails"
-        [rooms]="state.rooms"
-        (newRoomFormSubmitted)="onNewRoomFormSubmitted($event)"
-        (roomMarkUnavailable)="onRoomMarkUnavailable($event)"
-        (roomSelectedForEdit)="onRoomSelectedForEdit($event)"
-      ></app-rooms-list>
-      <!-- <app-room-edit
+      *ngIf="!state.showRoomDetails"
+      [rooms]="state.rooms"
+      (newRoomFormSubmitted)="onNewRoomFormSubmitted($event)"
+      (roomMarkUnavailable)="onRoomMarkUnavailable($event)"
+    ></app-rooms-list>
+
+    <!-- <router-outlet></router-outlet> -->
+    
+  
+  <!-- <app-room-edit
         class="page-body__room-edit"
         *ngIf="state.showRoomDetails"
         [roomToUpdate]="state.selectedRoom"
         [userUid]="user?.uid"
         (updateFormSubmitted)="onUpdateRoomFormSubmitted($event)"
       ></app-room-edit> -->
-    <!-- </ng-container> -->
-
-
-
+  <!-- </ng-container> -->
 
   <!-- </ng-container> -->
 </section>

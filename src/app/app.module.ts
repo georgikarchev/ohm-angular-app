@@ -37,7 +37,6 @@ import { HotToastModule } from '@ngneat/hot-toast';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
-import { PagesModule } from './feature/pages/pages.module';
 
 @NgModule({
   declarations: [
@@ -63,8 +62,7 @@ import { PagesModule } from './feature/pages/pages.module';
     BrowserAnimationsModule,
     
     AuthModule,
-    CoreModule.forRoot(),
-    PagesModule
+    CoreModule.forRoot()
   ],
   providers: [
     ScreenTrackingService,UserTrackingService

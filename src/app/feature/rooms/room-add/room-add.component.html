@@ -1,49 +1,182 @@
 <div class="wrapper">
-  <ng-container *ngIf="addRoomOn">
-    <h3>Add a new Room</h3>
-    <!-- <form action="">
+  <h3>Add a new Room</h3>
+  <!-- <form action="">
             <input type="text" name="room-number" id="room-number" placeholder="Enter the room number">
             <button>submit</button>
         </form> -->
 
-    <!-- <form #roomData="ngForm" (ngSubmit)="onClickSubmit(roomData)"> -->
-      <form>
-      <div class="form-row form-row--identifier">
-        <label for="roomName">Room Name/Number</label>
-        <input id="roomName" type="text" name="roomName" ngModel/>
+  <!-- <form #roomData="ngForm" (ngSubmit)="onClickSubmit(roomData)"> -->
+  
+    <div class="form-container">
+      <form [formGroup]="addRoomForm" (ngSubmit)="onClickSubmit()">
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Room Number</mat-label>
+            <input
+              matInput
+              placeholder="Room Number"
+              id="roomNumber"
+              type="text"
+              name="roomNumber"
+              formControlName="roomNumber"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Single Beds</mat-label>
+            <input
+              matInput
+              placeholder="Single Beds"
+              id="singleBeds"
+              type="number"
+              name="singleBeds"
+              formControlName="singleBeds"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Double Beds</mat-label>
+            <input
+              matInput
+              placeholder="Double Beds"
+              id="doubleBeds"
+              type="number"
+              name="doubleBeds"
+              formControlName="doubleBeds"
+            />
+          </mat-form-field>
+        </div>
+        <div *ngIf="addRoomForm.errors?.['pesho']" class="alert alert-danger">
+          'Pesho' ERROR!
       </div>
-      <div class="form-row">
-        <label>Single Beds</label>
-        <input id="singleBeds" type="number" name="roomSingleBeds" ngModel/>
-        <!-- <select id="singleBeds" name="roomSingleBeds" ngModel>
-          <option *ngFor="let number of [0, 1, 2, 3]" [ngValue]="number">
-            {{ number }}
-          </option>
-        </select> -->
-      </div>
-      <div class="form-row">
-        <label for="doubleBeds">Double Beds</label>
-        <input id="doubleBeds" type="number" name="roomDoubleBeds" ngModel/>
-      </div>
-      <div class="form-row">
-        <label for="babyCots">Baby Cots</label>
-        <input id="babyCots" type="number" name="roomBabyCots" ngModel/>
-      </div>
-      <div class="form-row">
-        <input type="submit" value="submit" />
-      </div>
-    </form>
-  </ng-container>
-  <!-- <button
-    [ngClass]="{
-      'add-room__button add-room__button--toggle': true,
-      'add-room__button--cancel': addRoomOn
-    }"
-    (click)="addRoomClickHandler()"
-  > -->
-  <button
-    (click)="addRoomClickHandler()"
-  >
-    {{ addRoomOn ? "Cancel" : "add room" }}
-  </button>
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Baby Cots</mat-label>
+            <input
+              matInput
+              placeholder="Baby Cots"
+              id="babyCots"
+              type="number"
+              name="babyCots"
+              formControlName="babyCots"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Base price</mat-label>
+            <input
+              matInput
+              placeholder="Base price"
+              id="basePrice"
+              type="number"
+              name="basePrice"
+              formControlName="basePrice"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Price per extra adult</mat-label>
+            <input
+              matInput
+              placeholder="Price per extra adult"
+              id="pricePerExtraAdult"
+              type="number"
+              name="pricePerExtraAdult"
+              formControlName="pricePerExtraAdult"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Price per extra child</mat-label>
+            <input
+              matInput
+              placeholder="Price per extra child"
+              id="pricePerExtraChild"
+              type="number"
+              name="pricePerExtraChild"
+              formControlName="pricePerExtraChild"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-row form-row__submit">
+          <button mat-flat-button color="primary" type="submit">Send</button>
+        </div>
+      </form>
+    </div>
+  
+  
+  
+    <!-- <div class="form-container">
+      <form #roomData="ngForm" name="addRoomForm" (ngSubmit)="onClickSubmit(roomData)">
+        <div class="form-row form-row--identifier">
+          <mat-form-field appearance="fill">
+            <mat-label>Room Name</mat-label>
+            <input
+              matInput
+              placeholder="Room Name"
+              id="roomName"
+              type="text"
+              name="roomName"
+              minlength="1"
+              maxlength="30"
+              required
+              ngModel
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Single Beds</mat-label>
+            <input
+              matInput
+              id="singleBeds"
+              type="number"
+              name="roomSingleBeds"
+              min="0"
+              max="10"
+              ngmodel="fields.one"
+              ng-required="!fields.two"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Double Beds</mat-label>
+            <input
+              matInput
+              id="doubleBeds"
+              type="number"
+              name="roomDoubleBeds"
+              min="0"
+              max="3"
+              ngmodel="fields.two"
+              ng-required="!fields.one"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Baby Cots</mat-label>
+            <input
+              matInput
+              id="babyCots"
+              type="number"
+              name="roomBabyCots"
+              max="2"
+              ngModel
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <button mat-flat-button color="primary" type="submit" ng-disabled="!addRoomForm.$valid">ADD ROOM</button>
+        </div>
+      </form>
+  </div> -->
+
+
 </div>
