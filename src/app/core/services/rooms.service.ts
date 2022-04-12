@@ -118,9 +118,11 @@ export class RoomsService {
       });
       this.rooms = arr;
       // console.log(this.rooms);
-    }, {
-      onlyOnce: true
-    });
+    },
+    // {
+    //   onlyOnce: true
+    // }
+    );
 
     // return bindCallback(fn) as unknown as Observable<any>;
     // return Observable.bindCallback(fn) as Observable<any>;
@@ -156,37 +158,18 @@ export class RoomsService {
     return null;
   }
 
-  updateRoom(_updatedRoomData: Room) {
-    console.log(_updatedRoomData);
-
+  updateRoomPhoto(_updatedRoomData: Room) {
+    // console.log(_updatedRoomData);
     const updates: any = {};
     updates['hotels/'+this.userData.uid+'/rooms/'+_updatedRoomData.id+'/photo'] = _updatedRoomData.photo;
-
     return update(ref(this.db), updates);
-    
-    
-    
-    
-    // code responsible for updating a room in the rooms object, contained in the rooms.service
-    // find the room to be edited in the rooms array
-    
-    //console.log("#rooms.service: updateRoom():: _updatedRoomData.id:::",_updatedRoomData.id);
-    //let roomToUpdate: any = this.rooms.find(room => room.id === _updatedRoomData.id);
-    // console.log("#rooms.service: updateRoom():: roomToUpdate", roomToUpdate);
-    //room = _updatedRoomData;
-    // console.log(this.rooms);
-    // HTTP POST - send new room data to API
-    // return success or error ?
   }
 
-  // updateToggleRoomAvailable(roomId: String): void {
-  //   // maybe this method should simply call the updateRoom method and define the change using the parameters passed to it
-  //   let roomToUpdate: any = this.rooms.find(room => room.id === roomId);
-  //   if(roomToUpdate !== undefined) {
-  //     roomToUpdate.available = !roomToUpdate.available;
-  //     this.orderRooms(this.orderBy);
-  //   } else {
-  //     console.log("#rooms.service - updateToggleRoomAvailable() - Room not found.");
-  //   }
-  // }
+  updateRoom(_updatedRoomData: Room) {
+    // console.log(_updatedRoomData);
+    const updates: any = {};
+    updates['hotels/'+this.userData.uid+'/rooms/'+_updatedRoomData.id] = _updatedRoomData;
+    return update(ref(this.db), updates);
+  }
+  
 }

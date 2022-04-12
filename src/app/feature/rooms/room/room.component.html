@@ -12,7 +12,6 @@
     <img
     *ngIf="room.photo"
     [src]="room.photo"
-    alt="Photo of room {{ room.name }}"
     />
     <ng-container *ngIf="!room.photo">
       <div class="fallback">

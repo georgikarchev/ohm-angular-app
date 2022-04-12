@@ -23,19 +23,21 @@ header {
 
     .tooltip {
       position: absolute;
-      bottom: -15px;
+      top: -15px;
       width: 100%;
       text-align: center;
       font-weight: 300;
       opacity: 0;
       left: 0;
-      transition: all .2s;
+      transition: all 0.2s ease-out;
+      font-size: 1.2rem;
+      display: inline;
     }
 
     &:hover {
       .tooltip {
         opacity: 0.5;
-        bottom: -30px;
+        top: -25px;
       }
     }
   }

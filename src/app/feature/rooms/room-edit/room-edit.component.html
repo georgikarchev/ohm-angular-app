@@ -1,45 +1,174 @@
-<div class="wrapper">
-  <section class="image-wrapper">
-    <!-- <form #roomImage="ngForm" (ngSubmit)="onClickSubmitImageForm(roomImage)"> -->
-    <!-- <input #inputFile type="file" hidden (change)="onFileSelected($event)"> -->
-    <input #inputFile type="file" (change)="uploadFile($event)" hidden>
-    <!-- </form> -->
-    <button (click)="inputFile.click();">
-      upload photo
-    </button>
-    <img [src]="roomToUpdate.photo ?? 'assets/images/rooms/placeholder-image.png'" alt="">
-  </section>
-  <section class="data-wrapper">
-    <h3>Edit room</h3>
-  
-    <form #roomData="ngForm" (ngSubmit)="onClickSubmitDataForm(roomData)">
-      <div class="form-row form-row--identifier">
-        <label for="roomName">Room Name/Number</label>
-        <input id="roomName" type="text" name="roomName" [(ngModel)]="roomToUpdate!.name" />
+<header>
+  <h1><span>Edit Room</span> {{roomToUpdate.name}}</h1>
+  <button mat-fab color="white" class="button--cancel" (click)="onClickCancel()" >
+    <mat-icon color="primary">arrow_back</mat-icon>
+    <span class="tooltip">BACK</span>
+  </button>
+</header>
+<section class="page-body">
+  <div class="wrapper">
+    <section class="image-wrapper">
+      <!-- <form #roomImage="ngForm" (ngSubmit)="onClickSubmitImageForm(roomImage)"> -->
+      <!-- <input #inputFile type="file" hidden (change)="onFileSelected($event)"> -->
+      <input #inputFile type="file" (change)="uploadFile($event)" hidden>
+      <!-- </form> -->
+      <!-- <button (click)="inputFile.click();">
+        upload photo
+      </button> -->
+      <button mat-raised-button type="button" (click)="inputFile.click();">UPLOAD PHOTO</button>
+      <img [src]="roomToUpdate.photo ?? 'assets/images/rooms/placeholder-image.png'" alt="">
+    </section>
+    <section class="data-wrapper">
+    
+      <div class="form-container">
+        <form [formGroup]="editRoomForm" (ngSubmit)="onClickSubmit()">
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Room Number</mat-label>
+              <input
+                matInput
+                placeholder="Room Number"
+                id="roomNumber"
+                type="text"
+                name="roomNumber"
+                formControlName="roomNumber"
+              />
+            </mat-form-field>
+            <div *ngIf="!editRoomForm.controls['roomNumber'].pristine && editRoomForm.controls['roomNumber'].errors?.['roomNumberTaken']" class="alert alert-danger">
+              <p>
+                This room number is already taken
+              </p>
+            </div>
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Single Beds</mat-label>
+              <input
+                matInput
+                placeholder="Single Beds"
+                id="singleBeds"
+                type="number"
+                name="singleBeds"
+                formControlName="singleBeds"
+                min="0"
+                max="10"
+              />
+            </mat-form-field>
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Double Beds</mat-label>
+              <input
+                matInput
+                placeholder="Double Beds"
+                id="doubleBeds"
+                type="number"
+                name="doubleBeds"
+                formControlName="doubleBeds"
+                min="0"
+                max="4"
+              />
+            </mat-form-field>
+          </div>
+          <div *ngIf="(!editRoomForm.controls['doubleBeds'].pristine || !editRoomForm.controls['singleBeds'].pristine) && editRoomForm.errors?.['atLeastOneBed']" class="alert alert-danger">
+            <p class="danger">
+              A room needs to have at least one bed.
+            </p>
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Baby Cots</mat-label>
+              <input
+                matInput
+                placeholder="Baby Cots"
+                id="babyCots"
+                type="number"
+                name="babyCots"
+                formControlName="babyCots"
+                min="0"
+                max="2"
+              />
+            </mat-form-field>
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Base price &euro;</mat-label>
+              <input
+                matInput
+                placeholder="Base price"
+                id="basePrice"
+                type="number"
+                name="basePrice"
+                formControlName="basePrice"
+                min="0"
+              />
+            </mat-form-field>
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Price per extra adult &euro;</mat-label>
+              <input
+                matInput
+                placeholder="Price per extra adult"
+                id="pricePerExtraAdult"
+                type="number"
+                name="pricePerExtraAdult"
+                formControlName="pricePerExtraAdult"
+                min="0"
+              />
+            </mat-form-field>
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Price per extra child &euro;</mat-label>
+              <input
+                matInput
+                placeholder="Price per extra child"
+                id="pricePerExtraChild"
+                type="number"
+                name="pricePerExtraChild"
+                formControlName="pricePerExtraChild"
+                min="0"
+              />
+            </mat-form-field>
+          </div>
+          <div class="form-row form-row__submit">
+            <button mat-flat-button color="primary" type="submit" [disabled]="!editRoomForm.valid">SAVE</button>
+          </div>
+        </form>
       </div>
-      <div class="form-row">
-        <label>Single Beds</label>
-        <input id="singleBeds" type="number" name="roomSingleBeds" [(ngModel)]="roomToUpdate!.singleBeds" />
-      </div>
-      <div class="form-row">
-        <label for="doubleBeds">Double Beds</label>
-        <input id="doubleBeds" type="number" name="roomDoubleBeds" [(ngModel)]="roomToUpdate!.doubleBeds" />
-      </div>
-      <div class="form-row">
-        <label for="babyCots">Baby Cots</label>
-        <input id="babyCots" type="number" name="roomBabyCots" [(ngModel)]="roomToUpdate!.babyCots" />
-      </div>
-      <div class="form-row">
-        <input type="submit" value="save" />
-      </div>
-    </form>
-  </section>
 
+
+      <!-- <form #roomData="ngForm" (ngSubmit)="onClickSubmitDataForm(roomData)">
+        <div class="form-row form-row--identifier">
+          <label for="roomName">Room Name/Number</label>
+          <input id="roomName" type="text" name="roomName" [(ngModel)]="roomToUpdate!.name" />
+        </div>
+        <div class="form-row">
+          <label>Single Beds</label>
+          <input id="singleBeds" type="number" name="roomSingleBeds" [(ngModel)]="roomToUpdate!.singleBeds" />
+        </div>
+        <div class="form-row">
+          <label for="doubleBeds">Double Beds</label>
+          <input id="doubleBeds" type="number" name="roomDoubleBeds" [(ngModel)]="roomToUpdate!.doubleBeds" />
+        </div>
+        <div class="form-row">
+          <label for="babyCots">Baby Cots</label>
+          <input id="babyCots" type="number" name="roomBabyCots" [(ngModel)]="roomToUpdate!.babyCots" />
+        </div>
+        <div class="form-row">
+          <input type="submit" value="save" />
+        </div>
+      </form> -->
+    </section>
   
-  <!-- <button
-    class="add-room__button add-room__button--cancel"
-    (click)="onClickCancelEditRoom()"
-  >
-    Cancel
-  </button> -->
-</div>
+    
+    <!-- <button
+      class="add-room__button add-room__button--cancel"
+      (click)="onClickCancelEditRoom()"
+    >
+      Cancel
+    </button> -->
+  </div>
+</section>
+
