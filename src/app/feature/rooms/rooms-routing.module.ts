@@ -25,6 +25,11 @@ export const RoomsRoutingModule = RouterModule.forChild([
         path: 'new',
         component: RoomAddComponent,
     },
+    {
+        //  '/new' is wrong - the route shoud be specified without a forward dash!!!
+        path: 'edit/:roomNumber',
+        component: RoomEditComponent,
+    },
     
     // {
     //     path: '/add-new-room',

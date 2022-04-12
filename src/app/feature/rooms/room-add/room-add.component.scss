@@ -1,8 +1,44 @@
 :host {
   width: 100%;
+  height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+}
+
+header {
+  display: grid;
+  grid-template-areas: "spacer heading button";
+  grid-template-columns: 1fr 8fr 1fr;
+
+  h1 {
+    grid-area: heading;
+    text-align: center;
+  }
+
+  .button--cancel {
+    grid-area: button;
+    justify-self: right;
+    position: relative;
+
+    .tooltip {
+      position: absolute;
+      bottom: -15px;
+      width: 100%;
+      text-align: center;
+      font-weight: 300;
+      opacity: 0;
+      left: 0;
+      transition: all .2s;
+    }
+
+    &:hover {
+      .tooltip {
+        opacity: 0.5;
+        bottom: -30px;
+      }
+    }
+  }
 }
 
 .wrapper {
@@ -11,10 +47,6 @@
   justify-content: center;
   align-items: center;
   padding: var(--padding-min);
-
-  & h3 {
-    font-size: 1.5rem;
-  }
 
   & .form-container {
     & form {

@@ -5,10 +5,9 @@
   height: 100%;
 
   // center children
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: flex-start;
-//   align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 ::ng-deep .mat-tab-group .mat-tab-header {
@@ -26,7 +25,8 @@
 header {
     display: grid;
     grid-template-areas: "spacer filters button";
-    grid-columns: 1fr 8fr 1fr;
+    grid-template-columns: 1fr 8fr 1fr;
+   
 
     .rooms__filters {
         grid-area: filters;

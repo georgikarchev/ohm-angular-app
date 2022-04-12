@@ -24,6 +24,7 @@
     "@ngneat/hot-toast": "^4.1.0",
     "@ngneat/overview": "^3.0.0",
     "@ngrx/store": "^13.0.2",
+    "angularfire2": "^5.4.2",
     "firebase": "^9.6.10",
     "normalize.css": "^8.0.1",
     "rxjs": "~7.5.0",

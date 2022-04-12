@@ -16,7 +16,7 @@ import { StorageService } from './storage.service';
 })
 export class AuthService {
   _currentUserUid: string = '';
-
+  user: any;
   currentUser$ = authState(this.auth);
 
   constructor(private auth: Auth, private storage: StorageService) {
@@ -58,6 +58,7 @@ export class AuthService {
     return from(signInWithEmailAndPassword(this.auth, email, password)).pipe(
       tap((data) => {
         // console.log('AuthService#data.user',data.user);
+        this.user = data.user;
         this.currentUserUid = data.user.uid;
         this.storage.setItem('uid',data.user.uid);
       })

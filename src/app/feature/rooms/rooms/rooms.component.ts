@@ -116,28 +116,31 @@ export class RoomsComponent implements OnInit, OnChanges {
   filterRooms(filter: string) {}
 
   roomsList() {
-    if (!this.authService.currentUserUid) {
-      console.log('User is not logged in');
-      return;
-    } else {
-      const db = getDatabase();
-      const starCountRef = ref(
-        db,
-        `hotels/${this.authService.currentUserUid}/rooms`
-      );
-      onValue(starCountRef, (snapshot) => {
-        const data = snapshot.val();
-        //alert(data);
-        // console.log(data);
-        // updateStarCount(postElement, data);
-        let arr: Array<any> = [];
-        Object.keys(data).map(function (key) {
-          arr.push(data[key]);
-          return arr;
-        });
-        this.state.rooms = arr;
-      });
-    }
+    // #1 working
+    // if (!this.authService.currentUserUid) {
+    //   console.log('User is not logged in');
+    //   return;
+    // } else {
+    //   const db = getDatabase();
+    //   const roomsRef = ref(
+    //     db,
+    //     `hotels/${this.authService.currentUserUid}/rooms`
+    //   );
+    //   onValue(roomsRef, (snapshot) => {
+    //     const data = snapshot.val();
+    //     //alert(data);
+    //     // console.log(data);
+    //     // updateStarCount(postElement, data);
+    //     let arr: Array<any> = [];
+    //     Object.keys(data).map(function (key) {
+    //       arr.push(data[key]);
+    //       return arr;
+    //     });
+    //     this.state.rooms = arr;
+    //   });
+    // }
+    // #2
+    this.state.rooms = this.roomsService.getRooms();
   }
 
   // newGetRooms() {
@@ -170,41 +173,27 @@ export class RoomsComponent implements OnInit, OnChanges {
     this.router.navigate(['/rooms/new/']);
   }
 
-  onNewRoomFormSubmitted(params: any): void {
-    //newRoomData: Room, user: ProfileUser
-    console.log(params);
-    const newRoomData = params[0];
-    const user = params[1];
-    //console.log("#Rooms-Page: New Room Data", newRoomData);
-    // check for duplicates in Room Number
+  // onUpdateRoomFormSubmitted(updatedRoomData: Room): void {
+  //   //console.log("#Rooms-Page: New Room Data", updatedRoomData);
+  //   // check for duplicates in Room Number
 
-    // call Service and update data object
+  //   // call Service and update data object
+  //   this.roomsService.updateRoom(updatedRoomData);
+  // }
 
-    // commented out - moved the call of the service to the room-add.component
-    // this.roomsService.addRoom(newRoomData, user);
-  }
+  // onRoomMarkUnavailable(roomIdentifier: string): void {
+  //   this.roomsService.updateToggleRoomAvailable(roomIdentifier);
+  // }
 
-  onUpdateRoomFormSubmitted(updatedRoomData: Room): void {
-    //console.log("#Rooms-Page: New Room Data", updatedRoomData);
-    // check for duplicates in Room Number
+  // onRoomSelectedForEdit(roomId: string): void {
+  //   this.state.showRoomDetails = true;
+  //   //console.log("#rooms-page: onRoomSelectedForEdit() :: roomId:",this.roomsService.getRooms());
+  //   this.state.showRoomId = roomId;
+  //   this.state.selectedRoom = this.roomsService.getRoom(roomId);
+  //   // console.log("#rooms-page: onRoomSelectedForEdit() :: selectedRoom Object",this.state.selectedRoom);
+  // }
 
-    // call Service and update data object
-    this.roomsService.updateRoom(updatedRoomData);
-  }
-
-  onRoomMarkUnavailable(roomIdentifier: string): void {
-    this.roomsService.updateToggleRoomAvailable(roomIdentifier);
-  }
-
-  onRoomSelectedForEdit(roomId: string): void {
-    this.state.showRoomDetails = true;
-    //console.log("#rooms-page: onRoomSelectedForEdit() :: roomId:",this.roomsService.getRooms());
-    this.state.showRoomId = roomId;
-    this.state.selectedRoom = this.roomsService.getRoom(roomId);
-    // console.log("#rooms-page: onRoomSelectedForEdit() :: selectedRoom Object",this.state.selectedRoom);
-  }
-
-  onClickBackToRooms() {
-    this.state.showRoomDetails = false;
-  }
+  // onClickBackToRooms() {
+  //   this.state.showRoomDetails = false;
+  // }
 }

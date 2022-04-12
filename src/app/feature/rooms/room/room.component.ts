@@ -25,8 +25,8 @@ export class RoomComponent implements OnInit {
     this.roomMarkUnavailable.emit(roomId);
   }
 
-  onClickEditRoom(roomId: string): void {
-    this.router.navigate(['/rooms/edit-room/', roomId]);
+  onClickEditRoom(roomNumber: string): void {
+    this.router.navigate(['/rooms/edit/', roomNumber]);
     // this.editRoomActive = !this.editRoomActive;
     // this.roomSelectedForEdit.emit(this.room.id);
   }

@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
 import { RoomAddComponent } from './room-add/room-add.component';
+import { AddImageToRoomComponent } from './add-image-to-room/add-image-to-room.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { RoomAddComponent } from './room-add/room-add.component';
     RoomsListComponent,
     RoomDetailsComponent,
     RoomEditComponent,
-    RoomAddComponent
+    RoomAddComponent,
+    AddImageToRoomComponent
   ],
   imports: [
     CommonModule,

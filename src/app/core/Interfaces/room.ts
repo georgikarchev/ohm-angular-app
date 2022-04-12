@@ -5,6 +5,9 @@ export interface Room {
     singleBeds?: number;
     doubleBeds?: number;
     babyCots?: number;
+    basePrice: number,
+    pricePerExtraAdult: number,
+    pricePerExtraChild: number,
     disabilityFriendly?: boolean;
     available?: boolean;
   }

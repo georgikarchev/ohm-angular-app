@@ -25,16 +25,14 @@
   <!-- <ng-container *ngIf="this.rooms$ | async as rooms"> -->
 
   <!-- <ng-container *ngIf="this.authService.currentUser$ | async as user"> -->
-  <ng-container  *ngIf="!!this.state.rooms">
+      <!-- <ng-container  *ngIf="!!this.state.rooms">
         roomsList {{this.state.rooms}}
-      </ng-container>
+      </ng-container> -->
 
 
       <app-rooms-list
       *ngIf="!state.showRoomDetails"
       [rooms]="state.rooms"
-      (newRoomFormSubmitted)="onNewRoomFormSubmitted($event)"
-      (roomMarkUnavailable)="onRoomMarkUnavailable($event)"
     ></app-rooms-list>
 
     <!-- <router-outlet></router-outlet> -->
