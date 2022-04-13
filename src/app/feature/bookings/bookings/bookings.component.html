@@ -1,0 +1,76 @@
+<header [class.btnOnly]="bookings.length <= 0">
+  <nav class="rooms__filters" *ngIf="bookings.length > 0">
+    <ul>
+      <li>
+        <a [class.selected]="filter === 'all'" (click)="applyFilter('all')"
+          >ALL</a
+        >
+      </li>
+      <li>
+        <a
+          [class.selected]="filter === 'free'"
+          (click)="applyFilter('checkedIn')"
+          >CHECKED IN</a
+        >
+      </li>
+      <li>
+        <a
+          [class.selected]="filter === 'occupied'"
+          (click)="applyFilter('checkedOut')"
+          >CHECKED OUT</a
+        >
+      </li>
+      <li>
+        <a
+          [class.selected]="filter === 'ooo'"
+          (click)="applyFilter('upcomming')"
+          >UPCOMMING</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <button
+    mat-fab
+    color="white"
+    class="button--new button"
+    [class.center]="bookings.length <= 0"
+    (click)="onNewBookingClicked()"
+  >
+    <mat-icon color="primary">edit</mat-icon>
+    <span class="tooltip">NEW BOOKING</span>
+  </button>
+</header>
+<section class="page-body">
+  <!-- <router-outlet></router-outlet> -->
+  <ng-container *ngIf="!isLoading; else loadingIndicator">
+    <ng-container *ngIf="bookings.length > 0; else noBookings">
+      <app-bookings-list [bookings]="bookings"></app-bookings-list>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #noBookings>
+    <div class="padding-top--big center">
+      <p class="medium">No bookings have yet been created.</p>
+      <p class="small">
+        Want to create the first booking? Click the button above!
+      </p>
+    </div>
+  </ng-template>
+
+  <ng-template #newBookingButtons>
+    <button
+      mat-fab
+      color="white"
+      class="button--cancel button"
+      [class.center]="bookings.length <= 0"
+      (click)="onClickCancel()"
+    >
+      <mat-icon color="primary">delete</mat-icon>
+      <span class="tooltip">CANCEL</span>
+    </button>
+  </ng-template>
+
+  <ng-template #loadingIndicator>
+    Loading... <mat-spinner></mat-spinner>
+  </ng-template>
+</section>

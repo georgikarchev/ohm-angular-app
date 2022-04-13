@@ -110,9 +110,6 @@ editRoomForm = new FormGroup(
           this.editRoomForm.controls['basePrice'].setValue(this.roomToUpdate.basePrice);
           this.editRoomForm.controls['pricePerExtraAdult'].setValue(this.roomToUpdate.pricePerExtraAdult);
           this.editRoomForm.controls['pricePerExtraChild'].setValue(this.roomToUpdate.pricePerExtraChild);
-
-
-
         })
       ).subscribe({
         next: room => {
@@ -124,18 +121,7 @@ editRoomForm = new FormGroup(
           console.error('Error occured while loading room data.', error);
         }
       });
-
-
-
-
-    // console.log("#room-edit: ngOnInit():: ",this.roomToUpdate);
-    //console.log("%%%",this.roomToUpdate.photo);
   }
-
-  // onFileSelected(event: any): void {
-  //   // console.log(event);
-  //   this.selectedFile = event.target.files[0];
-  // }
 
   uploadFile(event: any) {//, { uid }: ProfileUser
     this.fileUploadService
@@ -150,82 +136,12 @@ editRoomForm = new FormGroup(
           this.roomToUpdate.photo = photoUrRL;
           this.roomsService.updateRoomPhoto(this.roomToUpdate);
         })
-        // switchMap((photoURL) => {
-        //     if(photoURL) {
-        //       // this.roomToUpdate.photo = photoURL;
-        //       // this.roomsService.updateRoom(this.roomToUpdate);
-        //     }
-        // }),
-        // switchMap(
-        //   (photoURL) => {
-        //     console.log(
-        //       '$$$ Insert the realtime DB update call HERE!',
-        //       photoURL
-        //     )
-        //     return true;
-        //   }
-        // )
       )
       .subscribe();
   }
 
-  // uploadFile(event: any) {
-  //   this.fileUploadService
-  //     .uploadFile(event.target.files[0], `rooms/h1/`)
-  //     .pipe(
-  //       this.toast.observe({
-  //         loading: 'Uploading profile image...',
-  //         success: 'Image uploaded successfully',
-  //         error: 'There was an error in uploading the image',
-  //       })
-  //       ,
-  //       switchMap(
-  //         (photoURL) => {
-  //           console.log(
-  //             '$$$ Insert the realtime DB update call HERE!',
-  //             photoURL
-  //           );
-  //           //return true;
-  //         }
-  //         // this.usersService.updateUser({
-  //         //   uid,
-  //         //   photoURL,
-  //         // })
-  //       )
-  //     )
-  //     .subscribe();
-  // }
-
   onClickCancel() {
     this.router.navigate(['/rooms']);
-  }
-
-  onClickSubmitImageForm(result: NgForm): void {
-    // upload the image and change the image path that would be submitted if the Data form is submitted
-  }
-
-  onClickSubmitDataForm(result: NgForm): void {
-    // console.log(this.roomToUpdate);
-
-    // const updatedRoom: Room = {
-    //   id: this.roomToUpdate?.id,
-    //   name: result.value.roomName,
-    //   photo: this.roomToUpdate.photo,
-    //   singleBeds:
-    //     result.value.roomSingleBeds !== undefined
-    //       ? result.value.roomSingleBeds
-    //       : 0,
-    //   doubleBeds:
-    //     result.value.roomDoubleBeds !== undefined
-    //       ? result.value.roomDoubleBeds
-    //       : 0,
-    //   babyCots:
-    //     result.value.roomBabyCots != undefined ? result.value.roomBabyCots : 0,
-    //   disabilityFriendly: this.roomToUpdate?.disabilityFriendly,
-    //   available: this.roomToUpdate?.available,
-    // };
-    // this.updateFormSubmitted.emit(updatedRoom);
-    // console.log("#room-edit: ", updatedRoom);
   }
 
   onClickSubmit(): void {
@@ -247,6 +163,7 @@ editRoomForm = new FormGroup(
     const newRoomData: Room = {
       id: this.roomToUpdate.id,
       name: roomNumber,
+      photo: this.roomToUpdate.photo,
       singleBeds: singleBeds !== undefined? singleBeds : 0,
       doubleBeds: doubleBeds !== undefined? doubleBeds : 0,
       babyCots: babyCots != undefined? babyCots : 0,

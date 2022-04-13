@@ -66,6 +66,7 @@ header {
       & .form-row {
         display: flex;
         flex-direction: column;
+        margin-bottom: var(--padding-min);
 
         // & .mat-form-field {
         //     display: block;
@@ -81,6 +82,33 @@ header {
 
     &--identifier {
       font-weight: bold;
+    }
+  }
+  & .price-stay-output {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: var(--padding-min);
+    padding-top: var(--padding-min);
+    padding-bottom: var(--padding-min);
+
+    font-size: 3em;
+    font-weight: 200;
+
+    & .small {
+      font-weight: 500;
+      font-size: 0.3em;
+      letter-spacing: 0.1em;
+    }
+
+    & .stay-output,
+    & .price-output {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: var(--padding-min);
     }
   }
 }

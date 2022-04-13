@@ -1,0 +1,65 @@
+<div class="booking" [class.lifted]="notesOpen">
+  <div class="booking__email">
+    <mat-icon aria-hidden="false" aria-label="Email icon">email</mat-icon>
+    {{ booking.email }}
+  </div>
+  <div class="booking__phone">
+    <mat-icon aria-hidden="false" aria-label="Phone icon">phone_android</mat-icon>
+    {{ booking.phone }}
+  </div>
+  <div class="booking__check-in-date">
+    <mat-icon aria-hidden="false" aria-label="Check-in icon">login</mat-icon>
+    {{ booking.checkInDate | date }}
+  </div>
+  <div class="booking__check-out-date">
+    <mat-icon aria-hidden="false" aria-label="Check-out icon">logout</mat-icon>
+    {{ booking.checkOutDate | date }}
+  </div>
+  <div class="booking__room">{{ room.name }}<span>room</span></div>
+  <div class="booking__price-stay-output">
+    <div class="price-output">
+      {{ total }} &euro;
+    </div>
+    <div class="stay-output">
+      {{stay}} days
+    </div>
+  </div>
+  <div class="booking__buttons">
+    <button mat-fab color="white" class="button" (click)="onEditClicked()">
+      <mat-icon color="primary">edit</mat-icon>
+    </button>
+    <button
+      mat-fab
+      color="white"
+      class="button"
+      (click)="onNotesClicked()"
+      *ngIf="!notesOpen"
+    >
+      <mat-icon color="primary">description</mat-icon>
+    </button>
+    <button
+      mat-fab
+      color="white"
+      class="button"
+      (click)="onNotesSaveClicked()"
+      *ngIf="notesOpen"
+    >
+      <mat-icon color="primary">check</mat-icon>
+    </button>
+  </div>
+</div>
+<ng-container *ngIf="notesOpen">
+  <div class="notes">
+    <form [formGroup]="editNotesForm">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Leave a comment</mat-label>
+        <textarea
+          matInput
+          formControlName="notes"
+          placeholder="Notes concerning arrival or departure of guests etc. ..."
+          value=""
+        ></textarea>
+      </mat-form-field>
+    </form>
+  </div>
+</ng-container>

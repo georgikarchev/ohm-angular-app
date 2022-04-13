@@ -10,6 +10,8 @@
 ::ng-deep :root {
   --white: #fefefe;
   --gray1: #f5f5f5;
+  --gray2: #E0E0E0;
+
   --gray-dark-1: #757575;
 
   --black: #000000;
@@ -31,7 +33,7 @@
   --grid-template-columns-12col-mobile: 1px 5fr 5fr 1px;
   --grid-gap: 1em;
 
-  --border-radius: 6px;
+  --border-radius: 4px;
   --box-shadow-color: rgba(--main-color-dark: , $alpha: 0.15);
   --box-shadow: 1px 1px 10px var(--box-shadow-color);
   --box-shadow-2: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
@@ -94,6 +96,18 @@
 
   .padding-top--small {
     padding-top: var(--padding-small);
+  }
+
+  .padding-top--medium {
+    padding-top: var(--padding-medium);
+  }
+
+  .padding-top--big {
+    padding-top: var(--padding-big);
+  }
+
+  .center {
+    text-align: center;
   }
 
   .alert-danger {

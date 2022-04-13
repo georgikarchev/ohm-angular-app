@@ -39,7 +39,6 @@ export class RoomsComponent implements OnInit, OnChanges {
     // this.rooms = roomsService.orderRooms('number');
     this.state = {
       rooms: roomsService.getRooms(),
-      showRoomDetails: false,
       showRoomId: '',
       selectedRoom: undefined,
     };

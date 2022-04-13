@@ -42,10 +42,14 @@ const routes: Routes = [
     path: 'rooms',
     loadChildren: () => import('./feature/rooms/rooms.module').then(m => m.RoomsModule)
   },
-  // {
-  //   path: 'dashboard',
-  //   loadChildren: () => import('./feature/dashboard/dashboard.module').then(m => m.DashboardModule)
-  // },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./feature/dashboard/dashboard.module').then(m => m.DashboardModule)
+  },
+  {
+    path: 'bookings',
+    loadChildren: () => import('./feature/bookings/bookings.module').then(m => m.BookingsModule)
+  },
   // {
   //   path: 'dashboard',
   //   component: DashboardComponent,

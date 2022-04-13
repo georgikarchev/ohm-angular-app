@@ -1,0 +1,126 @@
+:host{
+    width: 100%;
+    height: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: center;
+
+    gap: var(--padding-min);
+}
+
+.booking {
+    position: relative;
+    z-index: 10;
+
+    width: 100%;
+    height: 10rem;
+
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr 6fr 1fr 5fr 1fr 5fr 1fr 3fr 1fr 3fr 1fr 4fr 1fr;
+    grid-template-areas: "sp1 email sp2 phone s3 checkIn sp4 checkOut sp5 room sp6 priceStay sp7 buttons sp8";
+
+    background-color: var(--gray2);
+    border-radius: var(--border-radius);
+
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.05);
+
+    &.lifted {
+        box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25), 0px 4px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    & > * {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    & .mat-icon {
+        margin-right: var(--padding-min);
+    }
+
+    &__email {
+        grid-area: email;
+    }
+
+    &__phone {
+        grid-area: phone;
+    }
+
+    &__check-in-date {
+        grid-area: checkIn;
+    }
+
+    &__check-out-date {
+        grid-area: checkOut;
+    }
+
+    &__room {
+        grid-area: room;
+        flex-direction: column;
+        font-weight: 500;
+        font-size: 2.3em;
+        gap: var(--padding-min);
+
+        & span {
+            display: block;
+            font-size: 0.4em;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+        }
+    }
+
+    &__price-stay-output {
+        grid-area: priceStay;
+
+        display: flex;
+        flex-direction: column;
+        gap: var(--padding-min);
+
+        justify-content: center;
+        align-items: center;
+        font-size: 0.8em;
+        color: var(--main-color-light);
+    }
+
+    &__buttons {
+        grid-area: buttons;
+        gap: var(--padding-min);
+
+        button.mat-fab.button {
+            background: unset;
+            box-shadow: unset;
+            color: var(--main-color-dark);
+
+            & .mat-icon {
+                margin: 0;
+                color: inherit;
+            }
+        }
+    }
+}
+
+.notes {
+    width: 100%;
+    height: 15rem;
+    box-sizing: border-box;
+
+    position: relative;
+    z-index: 0;
+
+    margin-top: -1.5rem;
+
+    background-color: var(--gray1);
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
+
+    border-radius: var(--border-radius);
+
+    padding: var(--padding-small);
+
+    & .mat-form-field.full-width {
+        width: 100%;
+        height: 100%;
+    }
+
+}

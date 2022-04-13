@@ -27,12 +27,12 @@ import { AuthService } from "./auth.service";
 // }
 
 // % TEST ONLY
-export interface Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
+// export interface Post {
+//   userId: number;
+//   id: number;
+//   title: string;
+//   body: string;
+// }
 
 @Injectable({
   providedIn: "root",
@@ -64,10 +64,10 @@ export class RoomsService {
   }
 
   // % TEST ONLY
-  getAllPosts(): Observable<Post[]> {
-    const url = "https://jsonplaceholder.typicode.com/posts";
-    return this.http.get<Post[]>(url);
-  }
+  // getAllPosts(): Observable<Post[]> {
+  //   const url = "https://jsonplaceholder.typicode.com/posts";
+  //   return this.http.get<Post[]>(url);
+  // }
 
   orderRooms(orderBy?: String) {
     //this.rooms = [...this.roomsData];
@@ -137,6 +137,11 @@ export class RoomsService {
 
   getRoomByNumber(roomNumber: string): any {
     const room = this.rooms.find(r => r.name === roomNumber);
+    return room;
+  }
+
+  getRoomById(roomId: string): any {
+    const room = this.rooms.find(r => r.id === roomId);
     return room;
   }
 

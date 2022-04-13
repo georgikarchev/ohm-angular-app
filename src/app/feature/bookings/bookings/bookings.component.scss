@@ -1,0 +1,130 @@
+@import "src/assets/scss/abstracts/_mixins.scss";
+
+:host {
+  width: 100%;
+  height: 100%;
+
+  // center children
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+::ng-deep .mat-tab-group .mat-tab-header {
+  margin-bottom: 100px;
+}
+
+//   .ohmTabGroupCenter {
+//     flex: 1 0.5 auto;
+//   }
+
+//   .ohmTabGroupCenter .mat-tab-header {
+//     align-self: center;
+//   }
+
+header {
+    display: grid;
+    grid-template-areas: "spacer filters button";
+    grid-template-columns: 1fr 8fr 1fr;
+    margin-bottom: var(--padding-medium);
+   
+    &.btnOnly {
+        grid-template-areas: "spacerLeft button spacerRight";
+        grid-template-columns: 1fr 8fr 1fr;
+    }
+
+    .rooms__filters {
+        grid-area: filters;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: var(--padding-medium);
+
+        & ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: row;
+          justify-items: stretch;
+          align-items: center;
+          width: 48rem;
+        
+          & li {
+              flex: 1 1 0;
+              text-align: center;
+              padding: 0 5px;
+            
+            & a {
+                display: block;
+                padding: 10px;
+                border: unset;
+                background: unset;
+                text-align: center;
+                font-family: inherit;
+                font-weight: 500;
+                cursor: pointer;
+                white-space: nowrap;
+                color: var(--gray-dark-1);
+                border-bottom: 1px solid transparent;
+            }
+
+            & a.selected {
+                color:var(--highlight-color);
+                border-bottom: 1px solid currentColor;
+            }
+          }
+        }
+    }
+
+    .button {
+      grid-area: button;
+      justify-self: right;
+      position: relative;
+
+      &.center {
+          justify-self: center;
+      }
+
+      .tooltip {
+        position: absolute;
+        top: -15px;
+        text-align: center;
+        font-weight: 300;
+        opacity: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: all 0.2s ease-out;
+        font-size: 1.1rem;
+        display: block;
+      }
+  
+      &:hover {
+        .tooltip {
+          opacity: 0.5;
+          top: -25px;
+        }
+      }
+    }
+
+}
+
+.page-body {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p.small {
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    line-height: 1.1;
+    letter-spacing: 0.3em;
+  }
+  
+  p.medium {
+      font-size: 2em;
+      line-height: 1.2;
+  }
+}

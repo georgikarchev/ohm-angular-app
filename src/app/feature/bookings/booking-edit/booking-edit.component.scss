@@ -1,0 +1,114 @@
+:host {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  header {
+    display: grid;
+    grid-template-areas: "spacer heading button";
+    grid-template-columns: 1fr 8fr 1fr;
+  
+    h1 {
+      grid-area: heading;
+      text-align: center;
+      font-size: 3.6rem;
+  
+      span {
+        font-size: 1.4rem;
+        display: block;
+        text-transform: uppercase;
+      }
+    }
+  
+    .button--cancel {
+      grid-area: button;
+      justify-self: right;
+      position: relative;
+  
+      .tooltip {
+        position: absolute;
+        top: -15px;
+        width: 100%;
+        text-align: center;
+        font-weight: 300;
+        opacity: 0;
+        left: 0;
+        transition: all 0.2s ease-out;
+        font-size: 1.2rem;
+        display: inline;
+      }
+  
+      &:hover {
+        .tooltip {
+          opacity: 0.5;
+          top: -25px;
+        }
+      }
+    }
+  }
+  
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: var(--padding-min);
+  
+    & .form-container {
+      & form {
+        min-width: 300px;
+        width: 30rem;
+        max-width: 100%;
+  
+        & .form-row {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: var(--padding-min);
+  
+          // & .mat-form-field {
+          //     display: block;
+          // }
+        }
+      }
+    }
+  
+    & .form-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+  
+      &--identifier {
+        font-weight: bold;
+      }
+    }
+    & .price-stay-output {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      gap: var(--padding-min);
+      padding-top: var(--padding-min);
+      padding-bottom: var(--padding-min);
+  
+      font-size: 3em;
+      font-weight: 200;
+  
+      & .small {
+        font-weight: 500;
+        font-size: 0.3em;
+        letter-spacing: 0.1em;
+      }
+  
+      & .stay-output,
+      & .price-output {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: var(--padding-min);
+      }
+    }
+  }  

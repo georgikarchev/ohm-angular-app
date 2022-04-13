@@ -1,0 +1,165 @@
+<header>
+    <h1><span>Edit</span> Booking</h1>
+    <button
+      mat-fab
+      color="white"
+      class="button--cancel"
+      (click)="onClickCancel()"
+    >
+      <mat-icon color="primary">arrow_back</mat-icon>
+      <span class="tooltip">CANCEL</span>
+    </button>
+  </header>
+  <section class="page-body">
+    <div class="wrapper">
+      <div class="form-container">
+        <form [formGroup]="editBookingForm" (ngSubmit)="onClickSubmit()">
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Name</mat-label>
+              <input
+                matInput
+                placeholder="Name"
+                id="roomNumber"
+                type="text"
+                name="name"
+                formControlName="name"
+              />
+            </mat-form-field>
+            <!-- <div
+              *ngIf="!editBookingForm.controls['roomNumber'].pristine && editBookingForm.controls['roomNumber'].errors?.['roomNumberTaken']"
+              class="alert alert-danger"
+            >
+              <p>This room number is already taken</p>
+            </div> -->
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                placeholder="Email"
+                id="email"
+                type="email"
+                name="email"
+                formControlName="email"
+              />
+            </mat-form-field>
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Phone</mat-label>
+              <input
+                matInput
+                placeholder="Phone number"
+                id="phone"
+                type="text"
+                name="phone"
+                formControlName="phone"
+              />
+            </mat-form-field>
+          </div>
+          <div
+            *ngIf="!editBookingForm.controls['phone'].pristine && !editBookingForm.controls['email'].pristine && editBookingForm.errors?.['phoneOrEmailIsRequired']"
+            class="alert alert-danger"
+          >
+            <p class="danger">You need to have a phone number or email in every booking.</p>
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Check-in Date</mat-label>
+              <input matInput [matDatepicker]="picker1" formControlName="checkInDate">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Check-out Date</mat-label>
+              <input matInput [matDatepicker]="picker2" formControlName="checkOutDate">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Discount %</mat-label>
+              <input
+                matInput
+                placeholder="Discount %"
+                id="discount"
+                type="number"
+                name="discount"
+                formControlName="discount"
+                min="0"
+                max="100"
+              />
+            </mat-form-field>
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Adults</mat-label>
+              <input
+                matInput
+                placeholder="Adults"
+                id="adults"
+                type="number"
+                name="adults"
+                formControlName="adults"
+                min="1"
+              />
+            </mat-form-field>
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Children</mat-label>
+              <input
+                matInput
+                placeholder="Children"
+                id="children"
+                type="number"
+                name="children"
+                formControlName="children"
+                min="0"
+              />
+            </mat-form-field>
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Room</mat-label>
+              <mat-select formControlName="roomId">
+                <mat-option *ngFor="let room of rooms" [value]="room.id">
+                  <b>{{room.name}}</b> <small>{{ room.singleBeds !== undefined && room.doubleBeds !== undefined? '  ( ' + (room.singleBeds + room.doubleBeds) + " )" : '' }} adults max</small>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+  
+          <div class="price-stay-output">
+            <div class="price-output">
+              {{ total }} &euro;
+              <span class="small">{{ stay > 0? 'Total price' : 'Price per night'}}</span>
+            </div>
+            <div class="stay-output" *ngIf="stay > 0">
+              {{stay}}
+              <span class="small">days</span>
+            </div>
+          </div>
+  
+          <div class="form-row form-row__submit">
+            {{editBookingForm.errors}}
+            <button
+              mat-flat-button
+              color="primary"
+              type="submit"
+              [disabled]="!editBookingForm.valid"
+            >
+              SAVE BOOKING
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>  
