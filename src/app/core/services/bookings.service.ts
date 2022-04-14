@@ -68,6 +68,12 @@ export class BookingsService {
     return update(ref(this.db), updates);
   }
 
+  updateBooking(_updatedBooking: Booking) {
+    const updates: any = {};
+    updates['hotels/'+this.userData.uid+'/bookings/'+_updatedBooking.id] = _updatedBooking;
+    return update(ref(this.db), updates);
+  }
+
   getBookings(): Array<Booking> {
     return this.bookings;
   }

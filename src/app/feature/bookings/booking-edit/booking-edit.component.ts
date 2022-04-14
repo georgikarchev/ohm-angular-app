@@ -89,7 +89,7 @@ export class BookingEditComponent implements OnInit {
       if(!val) {
         return;
       }
-      console.log(val.checkInDate);
+      // console.log(val.checkInDate);
       if(val.checkInDate !== '' && val.checkOutDate !== '') {
         const diffTime = Math.abs(val.checkOutDate - val.checkInDate);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
@@ -168,8 +168,8 @@ export class BookingEditComponent implements OnInit {
     // const checkOutDateObj = new Date(checkOutDate)
     // const checkOutDateStr = checkOutDateObj.getFullYear() + `${checkOutDateObj.getMonth() + 1}`.padStart(2, '0') + `${checkOutDateObj.getDate()}`.padStart(2, '0');
 
-    const newBooking: Booking = {
-      id: 'placeholder-id',
+    const updatedBooking: Booking = {
+      id: this.booking.id,
       name: name,
       email: email,
       phone: phone,
@@ -182,7 +182,7 @@ export class BookingEditComponent implements OnInit {
       notes: '',
       status: ''
     };
-    this.bookingsService.addBooking(newBooking)?.then(this.onBookingUpdated());
+    this.bookingsService.updateBooking(updatedBooking)?.then(r => this.onBookingUpdated());
   }
 
   onBookingUpdated() {
