@@ -16,6 +16,7 @@ import { ContactComponent } from './feature/pages/contact/contact.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { PageNotFoundComponent } from './feature/pages/page-not-found/page-not-found.component';
+import { AuthGuard } from "../app/guards/auth.guard";
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectToHome = () => redirectLoggedInTo(['dashboard']);
@@ -40,14 +41,17 @@ const routes: Routes = [
   },
   {
     path: 'rooms',
+    canLoad: [AuthGuard],
     loadChildren: () => import('./feature/rooms/rooms.module').then(m => m.RoomsModule)
   },
   {
     path: 'dashboard',
+    canLoad: [AuthGuard],
     loadChildren: () => import('./feature/dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
     path: 'bookings',
+    canLoad: [AuthGuard],
     loadChildren: () => import('./feature/bookings/bookings.module').then(m => m.BookingsModule)
   },
   // {
