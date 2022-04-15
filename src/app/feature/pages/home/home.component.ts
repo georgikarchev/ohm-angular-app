@@ -10,8 +10,10 @@ import { getDatabase, onValue, ref, set, update } from "firebase/database";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  _roomsTotal: number = 0;
-  statistics = [];
+  hotelsTotal: number = 0;
+  roomsTotal: number = 0;
+  bookingsTotal: number = 0;
+
 
   private db: any;
 
@@ -32,24 +34,57 @@ export class HomeComponent implements OnInit {
     );
     onValue(roomsRef, (snapshot) => {
       const data = snapshot.val();
-      let arr: Array<any> = [];
+      
+      // Hotels
+      let arrHotels: Array<any> = [];
       Object.keys(data).map(function (key) {
-        arr.push(data[key]);
-        return arr;
+        arrHotels.push(data[key]);
+        return arrHotels;
       });
-      this.roomsTotal = arr.length;
-      console.log(this.roomsTotal);
+      this.hotelsTotal = arrHotels.length;
+      // console.log(this.roomsTotal);
+
+      // rooms
+      console.log(arrHotels);
+      let arrRooms: Array<any> = [];
+      let roomsCount = 0;
+      arrHotels.map(h => {
+        if(h.rooms){
+          Object.keys(h.rooms).map(function (key) {
+            arrRooms.push(h.rooms[key]);
+            return arrRooms;
+          });
+          roomsCount += arrRooms.length;
+        }
+      });
+      this.roomsTotal = roomsCount;
+
+      // bookings
+      console.log(arrHotels);
+      let arrBookings: Array<any> = [];
+      let bookingsCount = 0;
+      arrHotels.map(h => {
+        if(h.bookings){
+          Object.keys(h.bookings).map(function (key) {
+            arrBookings.push(h.bookings[key]);
+            return arrBookings;
+          });
+          bookingsCount += arrBookings.length;
+        }
+      });
+      this.bookingsTotal = bookingsCount;
+
       this.appRef.tick();
     });
   }
 
-  public set roomsTotal(value: number) {
-    this._roomsTotal = value;
-  }
+  // public set roomsTotal(value: number) {
+  //   this._roomsTotal = value;
+  // }
 
-  public get roomsTotal() {
-    return this._roomsTotal;
-  }
+  // public get roomsTotal() {
+  //   return this._roomsTotal;
+  // }
 
   // private updateC = (param: any) => {
   //   console.log('updateC#',param);

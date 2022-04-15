@@ -1,1 +1,17 @@
-<p>open-statistics-widget works! - roomsTotal: {{roomsTotal}}</p>
+<div class="statistics">
+    <div>
+        <span>{{hotelsTotal}}</span>
+        <small>HOTELS</small>
+    </div>
+    <div>
+        <span>{{roomsTotal}}</span>
+        <small>ROOMS</small>
+    </div>
+    <div>
+        <span>{{bookingsTotal}}</span>
+        <small>BOOKINGS</small>
+    </div>
+</div>
+<div class="info">
+Realtime Usage untill {{ today | date:'dd-MM-yyyy hh:mm a':'+0530' }}
+</div>
