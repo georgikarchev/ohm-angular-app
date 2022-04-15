@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, Injectable } from "@angular/core";
+import { ApplicationRef, Component, Injectable } from "@angular/core";
 import { getDatabase, onValue, ref, set, update } from "firebase/database";
 import { Room } from "../Interfaces/room";
 import { AuthService } from "./auth.service";
@@ -78,9 +78,6 @@ export class RoomsService {
       return null;
     }
     const roomsRef = ref(this.db,`hotels/${this.authService.currentUserUid}/rooms`);
-    // let fn = onValue(roomsRef, (snapshot) => {
-    //   return snapshot.val();
-    // });
     onValue(roomsRef, (snapshot) => {
       const data = snapshot.val();
       //alert(data);

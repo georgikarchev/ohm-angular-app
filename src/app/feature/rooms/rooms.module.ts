@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { RoomComponent } from './room/room.component';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
@@ -35,7 +36,8 @@ import { AddImageToRoomComponent } from './add-image-to-room/add-image-to-room.c
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     RoomsComponent

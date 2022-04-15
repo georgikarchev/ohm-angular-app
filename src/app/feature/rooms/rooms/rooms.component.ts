@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { ApplicationRef, Component, OnChanges, OnInit } from '@angular/core';
 import { User } from 'firebase/auth';
 import { ProfileUser } from '../../../core/Interfaces/user';
 import { AuthService } from '../../../core/services/auth.service';
@@ -22,7 +22,7 @@ export class RoomsComponent implements OnInit, OnChanges {
   public state: any;
   public userEmail: User | null | undefined;
 
-  isLoading: boolean = false;
+  isLoading: boolean = true;
 
   filter: string = 'all';
 
@@ -34,7 +34,8 @@ export class RoomsComponent implements OnInit, OnChanges {
     public authService: AuthService,
     private firestore: Firestore,
     private httpService: HttpClient,
-    private router: Router
+    private router: Router,
+    private appRef: ApplicationRef
   ) {
     // this.rooms = roomsService.orderRooms('number');
     this.state = {
@@ -43,56 +44,51 @@ export class RoomsComponent implements OnInit, OnChanges {
       selectedRoom: undefined,
     };
   }
-  // #1 - only shows rooms afte rerender
-  // ngOnInit(): void {
-  //   this.authService.currentUser$.subscribe((data) => {
-  //     const db = getDatabase();
-  //     const starCountRef = ref(db, `hotels/${data!.uid}/rooms`);
-  //     onValue(starCountRef, (snapshot) => {
-  //       const data = snapshot.val();
-  //        //alert(data);
-  //        console.log(data);
-  //       // updateStarCount(postElement, data);
-  //       let arr: Array<any> = [];
-  //       Object.keys(data).map(function (key) {
-  //         arr.push(data[key]);
-  //         return arr;
-  //       });
-  //       this.state.rooms = arr;
-  //     });
-  //   });
-  // }
-  // #2
+  // #1
   ngOnInit(): void {
-    // this.authService.currentUser$.pipe(
-    //   tap((data) => {
+    this.authService.currentUser$.subscribe((data) => {
+      // console.log(data);
+      // const db = getDatabase();
+      // const starCountRef = ref(db, `hotels/${data!.uid}/rooms`);
+      // onValue(starCountRef, (snapshot) => {
+      //   const data = snapshot.val();
+      //    //alert(data);
+      //    console.log(data);
+      //   // updateStarCount(postElement, data);
+      //   let arr: Array<any> = [];
+      //   Object.keys(data).map(function (key) {
+      //     arr.push(data[key]);
+      //     return arr;
+      //   });
+      //   this.state.rooms = arr;
+      // });
 
-    //     const db = getDatabase();
-    //     const starCountRef = ref(db, `hotels/${data!.uid}/rooms`);
-    //     onValue(starCountRef, (snapshot) => {
-    //       const data = snapshot.val();
-    //        //alert(data);
-    //        console.log(data);
-    //       // updateStarCount(postElement, data);
-    //       let arr: Array<any> = [];
-    //       Object.keys(data).map(function (key) {
-    //         arr.push(data[key]);
-    //         return arr;
-    //       });
-    //       this.state.rooms = arr;
-    //     });
-    //   })
-    // ).subscribe();
-
-    // this.rooms$ = this.roomsList();
-    this.roomsList();
-    this.isLoading = true;
-
-    // const inter = setInterval(()=>{
-    //   console.log(this.state.rooms);
-    // }, 1000);
-    //  The data is there it is simply not refreshed!!!!! how to force angular to rerender after the data is here
+      if(data?.uid) {
+        const db = getDatabase();
+        const roomsRef = ref(db,`hotels/${data?.uid}/rooms`);
+        onValue(roomsRef, (snapshot) => {
+          const data = snapshot.val();
+          //alert(data);
+          // console.log(data);
+          // updateStarCount(postElement, data);
+          let arr: Array<any> = [];
+          Object.keys(data).map(function (key) {
+            arr.push(data[key]);
+            return arr;
+          });
+          this.isLoading = false;
+          this.state.rooms = arr;
+          this.appRef.tick();
+        }
+        );
+      }
+    });
   }
+  // #2 - working fine
+  // ngOnInit(): void {
+  //   this.roomsList();
+  //   this.isLoading = true;
+  // }
 
   applyFilter(val: string) {
     switch (val) {
@@ -115,54 +111,9 @@ export class RoomsComponent implements OnInit, OnChanges {
   filterRooms(filter: string) {}
 
   roomsList() {
-    // #1 working
-    // if (!this.authService.currentUserUid) {
-    //   console.log('User is not logged in');
-    //   return;
-    // } else {
-    //   const db = getDatabase();
-    //   const roomsRef = ref(
-    //     db,
-    //     `hotels/${this.authService.currentUserUid}/rooms`
-    //   );
-    //   onValue(roomsRef, (snapshot) => {
-    //     const data = snapshot.val();
-    //     //alert(data);
-    //     // console.log(data);
-    //     // updateStarCount(postElement, data);
-    //     let arr: Array<any> = [];
-    //     Object.keys(data).map(function (key) {
-    //       arr.push(data[key]);
-    //       return arr;
-    //     });
-    //     this.state.rooms = arr;
-    //   });
-    // }
-    // #2
     this.state.rooms = this.roomsService.getRooms();
   }
 
-  // newGetRooms() {
-  //   this.rooms$ = this.fetchRoomsFromServer();
-  // }
-
-  // fetchRoomsFromServer(): Observable<Room[]> {
-  //   this.authService.currentUser$.subscribe((data) => {
-  //     const db = getDatabase();
-  //     const starCountRef = ref(db, `hotels/${data!.uid}/rooms`);
-  //     onValue(starCountRef, (snapshot) => {
-  //       const data = snapshot.val();
-  //       // alert(data);
-  //       // updateStarCount(postElement, data);
-  //       let arr: Array<any> = [];
-  //       Object.keys(data).map(function (key) {
-  //         arr.push(data[key]);
-  //         return arr;
-  //       });
-  //       return arr;
-  //     });
-  //   });
-  // }
 
   ngOnChanges(): void {
     console.log('CHANGES');
@@ -172,27 +123,5 @@ export class RoomsComponent implements OnInit, OnChanges {
     this.router.navigate(['/rooms/new/']);
   }
 
-  // onUpdateRoomFormSubmitted(updatedRoomData: Room): void {
-  //   //console.log("#Rooms-Page: New Room Data", updatedRoomData);
-  //   // check for duplicates in Room Number
 
-  //   // call Service and update data object
-  //   this.roomsService.updateRoom(updatedRoomData);
-  // }
-
-  // onRoomMarkUnavailable(roomIdentifier: string): void {
-  //   this.roomsService.updateToggleRoomAvailable(roomIdentifier);
-  // }
-
-  // onRoomSelectedForEdit(roomId: string): void {
-  //   this.state.showRoomDetails = true;
-  //   //console.log("#rooms-page: onRoomSelectedForEdit() :: roomId:",this.roomsService.getRooms());
-  //   this.state.showRoomId = roomId;
-  //   this.state.selectedRoom = this.roomsService.getRoom(roomId);
-  //   // console.log("#rooms-page: onRoomSelectedForEdit() :: selectedRoom Object",this.state.selectedRoom);
-  // }
-
-  // onClickBackToRooms() {
-  //   this.state.showRoomDetails = false;
-  // }
 }

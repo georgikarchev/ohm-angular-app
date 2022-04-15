@@ -8,7 +8,7 @@ import { NavigationEnd, Router, Event } from '@angular/router';
 })
 export class AppComponent implements OnInit, OnChanges {
   title = 'ohm-app';
-  showHero: boolean = true;
+  showHero: boolean = false;
   constructor(private router: Router) {}
 
   ngOnInit(): void {

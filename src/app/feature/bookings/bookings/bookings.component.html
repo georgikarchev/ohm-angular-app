@@ -1,4 +1,4 @@
-<header [class.btnOnly]="bookings.length <= 0">
+<header *ngIf="!isLoading" [class.btnOnly]="bookings.length <= 0">
   <nav class="rooms__filters" *ngIf="bookings.length > 0">
     <ul>
       <li>
@@ -71,6 +71,6 @@
   </ng-template>
 
   <ng-template #loadingIndicator>
-    Loading... <mat-spinner></mat-spinner>
+    <mat-spinner></mat-spinner>
   </ng-template>
 </section>
