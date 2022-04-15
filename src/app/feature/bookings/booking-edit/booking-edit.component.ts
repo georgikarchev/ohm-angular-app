@@ -179,8 +179,8 @@ export class BookingEditComponent implements OnInit {
       roomId: roomId,
       adults: adults,
       children: children,
-      notes: '',
-      status: ''
+      notes: this.booking.notes,
+      status: this.booking.status
     };
     this.bookingsService.updateBooking(updatedBooking)?.then(r => this.onBookingUpdated());
   }

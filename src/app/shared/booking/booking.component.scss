@@ -1,3 +1,5 @@
+@import "src/assets/scss/abstracts/mixins";
+
 :host{
     width: 100%;
     height: 100%;
@@ -26,6 +28,11 @@
 
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.05);
 
+    @include respond(tab-land) {
+        grid-template-columns: 1fr 6fr 1fr 5fr 1fr 5fr 1fr 3fr 1fr 3fr 1fr 4fr 1fr;
+        grid-template-areas: "sp1 email s3 checkIn sp4 checkOut sp5 room sp6 priceStay sp7 buttons sp8";
+    }
+
     &.lifted {
         box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25), 0px 4px 8px rgba(0, 0, 0, 0.25);
     }
@@ -46,6 +53,10 @@
 
     &__phone {
         grid-area: phone;
+
+        @include respond(tab-land) {
+            display: none !important;
+        }
     }
 
     &__check-in-date {

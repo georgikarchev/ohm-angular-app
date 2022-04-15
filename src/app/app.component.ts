@@ -1,14 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { NavigationEnd, Router, Event } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnChanges {
   title = 'ohm-app';
+  showHero: boolean = true;
+  constructor(private router: Router) {}
 
-  constructor(){}
+  ngOnInit(): void {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        if (event.url == '/home' || event.url == '/') {
+          this.showHero = true;
+        } else {
+          this.showHero = false;
+        }
+      }
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    
+  }
 
   // notifications: Notification[] = [
   //   {

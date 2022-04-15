@@ -1,21 +1,29 @@
-// app-home {
-//     display: grid;
-//     grid-template-columns: var(--grid-template-columns-12col);
-//     grid-template-areas: "padding-left" "main main" "padding-right";
-//     gap: var(--grid-gap);
+header {
+  text-align: center;
 
-//     & > .wrapper {
-//         grid-area: main;
-//     }
-// }
+  margin-top: 5vw;
+  margin-bottom: 5vw;
 
-// .wrapper {
-//     display: grid;
-//     grid-template-columns: var(--grid-template-columns-12col);
-//     grid-template-areas: "padding-left main main padding-right";
-//     gap: var(--grid-gap);
+  & h1 {
+    font-size: 4.8rem;
+    font-weight: 100;
 
-//     & article {
-//         grid-area: main;
-//     }
-// }
+    small {
+      font-size: 0.3em;
+    }
+  }
+
+  & h2 {
+    font-size: 1.65rem;
+    font-weight: 100;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+}
+
+.page-body {
+    h3 {
+        text-transform: uppercase;
+        font-weight: 100;
+    }
+}

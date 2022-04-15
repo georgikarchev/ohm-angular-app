@@ -1,0 +1,50 @@
+:host {
+    // width: 100%;
+    
+}
+
+
+.module--1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-image: linear-gradient(to top right, rgba(255, 184, 0, 0.8),rgba(0,0,0,1.0)), url(../../../assets/chastity-cortijo-R-w5Q-4Mqm0-unsplash.jpg) ;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+
+    height: 40vw;
+
+    #videoLogoContainer {
+        position: relative;
+    
+        width: 50vw;
+        height: 30vw;
+    
+        margin: 10rem auto;
+    
+        background-image: url('../../../assets/logo2.svg');
+        background-size: 50vw auto;
+        background-position: left top;
+        background-repeat: no-repeat;
+        
+    
+        & #videoContainer {
+            position: absolute;
+            top: 7vw;
+            left: 1vw;
+    
+            border-radius: 50%;
+            overflow: hidden;
+            width: 13.5vw;
+            height: 13.5vw;
+    
+            & #vid video {
+                width: 13.6vw;
+                // max-width: 100%;
+                // min-width: 100%;
+                height: auto;
+            }
+        }
+    }
+}

@@ -81,9 +81,10 @@
 
   display: grid;
   grid-template-columns: var(--grid-template-columns-12col);
-  grid-template-rows: 10rem auto 5rem;
+  grid-template-rows: 10rem min-content auto 5rem;
   grid-template-areas:
     "header header header header"
+    "hero hero hero hero"
     "padding-left main main padding-right"
     "footer footer footer footer";
   gap: var(--grid-gap);
@@ -169,6 +170,10 @@
   //         grid-area: main;
   //     }
   // }
+
+  & > .hero {
+    grid-area: hero;
+  }
 
   & > header {
     grid-area: header;
