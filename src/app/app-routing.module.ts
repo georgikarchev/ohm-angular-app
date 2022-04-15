@@ -17,6 +17,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { PageNotFoundComponent } from './feature/pages/page-not-found/page-not-found.component';
 import { AuthGuard } from "../app/guards/auth.guard";
+import { ProfileComponent } from './auth/profile/profile.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectToHome = () => redirectLoggedInTo(['dashboard']);
@@ -68,6 +69,12 @@ const routes: Routes = [
     path: 'sign-up',
     component: SignupComponent,
     ...canActivate(redirectToHome)
+  },
+  {
+    path: 'profile',
+    canActivate: [AuthGuard],
+    component: ProfileComponent,
+    // ...canActivate(redirectToHome)
   },
   {
     path: '**',

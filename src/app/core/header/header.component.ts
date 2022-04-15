@@ -36,11 +36,11 @@ export class HeaderComponent implements OnInit {
   // }
 
   // TODO - move the handler to the app.component
-  logout():void {
-    this.authService.logout().subscribe(()=>{
-      this.router.navigate(['/']);
-    });
-  }
+  // logout():void {
+  //   this.authService.logout().subscribe(()=>{
+  //     this.router.navigate(['/']);
+  //   });
+  // }
 
   // ngOnChanges(changes: SimpleChanges): void {
   //   this.setLogoVisibility(this.router);

@@ -136,16 +136,13 @@
           Rooms
         </a>
       </li>
-      <li>
+      <!-- <li>
         <button mat-button (click)="logout()">Logout</button>
-        <!-- <button class="button button--light button--logout" (click)="logout()">
-          Logout
-        </button> -->
-      </li>
+      </li> -->
     </ng-container>
   </ul>
   <ng-container *ngIf="this.authService.currentUser$ | async">
-    <button class="auth" mat-fab>
+    <button class="auth" mat-mini-fab routerLink="/profile">
       <mat-icon color="white">person</mat-icon>
     </button>
   </ng-container>
