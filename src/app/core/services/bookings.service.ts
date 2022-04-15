@@ -88,15 +88,17 @@ export class BookingsService {
     const roomsRef = ref(this.db,`hotels/${this.authService.currentUserUid}/bookings`);
     onValue(roomsRef, (snapshot) => {
       const data = snapshot.val();
-      // console.log("onValue",data);
-      let arr: Array<any> = [];
-      Object.keys(data).map(function (key) {
-        arr.push(data[key]);
-        return arr;
-      });
-      //console.log(this.bookings);
-      this.bookings = arr;
-      // return this.bookings;
+      if(data !== null) {
+        // console.log("onValue",data);
+        let arr: Array<any> = [];
+        Object.keys(data).map(function (key) {
+          arr.push(data[key]);
+          return arr;
+        });
+        //console.log(this.bookings);
+        this.bookings = arr;
+        // return this.bookings;
+      }
     }
     );
 

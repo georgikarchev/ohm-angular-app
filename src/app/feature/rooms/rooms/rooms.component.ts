@@ -67,18 +67,25 @@ export class RoomsComponent implements OnInit, OnChanges {
         const db = getDatabase();
         const roomsRef = ref(db,`hotels/${data?.uid}/rooms`);
         onValue(roomsRef, (snapshot) => {
+          if(!snapshot) {
+            return;
+          }
           const data = snapshot.val();
-          //alert(data);
-          // console.log(data);
-          // updateStarCount(postElement, data);
-          let arr: Array<any> = [];
-          Object.keys(data).map(function (key) {
-            arr.push(data[key]);
-            return arr;
-          });
-          this.isLoading = false;
-          this.state.rooms = arr;
-          this.appRef.tick();
+          if(data !== null) {
+            // console.log(data);
+            // updateStarCount(postElement, data);
+            let arr: Array<any> = [];
+            Object.keys(data).map(function (key) {
+              arr.push(data[key]);
+              return arr;
+            });
+            this.isLoading = false;
+            this.state.rooms = arr;
+            this.appRef.tick();
+          } else {
+            this.isLoading = false;
+          }
+
         }
         );
       }

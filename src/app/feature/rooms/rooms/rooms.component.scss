@@ -23,81 +23,88 @@
 //   }
 
 header {
-    display: grid;
-    grid-template-areas: "spacer filters button";
+  display: grid;
+  grid-template-areas: "spacer filters button";
+  grid-template-columns: 1fr 8fr 1fr;
+
+  &.btnOnly {
+    grid-template-areas: "spacerLeft button spacerRight";
     grid-template-columns: 1fr 8fr 1fr;
-   
+  }
 
-    .rooms__filters {
-        grid-area: filters;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        margin-bottom: var(--padding-medium);
+  .rooms__filters {
+    grid-area: filters;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--padding-medium);
 
-        & ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-          display: flex;
-          flex-direction: row;
-          justify-items: stretch;
-          align-items: center;
-          width: 48rem;
-        
-          & li {
-              flex: 1 1 0;
-              text-align: center;
-              padding: 0 5px;
-            
-            & a {
-                display: block;
-                padding: 10px;
-                border: unset;
-                background: unset;
-                text-align: center;
-                font-family: inherit;
-                font-weight: 500;
-                cursor: pointer;
-                white-space: nowrap;
-                color: var(--gray-dark-1);
-                border-bottom: 1px solid transparent;
-            }
+    & ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      justify-items: stretch;
+      align-items: center;
+      width: 48rem;
 
-            & a.selected {
-                color:var(--highlight-color);
-                border-bottom: 1px solid currentColor;
-            }
-          }
-        }
-    }
-
-    .button--new {
-      grid-area: button;
-      justify-self: right;
-      position: relative;
-
-      .tooltip {
-        position: absolute;
-        top: -15px;
-        width: 100%;
+      & li {
+        flex: 1 1 0;
         text-align: center;
-        font-weight: 300;
-        opacity: 0;
-        left: 0;
-        transition: all 0.2s ease-out;
-        font-size: 1.2rem;
-        display: inline;
-      }
-  
-      &:hover {
-        .tooltip {
-          opacity: 0.5;
-          top: -25px;
+        padding: 0 5px;
+
+        & a {
+          display: block;
+          padding: 10px;
+          border: unset;
+          background: unset;
+          text-align: center;
+          font-family: inherit;
+          font-weight: 500;
+          cursor: pointer;
+          white-space: nowrap;
+          color: var(--gray-dark-1);
+          border-bottom: 1px solid transparent;
+        }
+
+        & a.selected {
+          color: var(--highlight-color);
+          border-bottom: 1px solid currentColor;
         }
       }
     }
+  }
 
+  .button--new {
+    grid-area: button;
+    justify-self: right;
+    position: relative;
+
+    &.center {
+      justify-self: center;
+    }
+
+    .tooltip {
+      position: absolute;
+      top: -15px;
+      width: 100%;
+      text-align: center;
+      font-weight: 300;
+      opacity: 0;
+      left: 0;
+      transition: all 0.2s ease-out;
+      font-size: 1.2rem;
+      display: inline;
+    }
+
+    &:hover {
+      .tooltip {
+        opacity: 0.5;
+        top: -25px;
+      }
+    }
+  }
 }
 
 .page-body {
@@ -107,40 +114,15 @@ header {
   flex-direction: column;
   align-items: center;
 
-  // & .form-container {
-  //     & form {
-  //         min-width: 300px;
-  //         width: 30rem;
-  //         max-width: 100%;
+  p.small {
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    line-height: 1.1;
+    letter-spacing: 0.3em;
+  }
 
-  //         & .form-row {
-  //             display: flex;
-  //             flex-direction: column;
-
-  //             // & .mat-form-field {
-  //             //     display: block;
-  //             // }
-  //         }
-
-  //     }
-  // }
+  p.medium {
+    font-size: 2em;
+    line-height: 1.2;
+  }
 }
-
-// .page-body {
-//     padding: var(--padding-medium);
-//     width: 100%;
-//     box-sizing: border-box;
-
-//     @include respond(tab-land) {
-//         padding: var(--padding-small);
-//     }
-
-//     @include respond(phone) {
-//         padding: var(--padding-min);
-//     }
-
-//     &__room-edit {
-//         width: 100%;
-//         display: block;
-//     }
-// }

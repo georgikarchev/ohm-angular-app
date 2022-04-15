@@ -1,14 +1,5 @@
-<header *ngIf="!isLoading">
-  <!-- <section class="actions-left">
-    <app-button
-      *ngIf="state.showRoomDetails"
-      (btnClick)="onClickBackToRooms()"
-      text="back"
-      [isDisabled]="false"
-    ></app-button>
-  </section> -->
-  <!-- <h1>Rooms</h1> -->
-  <nav class="rooms__filters">
+<header *ngIf="!isLoading" [class.btnOnly]="state.rooms.length <= 0">
+  <nav class="rooms__filters" *ngIf="state.rooms.length > 0">
     <ul>
       <li>
         <a [class.selected]="filter === 'all'" (click)="applyFilter('all')"
@@ -38,6 +29,7 @@
     mat-fab
     color="white"
     class="button--new"
+    [class.center]="state.rooms.length <= 0"
     (click)="onNewRoomClicked()"
   >
     <mat-icon color="primary">edit</mat-icon>
@@ -45,8 +37,20 @@
   </button>
 </header>
 <section class="page-body">
-  <app-rooms-list *ngIf="!isLoading; else loadingIndicator" [rooms]="state.rooms"></app-rooms-list>
+  <ng-container *ngIf="!isLoading; else loadingIndicator">
+    <app-rooms-list *ngIf="state.rooms.length > 0; else noRooms" [rooms]="state.rooms"></app-rooms-list>
+  </ng-container>
 </section>
+
+
+<ng-template #noRooms>
+  <div class="padding-top--big center">
+    <p class="medium">No rooms have yet been created.</p>
+    <p class="small">
+      Want to create the first room? Click the button above!
+    </p>
+  </div>
+</ng-template>
 
 <ng-template #loadingIndicator>
   <mat-spinner></mat-spinner>

@@ -80,16 +80,14 @@ export class RoomsService {
     const roomsRef = ref(this.db,`hotels/${this.authService.currentUserUid}/rooms`);
     onValue(roomsRef, (snapshot) => {
       const data = snapshot.val();
-      //alert(data);
-      // console.log(data);
-      // updateStarCount(postElement, data);
-      let arr: Array<any> = [];
-      Object.keys(data).map(function (key) {
-        arr.push(data[key]);
-        return arr;
-      });
-      this.rooms = arr;
-      // console.log(this.rooms);
+      if( data !== null ) {
+        let arr: Array<any> = [];
+        Object.keys(data).map(function (key) {
+          arr.push(data[key]);
+          return arr;
+        });
+        this.rooms = arr;
+      }
     },
     // {
     //   onlyOnce: true
@@ -156,13 +154,15 @@ export class RoomsService {
     );
     onValue(roomsRef, (snapshot) => {
       const data = snapshot.val();
-      let arr: Array<any> = [];
-      Object.keys(data).map(function (key) {
-        arr.push(data[key]);
-        return arr;
-      });
-      this.roomsTotal = arr.length;
-      f(arr.length);
+      if( data !== null ) {
+        let arr: Array<any> = [];
+        Object.keys(data).map(function (key) {
+          arr.push(data[key]);
+          return arr;
+        });
+        this.roomsTotal = arr.length;
+        f(arr.length);
+      }
     });
   }
   

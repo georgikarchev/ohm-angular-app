@@ -42,17 +42,22 @@ export class BookingsComponent implements OnInit {
         const roomsRef = ref(db,`hotels/${data.uid}/bookings`)
         onValue(roomsRef, (snapshot) => {
           const data = snapshot.val();
-          //alert(data);
-          // console.log(data);
-          // updateStarCount(postElement, data);
-          let arr: Array<any> = [];
-          Object.keys(data).map(function (key) {
-            arr.push(data[key]);
-            return arr;
-          });
-          this.isLoading = false;
-          this.bookings = arr;
-          this.appRef.tick();
+          if(data !== null) {
+            //alert(data);
+            // console.log(data);
+            // updateStarCount(postElement, data);
+            let arr: Array<any> = [];
+            Object.keys(data).map(function (key) {
+              arr.push(data[key]);
+              return arr;
+            });
+            this.isLoading = false;
+            this.bookings = arr;
+            this.appRef.tick();
+          } else {
+            this.isLoading = false;
+            this.appRef.tick();
+          }
         }
         );
       }

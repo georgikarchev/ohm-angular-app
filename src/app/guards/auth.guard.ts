@@ -27,12 +27,12 @@ export class AuthGuard implements CanActivate, CanLoad {
     if(this.isUserLoggedIn(this.authService)) {
       return true;
     }
-    
+
     return this.router.createUrlTree(['/home']);
   }
 
   isUserLoggedIn(authService: AuthService): boolean {
-    console.log(authService.currentUserUid);
+    // console.log(authService.currentUserUid);
     if(authService.currentUserUid) {
       return true;
     }
