@@ -1,38 +1,8 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { User } from "firebase/auth";
+import { Component, Injectable } from "@angular/core";
 import { getDatabase, onValue, ref, set, update } from "firebase/database";
-import { Observable, bindCallback, of, concatMap } from "rxjs";
-import { ProfileUser } from "../Interfaces/user";
-import { UsersService } from "./users.service";
 import { Room } from "../Interfaces/room";
 import { AuthService } from "./auth.service";
-
-
-// export interface Room {
-//   number: string,
-//   description?: string,
-//   photo?: string,
-//   singleBeds?: number,
-//   doubleBeds?: number,
-//   kingSizeBeds?: number,
-//   babyCots?: number,
-//   airConditioning?: boolean,
-//   centralHeating?: boolean,
-//   fireplace?: boolean,
-//   minibar?: boolean,
-//   balcony?: boolean,
-//   disabilityFriendly?: boolean,
-//   kitchen?: boolean;
-// }
-
-// % TEST ONLY
-// export interface Post {
-//   userId: number;
-//   id: number;
-//   title: string;
-//   body: string;
-// }
 
 @Injectable({
   providedIn: "root",
@@ -48,6 +18,8 @@ export class RoomsService {
   private user$: any;
   public userData: any | undefined;
   private db: any;
+  roomsTotal: number = 0;
+  
 
   constructor(private http: HttpClient, public authService: AuthService) {
     this.orderBy = "name";
@@ -102,6 +74,9 @@ export class RoomsService {
   }
 
   fetchRooms(): any {
+    if(!this.authService.currentUserUid) {
+      return null;
+    }
     const roomsRef = ref(this.db,`hotels/${this.authService.currentUserUid}/rooms`);
     // let fn = onValue(roomsRef, (snapshot) => {
     //   return snapshot.val();
@@ -175,6 +150,23 @@ export class RoomsService {
     const updates: any = {};
     updates['hotels/'+this.userData.uid+'/rooms/'+_updatedRoomData.id] = _updatedRoomData;
     return update(ref(this.db), updates);
+  }
+
+  fetchRoomsStatistic(f: any): any {
+    const roomsRef = ref(
+      this.db,
+      `hotels`
+    );
+    onValue(roomsRef, (snapshot) => {
+      const data = snapshot.val();
+      let arr: Array<any> = [];
+      Object.keys(data).map(function (key) {
+        arr.push(data[key]);
+        return arr;
+      });
+      this.roomsTotal = arr.length;
+      f(arr.length);
+    });
   }
   
 }

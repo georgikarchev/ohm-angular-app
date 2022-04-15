@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { OpenStatisticsWidgetComponent } from './open-statistics-widget/open-statistics-widget.component';
 
 
 
@@ -19,7 +20,8 @@ import { MatSelectModule } from '@angular/material/select';
   declarations: [
     BookingComponent,
     BookingAddComponent,
-    BookingsListComponent
+    BookingsListComponent,
+    OpenStatisticsWidgetComponent,
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import { MatSelectModule } from '@angular/material/select';
   exports: [
     BookingComponent,
     BookingAddComponent,
-    BookingsListComponent
+    BookingsListComponent,
+    OpenStatisticsWidgetComponent
   ]
 })
 export class SharedModule { }
