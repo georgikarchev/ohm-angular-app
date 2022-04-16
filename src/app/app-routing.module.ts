@@ -63,12 +63,12 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    ...canActivate(redirectToHome)
+    // ...canActivate(redirectToHome)
   },
   {
     path: 'sign-up',
     component: SignupComponent,
-    ...canActivate(redirectToHome)
+    // ...canActivate(redirectToHome)
   },
   {
     path: 'profile',
