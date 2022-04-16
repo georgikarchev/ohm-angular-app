@@ -50,38 +50,38 @@ storageRef = ref(this.storage);
 imageRef: any;
 imagePath: string | undefined;
 
-editRoomForm = new FormGroup(
-  {
-    roomNumber: new FormControl('', [
-      Validators.required,
-      Validators.maxLength(4),
-      roomNumberTakenValidator(this.roomsService.getRoomNumbers())
-    ]),
-    singleBeds: new FormControl('', [
-      Validators.min(0),
-      Validators.max(5),
-    ]),
-    doubleBeds: new FormControl('', [
-      Validators.min(0),
-      Validators.max(3),
-    ]),
-    babyCots: new FormControl('', [
-      Validators.min(0),
-      Validators.max(2),
-    ]),
-    basePrice: new FormControl('', [Validators.required, Validators.min(0)]),
-    pricePerExtraAdult: new FormControl('', [
-      Validators.required,
-      Validators.min(0),
-    ]),
-    pricePerExtraChild: new FormControl('', [
-      Validators.required,
-      Validators.min(0),
-    ]),
-  },
-  { validators: [atLeastOneBedValidator] }
-);
-
+// editRoomForm = new FormGroup(
+//   {
+//     roomNumber: new FormControl('', [
+//       Validators.required,
+//       Validators.maxLength(4),
+//       roomNumberTakenValidator(this.roomsService.getRoomNumbers(), this.roomToUpdate.name)
+//     ]),
+//     singleBeds: new FormControl('', [
+//       Validators.min(0),
+//       Validators.max(5),
+//     ]),
+//     doubleBeds: new FormControl('', [
+//       Validators.min(0),
+//       Validators.max(3),
+//     ]),
+//     babyCots: new FormControl('', [
+//       Validators.min(0),
+//       Validators.max(2),
+//     ]),
+//     basePrice: new FormControl('', [Validators.required, Validators.min(0)]),
+//     pricePerExtraAdult: new FormControl('', [
+//       Validators.required,
+//       Validators.min(0),
+//     ]),
+//     pricePerExtraChild: new FormControl('', [
+//       Validators.required,
+//       Validators.min(0),
+//     ]),
+//   },
+//   { validators: [atLeastOneBedValidator] }
+// );
+editRoomForm!: FormGroup;
 
   constructor(
     private fileUploadService: FileUploadService,
@@ -102,6 +102,38 @@ editRoomForm = new FormGroup(
           this.titleService.setTitle('Edit Room ' + this.roomNumber);
           this.isLoading = true;
           this.roomToUpdate = this.roomsService.getRoomByNumber(params['roomNumber']);
+
+          this.editRoomForm = new FormGroup(
+            {
+              roomNumber: new FormControl('', [
+                Validators.required,
+                Validators.maxLength(4),
+                roomNumberTakenValidator(this.roomsService.getRoomNumbers(), this.roomToUpdate.name)
+              ]),
+              singleBeds: new FormControl('', [
+                Validators.min(0),
+                Validators.max(5),
+              ]),
+              doubleBeds: new FormControl('', [
+                Validators.min(0),
+                Validators.max(3),
+              ]),
+              babyCots: new FormControl('', [
+                Validators.min(0),
+                Validators.max(2),
+              ]),
+              basePrice: new FormControl('', [Validators.required, Validators.min(0)]),
+              pricePerExtraAdult: new FormControl('', [
+                Validators.required,
+                Validators.min(0),
+              ]),
+              pricePerExtraChild: new FormControl('', [
+                Validators.required,
+                Validators.min(0),
+              ]),
+            },
+            { validators: [atLeastOneBedValidator] }
+          );
           
           this.editRoomForm.controls['roomNumber'].setValue(this.roomToUpdate.name);
           this.editRoomForm.controls['singleBeds'].setValue(this.roomToUpdate.singleBeds);
@@ -200,11 +232,17 @@ const atLeastOneBedValidator: ValidatorFn = (f: AbstractControl) => {
    return null;
  };
  
- export function roomNumberTakenValidator(val: string[]): ValidatorFn {
+ export function roomNumberTakenValidator(val: string[], currentRoomNumber: string): ValidatorFn {
   
    return (control: AbstractControl): ValidationErrors | null => {
+
+    let v: string = control.value;
+    
+     // if no change in current room number - return no error
+    if(currentRoomNumber == v) {
+      return null;
+    }
   
-     let v: string = control.value;
  
      // console.log(val);
  
